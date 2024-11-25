@@ -14,168 +14,115 @@ namespace EgeApp.Backend.Data.Concrete.Configs
             builder.Property(x => x.Name)
                 .IsRequired()
                 .HasMaxLength(250);
+
             builder.Property(x => x.Url)
                 .IsRequired()
                 .HasMaxLength(500);
+
             builder.Property(x => x.Properties)
                 .IsRequired();
 
-            List<Product> products = [
+            builder.Property(x => x.ImageUrl)
+                .IsRequired();
+
+            builder.Property(x => x.Brand)
+                .IsRequired(false);
+
+            // Veritabanına önceden eklenmiş ürün verileri
+            var products = new List<Product>
+            {
                 new()
                 {
                     Id = 1,
-                    Name = "IPhone 14",
-                    Price = 59000,
-                    Properties = "Harika bir telefon",
-                    Url = "iphone-14",
-                    ImageUrl = "http://localhost:5200/images/products/1.png",
+                    Name = "Dorselumber Korse",
+                    Price = 1000,
+                    Properties = "Diz ve sırt destekleyici",
+                    Url = "dorselumber-korse",
+                    ImageUrl = "http://localhost:5200/images/products/dorselumberkorse.webp",
+                    Brand = null,
                     IsHome = true,
-                    CreatedDate=DateTime.Now,
-                    ModifiedDate=DateTime.Now,
-                    IsActive=true,
-                    CategoryId=2
+                    CreatedDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now,
+                    IsActive = true,
+                    CategoryId = 1
                 },
                 new()
                 {
                     Id = 2,
-                    Name = "IPhone 14 Pro",
-                    Price = 69000,
-                    Properties = "Bu da harika bir telefon",
-                    Url = "iphone-14-pro",
-                    ImageUrl = "http://localhost:5200/images/products/2.png",
-                    IsHome = false,
-                    CreatedDate=DateTime.Now,
-                    ModifiedDate=DateTime.Now,
-                    IsActive=true,
-                    CategoryId=2
+                    Name = "Devisbiss Oksijen Konsantratörü",
+                    Price = 8000,
+                    Properties = "Profesyonel solunum cihazı",
+                    Url = "devisbiss-oksijen-konsantratoru",
+                    ImageUrl = "http://localhost:5200/images/products/devisbissoksijen.webp",
+                    Brand = null,
+                    IsHome = true,
+                    CreatedDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now,
+                    IsActive = true,
+                    CategoryId = 2
                 },
                 new()
                 {
                     Id = 3,
-                    Name = "Samsung S23",
-                    Price = 49000,
-                    Properties = "İdare eder",
-                    Url = "samsung-s23",
-                    ImageUrl = "http://localhost:5200/images/products/3.png",
+                    Name = "Tam Yüz Maskesi",
+                    Price = 500,
+                    Properties = "Solunum desteği için maske",
+                    Url = "tam-yuz-maskesi",
+                    ImageUrl = "http://localhost:5200/images/products/tamyuzmaskesi.webp",
+                    Brand = null,
                     IsHome = true,
-                    CreatedDate=DateTime.Now,
-                    ModifiedDate=DateTime.Now,
-                    IsActive=true,
-                    CategoryId=2
+                    CreatedDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now,
+                    IsActive = true,
+                    CategoryId = 3
                 },
                 new()
                 {
                     Id = 4,
-                    Name = "Xaomi Note 4",
-                    Price = 39000,
-                    Properties = "Harika bir telefon",
-                    Url = "xaomi-note-4",
-                    ImageUrl = "http://localhost:5200/images/products/4.png",
+                    Name = "2 Motorlu Hasta Karyolası",
+                    Price = 12000,
+                    Properties = "Hasta bakım için motorlu yatak",
+                    Url = "2-motorlu-hasta-karyolasi",
+                    ImageUrl = "http://localhost:5200/images/products/motorluhastakaryolasi.webp",
+                    Brand = null,
                     IsHome = true,
-                    CreatedDate=DateTime.Now,
-                    ModifiedDate=DateTime.Now,
-                    IsActive=true,
-                    CategoryId=2
+                    CreatedDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now,
+                    IsActive = true,
+                    CategoryId = 4
                 },
                 new()
                 {
                     Id = 5,
-                    Name = "MacBook Air M2",
-                    Price = 52000,
-                    Properties = "M2nin gücü",
-                    Url = "macbook-air-m2",
-                    ImageUrl = "http://localhost:5200/images/products/5.png",
+                    Name = "W Cura C",
+                    Price = 700,
+                    Properties = "Hızlı tıbbi test malzemesi",
+                    Url = "w-cura-c",
+                    ImageUrl = "http://localhost:5200/images/products/wcuracdbg.webp",
+                    Brand = null,
                     IsHome = true,
-                    CreatedDate=DateTime.Now,
-                    ModifiedDate=DateTime.Now,
-                    IsActive=true,
-                    CategoryId=4
+                    CreatedDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now,
+                    IsActive = true,
+                    CategoryId = 5
                 },
                 new()
                 {
                     Id = 6,
-                    Name = "MacBook Pro M3",
-                    Price = 79000,
-                    Properties = "16 Gb ram",
-                    Url = "macbook-pro-m3",
-                    ImageUrl = "http://localhost:5200/images/products/6.png",
-                    IsHome = false,
-                    CreatedDate=DateTime.Now,
-                    ModifiedDate=DateTime.Now,
-                    IsActive=true,
-                    CategoryId=4
-                },
-                new()
-                {
-                    Id = 7,
-                    Name = "Vestel Çamaşır Makinesi X65",
-                    Price = 19000,
-                    Properties = "Akıllı makine",
-                    Url = "vestel-camasir-makinesi-x65",
-                    ImageUrl = "http://localhost:5200/images/products/7.png",
+                    Name = "Tansiyon Aleti",
+                    Price = 500,
+                    Properties = "Hassas tansiyon ölçer",
+                    Url = "tansiyon-aleti",
+                    ImageUrl = "http://localhost:5200/images/products/tansiyonaleti.webp",
+                    Brand = null,
                     IsHome = true,
-                    CreatedDate=DateTime.Now,
-                    ModifiedDate=DateTime.Now,
-                    IsActive=true,
-                    CategoryId=5
-                },
-                new()
-                {
-                    Id = 8,
-                    Name = "Arçelik Çamaşır Makinesi A-4",
-                    Price = 21000,
-                    Properties = "Süper hızlı makine",
-                    Url = "arcelik-camasir-makinesi-a-4",
-                    ImageUrl = "http://localhost:5200/images/products/8.png",
-                    IsHome = false,
-                    CreatedDate=DateTime.Now,
-                    ModifiedDate=DateTime.Now,
-                    IsActive=true,
-                    CategoryId=5
-                },
-                new()
-                {
-                    Id = 9,
-                    Name = "Hoop Dijital Radyo X96",
-                    Price = 1250,
-                    Properties = "Klasik radyo keyfi",
-                    Url = "hoop-dijital-radyo-x96",
-                    ImageUrl = "http://localhost:5200/images/products/9.png",
-                    IsHome = true,
-                    CreatedDate=DateTime.Now,
-                    ModifiedDate=DateTime.Now,
-                    IsActive=true,
-                    CategoryId=3
-                },
-                new()
-                {
-                    Id = 10,
-                    Name = "Xaomi Dijital Baskül",
-                    Price = 2100,
-                    Properties = "Kilonuzu kontrol edin",
-                    Url = "xaomi-dijital-baskul",
-                    ImageUrl = "http://localhost:5200/images/products/10.png",
-                    IsHome = true,
-                    CreatedDate=DateTime.Now,
-                    ModifiedDate=DateTime.Now,
-                    IsActive=true,
-                    CategoryId=3
-                },
-                new()
-                {
-                    Id = 11,
-                    Name = "Blaupunkt AC69 Led TV",
-                    Price = 9800,
-                    Properties = "Android tv",
-                    Url = "blaupunkt-ac69-led-tv",
-                    ImageUrl = "http://localhost:5200/images/products/11.png",
-                    IsHome = true,
-                    CreatedDate=DateTime.Now,
-                    ModifiedDate=DateTime.Now,
-                    IsActive=true,
-                    CategoryId=3
+                    CreatedDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now,
+                    IsActive = true,
+                    CategoryId = 6
                 }
-            ];
+            };
+
             builder.HasData(products);
             builder.ToTable("Products");
         }

@@ -38,37 +38,37 @@ namespace EgeApp.Backend.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(520),
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(6000),
                             UserId = "1"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(520),
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(6010),
                             UserId = "2"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(520),
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(6010),
                             UserId = "3"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(530),
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(6010),
                             UserId = "4"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(530),
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(6020),
                             UserId = "5"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(530),
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(6020),
                             UserId = "6"
                         });
                 });
@@ -129,6 +129,9 @@ namespace EgeApp.Backend.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("ParentCategoryId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Url")
                         .IsRequired()
                         .HasMaxLength(500)
@@ -136,68 +139,245 @@ namespace EgeApp.Backend.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ParentCategoryId");
+
                     b.ToTable("Categories", (string)null);
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(2000),
-                            Description = "Genel kategori",
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8430),
+                            Description = "Uyku ve solunum cihazları",
                             IsActive = true,
-                            ModifiedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(2000),
-                            Name = "Genel",
-                            Url = "genel"
+                            ModifiedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8430),
+                            Name = "Uyku ve Solunum",
+                            Url = "uyku-ve-solunum"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(2010),
-                            Description = "Telefonlar",
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8440),
+                            Description = "Oksijen konsantratörleri",
                             IsActive = true,
-                            ModifiedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(2010),
-                            Name = "Telefon",
-                            Url = "telefon"
+                            ModifiedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8440),
+                            Name = "Konsantratörler",
+                            ParentCategoryId = 1,
+                            Url = "konsantratorler"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(2010),
-                            Description = "Elektronik ürünler",
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8450),
+                            Description = "Aspiratör cihazları",
                             IsActive = true,
-                            ModifiedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(2010),
-                            Name = "Elektronik",
-                            Url = "elektronik"
+                            ModifiedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8450),
+                            Name = "Aspiratör Cihazları",
+                            ParentCategoryId = 1,
+                            Url = "aspirator-cihazlari"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(2010),
-                            Description = "Bilgisayarlar",
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8450),
+                            Description = "Oksimetre cihazları",
                             IsActive = true,
-                            ModifiedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(2010),
-                            Name = "Bilgisayar",
-                            Url = "bilgisayar"
+                            ModifiedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8450),
+                            Name = "Oksimetre",
+                            ParentCategoryId = 1,
+                            Url = "oksimetre"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(2010),
-                            Description = "Beyaz Eşyalar",
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8460),
+                            Description = "Oksijen tüpleri ve yardımcı aletler",
                             IsActive = true,
-                            ModifiedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(2010),
-                            Name = "Beyaz Eşya",
-                            Url = "beyaz-esya"
+                            ModifiedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8460),
+                            Name = "Oksijen Tüpü ve Yardımcı Aletleri",
+                            ParentCategoryId = 1,
+                            Url = "oksijen-tupu-yardimci-aletler"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(2020),
-                            Description = "Yurt dışından gelen ürünler",
-                            IsActive = false,
-                            ModifiedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(2020),
-                            Name = "Yurt Dışı",
-                            Url = "yurt-disi"
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8460),
+                            Description = "Oksijen kanülleri",
+                            IsActive = true,
+                            ModifiedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8460),
+                            Name = "Kanüller",
+                            ParentCategoryId = 1,
+                            Url = "kanuller"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8470),
+                            Description = "Pap cihazları ve ürünleri",
+                            IsActive = true,
+                            ModifiedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8470),
+                            Name = "Pap Ürünleri",
+                            ParentCategoryId = 1,
+                            Url = "pap-urunleri"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8470),
+                            Description = "Tekerlekli sandalye çeşitleri",
+                            IsActive = true,
+                            ModifiedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8470),
+                            Name = "Tekerlekli Sandalyeler",
+                            Url = "tekerlekli-sandalyeler"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8480),
+                            Description = "Banyo ve tuvalet kullanımına uygun tekerlekli sandalyeler",
+                            IsActive = true,
+                            ModifiedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8480),
+                            Name = "Banyo ve Tuvalet Tekerlekli Sandalyeleri",
+                            ParentCategoryId = 8,
+                            Url = "banyo-ve-tuvalet-tekerlekli-sandalyeleri"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8480),
+                            Description = "Günlük kullanım için tekerlekli sandalyeler",
+                            IsActive = true,
+                            ModifiedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8480),
+                            Name = "Günlük Kullanım Tekerlekli Sandalyeler",
+                            ParentCategoryId = 8,
+                            Url = "gunluk-kullanim-tekerlekli-sandalyeler"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8490),
+                            Description = "Konuşma cihazları",
+                            IsActive = true,
+                            ModifiedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8490),
+                            Name = "Konuşma Cihazları",
+                            Url = "konusma-cihazlari"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8490),
+                            Description = "Masaj ve muayene masaları",
+                            IsActive = true,
+                            ModifiedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8490),
+                            Name = "Masaj - Muayene Masaları",
+                            Url = "masaj-muayene-masalari"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8500),
+                            Description = "Çeşitli pusetler",
+                            IsActive = true,
+                            ModifiedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8500),
+                            Name = "Pusetler",
+                            Url = "pusetler"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8500),
+                            Description = "Yatan hastalar için ürünler",
+                            IsActive = true,
+                            ModifiedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8500),
+                            Name = "Yatan Hasta",
+                            Url = "yatan-hasta"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8500),
+                            Description = "Motorlu hasta karyolası",
+                            IsActive = true,
+                            ModifiedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8500),
+                            Name = "Hasta Karyolası",
+                            ParentCategoryId = 14,
+                            Url = "hasta-karyolasi"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8510),
+                            Description = "Hasta yatakları",
+                            IsActive = true,
+                            ModifiedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8510),
+                            Name = "Hasta Yatakları",
+                            ParentCategoryId = 14,
+                            Url = "hasta-yataklari"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8510),
+                            Description = "Yatan hastalar için bezler",
+                            IsActive = true,
+                            ModifiedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8510),
+                            Name = "Hasta Bezleri",
+                            ParentCategoryId = 14,
+                            Url = "hasta-bezleri"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8520),
+                            Description = "Yatan hastalar için yardımcı aletler",
+                            IsActive = true,
+                            ModifiedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8520),
+                            Name = "Yardımcı Aletler",
+                            ParentCategoryId = 14,
+                            Url = "yardimci-aletler"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8520),
+                            Description = "Engelsiz yaşam için ürünler",
+                            IsActive = true,
+                            ModifiedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8520),
+                            Name = "Engelsiz Ürünler",
+                            Url = "engelsiz-urunler"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8530),
+                            Description = "Baston ve kanedyen çeşitleri",
+                            IsActive = true,
+                            ModifiedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8530),
+                            Name = "Baston/Kanedyen",
+                            ParentCategoryId = 19,
+                            Url = "baston-kanedyen"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8530),
+                            Description = "Yürütücü cihazlar ve walkerlar",
+                            IsActive = true,
+                            ModifiedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8530),
+                            Name = "Yürütücü ve Wolker",
+                            ParentCategoryId = 19,
+                            Url = "yurutucu-ve-wolker"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8540),
+                            Description = "Engelsiz yaşam için ek ürünler",
+                            IsActive = true,
+                            ModifiedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(8540),
+                            Name = "Ek Ürünler",
+                            ParentCategoryId = 19,
+                            Url = "ek-urunler"
                         });
                 });
 
@@ -282,10 +462,19 @@ namespace EgeApp.Backend.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Brand")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("CategoryId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal?>("DiscountedPrice")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ImageUrl")
@@ -309,14 +498,23 @@ namespace EgeApp.Backend.Data.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("ProductionPlace")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Properties")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<int?>("Stock")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Url")
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("TEXT");
+
+                    b.Property<int?>("WarrantyPeriod")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -328,156 +526,86 @@ namespace EgeApp.Backend.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CategoryId = 2,
-                            CreatedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(2780),
-                            ImageUrl = "http://localhost:5200/images/products/1.png",
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(9960),
+                            ImageUrl = "http://localhost:5200/images/products/dorselumberkorse.webp",
                             IsActive = true,
                             IsHome = true,
-                            ModifiedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(2780),
-                            Name = "IPhone 14",
-                            Price = 59000m,
-                            Properties = "Harika bir telefon",
-                            Url = "iphone-14"
+                            ModifiedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(9960),
+                            Name = "Dorselumber Korse",
+                            Price = 1000m,
+                            Properties = "Diz ve sırt destekleyici",
+                            Url = "dorselumber-korse"
                         },
                         new
                         {
                             Id = 2,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(2780),
-                            ImageUrl = "http://localhost:5200/images/products/2.png",
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(9970),
+                            ImageUrl = "http://localhost:5200/images/products/devisbissoksijen.webp",
                             IsActive = true,
-                            IsHome = false,
-                            ModifiedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(2780),
-                            Name = "IPhone 14 Pro",
-                            Price = 69000m,
-                            Properties = "Bu da harika bir telefon",
-                            Url = "iphone-14-pro"
+                            IsHome = true,
+                            ModifiedDate = new DateTime(2024, 11, 25, 23, 33, 59, 764, DateTimeKind.Local).AddTicks(9970),
+                            Name = "Devisbiss Oksijen Konsantratörü",
+                            Price = 8000m,
+                            Properties = "Profesyonel solunum cihazı",
+                            Url = "devisbiss-oksijen-konsantratoru"
                         },
                         new
                         {
                             Id = 3,
-                            CategoryId = 2,
-                            CreatedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(2790),
-                            ImageUrl = "http://localhost:5200/images/products/3.png",
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 33, 59, 765, DateTimeKind.Local),
+                            ImageUrl = "http://localhost:5200/images/products/tamyuzmaskesi.webp",
                             IsActive = true,
                             IsHome = true,
-                            ModifiedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(2790),
-                            Name = "Samsung S23",
-                            Price = 49000m,
-                            Properties = "İdare eder",
-                            Url = "samsung-s23"
+                            ModifiedDate = new DateTime(2024, 11, 25, 23, 33, 59, 765, DateTimeKind.Local),
+                            Name = "Tam Yüz Maskesi",
+                            Price = 500m,
+                            Properties = "Solunum desteği için maske",
+                            Url = "tam-yuz-maskesi"
                         },
                         new
                         {
                             Id = 4,
-                            CategoryId = 2,
-                            CreatedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(2790),
-                            ImageUrl = "http://localhost:5200/images/products/4.png",
+                            CategoryId = 4,
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 33, 59, 765, DateTimeKind.Local).AddTicks(10),
+                            ImageUrl = "http://localhost:5200/images/products/motorluhastakaryolasi.webp",
                             IsActive = true,
                             IsHome = true,
-                            ModifiedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(2790),
-                            Name = "Xaomi Note 4",
-                            Price = 39000m,
-                            Properties = "Harika bir telefon",
-                            Url = "xaomi-note-4"
+                            ModifiedDate = new DateTime(2024, 11, 25, 23, 33, 59, 765, DateTimeKind.Local).AddTicks(10),
+                            Name = "2 Motorlu Hasta Karyolası",
+                            Price = 12000m,
+                            Properties = "Hasta bakım için motorlu yatak",
+                            Url = "2-motorlu-hasta-karyolasi"
                         },
                         new
                         {
                             Id = 5,
-                            CategoryId = 4,
-                            CreatedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(2800),
-                            ImageUrl = "http://localhost:5200/images/products/5.png",
+                            CategoryId = 5,
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 33, 59, 765, DateTimeKind.Local).AddTicks(20),
+                            ImageUrl = "http://localhost:5200/images/products/wcuracdbg.webp",
                             IsActive = true,
                             IsHome = true,
-                            ModifiedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(2800),
-                            Name = "MacBook Air M2",
-                            Price = 52000m,
-                            Properties = "M2nin gücü",
-                            Url = "macbook-air-m2"
+                            ModifiedDate = new DateTime(2024, 11, 25, 23, 33, 59, 765, DateTimeKind.Local).AddTicks(20),
+                            Name = "W Cura C",
+                            Price = 700m,
+                            Properties = "Hızlı tıbbi test malzemesi",
+                            Url = "w-cura-c"
                         },
                         new
                         {
                             Id = 6,
-                            CategoryId = 4,
-                            CreatedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(2800),
-                            ImageUrl = "http://localhost:5200/images/products/6.png",
-                            IsActive = true,
-                            IsHome = false,
-                            ModifiedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(2800),
-                            Name = "MacBook Pro M3",
-                            Price = 79000m,
-                            Properties = "16 Gb ram",
-                            Url = "macbook-pro-m3"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CategoryId = 5,
-                            CreatedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(2800),
-                            ImageUrl = "http://localhost:5200/images/products/7.png",
+                            CategoryId = 6,
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 33, 59, 765, DateTimeKind.Local).AddTicks(30),
+                            ImageUrl = "http://localhost:5200/images/products/tansiyonaleti.webp",
                             IsActive = true,
                             IsHome = true,
-                            ModifiedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(2810),
-                            Name = "Vestel Çamaşır Makinesi X65",
-                            Price = 19000m,
-                            Properties = "Akıllı makine",
-                            Url = "vestel-camasir-makinesi-x65"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CategoryId = 5,
-                            CreatedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(2810),
-                            ImageUrl = "http://localhost:5200/images/products/8.png",
-                            IsActive = true,
-                            IsHome = false,
-                            ModifiedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(2810),
-                            Name = "Arçelik Çamaşır Makinesi A-4",
-                            Price = 21000m,
-                            Properties = "Süper hızlı makine",
-                            Url = "arcelik-camasir-makinesi-a-4"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            CategoryId = 3,
-                            CreatedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(2810),
-                            ImageUrl = "http://localhost:5200/images/products/9.png",
-                            IsActive = true,
-                            IsHome = true,
-                            ModifiedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(2810),
-                            Name = "Hoop Dijital Radyo X96",
-                            Price = 1250m,
-                            Properties = "Klasik radyo keyfi",
-                            Url = "hoop-dijital-radyo-x96"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            CategoryId = 3,
-                            CreatedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(2820),
-                            ImageUrl = "http://localhost:5200/images/products/10.png",
-                            IsActive = true,
-                            IsHome = true,
-                            ModifiedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(2820),
-                            Name = "Xaomi Dijital Baskül",
-                            Price = 2100m,
-                            Properties = "Kilonuzu kontrol edin",
-                            Url = "xaomi-dijital-baskul"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            CategoryId = 3,
-                            CreatedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(2820),
-                            ImageUrl = "http://localhost:5200/images/products/11.png",
-                            IsActive = true,
-                            IsHome = true,
-                            ModifiedDate = new DateTime(2024, 11, 25, 21, 9, 15, 497, DateTimeKind.Local).AddTicks(2820),
-                            Name = "Blaupunkt AC69 Led TV",
-                            Price = 9800m,
-                            Properties = "Android tv",
-                            Url = "blaupunkt-ac69-led-tv"
+                            ModifiedDate = new DateTime(2024, 11, 25, 23, 33, 59, 765, DateTimeKind.Local).AddTicks(30),
+                            Name = "Tansiyon Aleti",
+                            Price = 500m,
+                            Properties = "Hassas tansiyon ölçer",
+                            Url = "tansiyon-aleti"
                         });
                 });
 
@@ -496,6 +624,15 @@ namespace EgeApp.Backend.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("EgeApp.Backend.Entity.Concrete.Category", b =>
+                {
+                    b.HasOne("EgeApp.Backend.Entity.Concrete.Category", "ParentCategory")
+                        .WithMany("SubCategories")
+                        .HasForeignKey("ParentCategoryId");
+
+                    b.Navigation("ParentCategory");
                 });
 
             modelBuilder.Entity("EgeApp.Backend.Entity.Concrete.OrderItem", b =>
@@ -520,7 +657,7 @@ namespace EgeApp.Backend.Data.Migrations
             modelBuilder.Entity("EgeApp.Backend.Entity.Concrete.Product", b =>
                 {
                     b.HasOne("EgeApp.Backend.Entity.Concrete.Category", "Category")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -531,6 +668,13 @@ namespace EgeApp.Backend.Data.Migrations
             modelBuilder.Entity("EgeApp.Backend.Entity.Concrete.Cart", b =>
                 {
                     b.Navigation("CartItems");
+                });
+
+            modelBuilder.Entity("EgeApp.Backend.Entity.Concrete.Category", b =>
+                {
+                    b.Navigation("Products");
+
+                    b.Navigation("SubCategories");
                 });
 
             modelBuilder.Entity("EgeApp.Backend.Entity.Concrete.Order", b =>
