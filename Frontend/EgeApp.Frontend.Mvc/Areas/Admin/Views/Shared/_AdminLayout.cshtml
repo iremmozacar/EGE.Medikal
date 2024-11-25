@@ -19,12 +19,13 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             @{
-                ContentDataModel contentDataModel = new()
+                var contentDataModel = new ContentDataModel
             {
-                PageHeader = ViewData["PageHeader"].ToString(),
-                ShowButton = (bool)ViewData["ShowButton"],
-                ButtonTitle = ViewData["ButtonTitle"].ToString(),
-                ButtonLink = ViewData["ButtonLink"].ToString()
+                PageHeader = ViewData["PageHeader"]?.ToString() ?? "Default Header", // Null kontrolü ekledim
+                ShowButton = ViewData["ShowButton"] != null && (bool)ViewData["ShowButton"], // ShowButton için null
+               
+            ButtonTitle = ViewData["ButtonTitle"]?.ToString() ?? "Default Button", // Null kontrolü ekledim
+                ButtonLink = ViewData["ButtonLink"]?.ToString() ?? "#" // Null kontrolü ekledim
             };
             }
             @await Html.PartialAsync("_ContentHeaderPartial", contentDataModel)

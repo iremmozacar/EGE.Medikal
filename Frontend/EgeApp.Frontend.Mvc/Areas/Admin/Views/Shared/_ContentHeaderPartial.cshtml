@@ -1,4 +1,5 @@
 ﻿@model EgeApp.Frontend.Mvc.Models.Other.ContentDataModel
+
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid">
@@ -9,9 +10,8 @@
             <div class="col-sm-6 text-right">
                 @if (Model.ShowButton)
                 {
-                        <a href="@Model.ButtonLink" class="btn btn-primary">@Model.ButtonTitle</a>
+                    <a href="@Model.ButtonLink" class="btn btn-primary">@Model.ButtonTitle</a>
                 }
-
             </div><!-- /.col -->
         </div><!-- /.row -->
     </div><!-- /.container-fluid -->
