@@ -1,0 +1,120 @@
+﻿@model EgeApp.Frontend.Mvc.Models.Identity.RoleAssignViewModel
+@{
+    ViewData["PageHeader"] = Model.Role.Name + " Rolüne Kullanıcı Atama";
+    ViewData["ShowButton"] = false;
+    ViewData["ButtonTitle"] = "";
+    ViewData["ButtonLink"] = "";
+}
+
+<form asp-area="Admin" asp-controller="Role" asp-action="Edit" method="post">
+    <input type="hidden" asp-for="@Model.Role.Id" name="RoleId" />
+    <div class="card">
+        <div class="card-body">
+            <div class="row w-75 m-auto">
+                <div class="col-md-6">
+                    <h6 class="bg-danger text-white p-3">Role Sahip Olmayan Üyeler</h6>
+                    <p class="mb-0"><span class="text-danger">@Model.Role.Name</span> rolüne atamak istediğiniz
+                        kullanıcıları seçin.
+                    </p>
+                    <div class="px-4">
+                        <input class="form-check-input" id="select-all-nonmembers" type="checkbox" />
+                        <label class="form-check-label" for="select-all-nonmembers"> Tümünü Seç</label>
+                    </div>
+                    @if (Model.NonMembers.Count == 0)
+                    {
+                        <div class="alert alert-warning">
+                            <span>Üye bulunamadı!</span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="card">
+                            <div class="card-body">
+                                @foreach (var user in Model.NonMembers)
+                                {
+                                    <div class="form-check">
+                                        <input id="user-@user.Id" type="checkbox" class="form-check-input nonmember"
+                                            name="IdsAdd" value="@user.Id" />
+                                        <label for="user-@user.Id" class="form-check-label">@user.UserName</label>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="col-md-6">
+                    <h6 class="bg-success text-white p-3">Role Sahip Olan Üyeler</h6>
+                    <p class="mb-0"><span class="text-danger">@Model.Role.Name </span>rolünden çıkarmak istediğiniz
+                        kullanıcıları seçin.</p>
+                    <div class="px-4">
+                        <input class="form-check-input" id="select-all-members" type="checkbox" />
+                        <label class="form-check-label" for="select-all-members"> Tümünü Seç</label>
+                    </div>
+                    @if (Model.Members.Count == 0)
+                    {
+                        <div class="alert alert-warning">
+                            <span>Üye bulunamadı!</span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="card">
+                            <div class="card-body">
+                                @foreach (var user in Model.Members)
+                                {
+                                    <div class="form-check">
+                                        <input id="user-@user.Id" type="checkbox" class="form-check-input member"
+                                            name="IdsRemove" value="@user.Id" />
+                                        <label for="user-@user.Id" class="form-check-label">@user.UserName</label>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="col-md-12">
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-block">Değişiklikleri Kaydet</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        const selectAllNonMembers = document.getElementById('select-all-nonmembers');
+        selectAllNonMembers.addEventListener('change', function () {
+
+            const nonMembers = document.querySelectorAll(".nonmember");
+
+            for (let i = 0; i < nonMembers.length; i++) {
+                if (selectAllNonMembers.checked) {
+                    nonMembers[i].checked = true;
+                } else {
+                    nonMembers[i].checked = false;
+                }
+
+            }
+        });
+
+        const selectAllMembers = document.getElementById('select-all-members');
+        selectAllMembers.addEventListener('change', function () {
+
+            const members = document.querySelectorAll(".member");
+
+            for (let i = 0; i < members.length; i++) {
+                if (selectAllMembers.checked) {
+                    members[i].checked = true;
+                } else {
+                    members[i].checked = false;
+                }
+
+            }
+        });
+
+
+
+    </script>
+}

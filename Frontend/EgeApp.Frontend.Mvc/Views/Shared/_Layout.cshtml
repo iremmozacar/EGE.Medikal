@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="utf-8">
+    <title>MSCD-5-EgeApp</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    @await Html.PartialAsync("_StylesPartial")
+</head>
+
+<body>
+    @await Html.PartialAsync("_SpinnerPartial")
+    @await Html.PartialAsync("_NavbarPartial")
+    @await Html.PartialAsync("_ModalSearchPartial")
+    @RenderBody()
+    @await Html.PartialAsync("_FooterPartial")
+    @await Html.PartialAsync("_CopyrightPartial")
+    @await Html.PartialAsync("_BackToTopPartial")
+    @await Html.PartialAsync("_ScriptsPartial")
+    @await Component.InvokeAsync("Notyf")
+    @await RenderSectionAsync("Scripts", false);
+</body>
+
+</html>

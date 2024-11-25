@@ -1,0 +1,65 @@
+{
+  "Files": [
+    {
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeMedikal/Backend/EgeApp.Backend.API/wwwroot/images/products/1.png",
+      "PackagePath": "staticwebassets/images/products/1.png"
+    },
+    {
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeMedikal/Backend/EgeApp.Backend.API/wwwroot/images/products/10.png",
+      "PackagePath": "staticwebassets/images/products/10.png"
+    },
+    {
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeMedikal/Backend/EgeApp.Backend.API/wwwroot/images/products/11.png",
+      "PackagePath": "staticwebassets/images/products/11.png"
+    },
+    {
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeMedikal/Backend/EgeApp.Backend.API/wwwroot/images/products/2.png",
+      "PackagePath": "staticwebassets/images/products/2.png"
+    },
+    {
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeMedikal/Backend/EgeApp.Backend.API/wwwroot/images/products/3.png",
+      "PackagePath": "staticwebassets/images/products/3.png"
+    },
+    {
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeMedikal/Backend/EgeApp.Backend.API/wwwroot/images/products/4.png",
+      "PackagePath": "staticwebassets/images/products/4.png"
+    },
+    {
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeMedikal/Backend/EgeApp.Backend.API/wwwroot/images/products/5.png",
+      "PackagePath": "staticwebassets/images/products/5.png"
+    },
+    {
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeMedikal/Backend/EgeApp.Backend.API/wwwroot/images/products/6.png",
+      "PackagePath": "staticwebassets/images/products/6.png"
+    },
+    {
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeMedikal/Backend/EgeApp.Backend.API/wwwroot/images/products/7.png",
+      "PackagePath": "staticwebassets/images/products/7.png"
+    },
+    {
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeMedikal/Backend/EgeApp.Backend.API/wwwroot/images/products/8.png",
+      "PackagePath": "staticwebassets/images/products/8.png"
+    },
+    {
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeMedikal/Backend/EgeApp.Backend.API/wwwroot/images/products/9.png",
+      "PackagePath": "staticwebassets/images/products/9.png"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.EgeApp.Backend.API.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.EgeApp.Backend.API.props",
+      "PackagePath": "build\\EgeApp.Backend.API.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.EgeApp.Backend.API.props",
+      "PackagePath": "buildMultiTargeting\\EgeApp.Backend.API.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.EgeApp.Backend.API.props",
+      "PackagePath": "buildTransitive\\EgeApp.Backend.API.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

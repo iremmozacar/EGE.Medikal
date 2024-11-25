@@ -1,0 +1,118 @@
+﻿@model EgeApp.Frontend.Mvc.Models.Identity.UserProfileViewModel
+<div class="container-fluid contact py-5">
+    <div class="container py-5">
+        <div class="p-5 bg-light rounded">
+            <div class="row g-4 py-5">
+
+                <div class="col-md-4 mt-5">
+                    <h1 class="display-6 fs-4 fw-normal text-success">Kullanıcı Bilgileri Güncelleme</h1>
+                    <form asp-area="" asp-controller="Account" asp-action="UpdateProfile" method="post">
+                        <div class="mb-3">
+                            <label asp-for="FirstName" class="form-label"></label>
+                            <input asp-for="FirstName" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="LastName" class="form-label"></label>
+                            <input asp-for="LastName" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="UserName" class="form-label"></label>
+                            <input asp-for="UserName" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label"></label>
+                            <input asp-for="Email" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="PhoneNumber" class="form-label"></label>
+                            <input asp-for="PhoneNumber" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="CurrentPassword" class="form-label"></label>
+                            <input asp-for="CurrentPassword" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="NewPassword" class="form-label"></label>
+                            <input asp-for="NewPassword" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="ReNewPassword" class="form-label"></label>
+                            <input asp-for="ReNewPassword" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-primary text-white">Profildeki Değişiklikleri
+                            Kaydet</button>
+                    </form>
+                </div>
+
+                <div class="col-md-8 mt-5">
+                    <h1 class="display-6 fs-4 fw-normal text-success">Siparişler</h1>
+                    @if (Model.Orders.Count > 0)
+                    {
+                            <div class="accordion" id="accordionExample">
+                            @foreach (var order in Model.Orders)
+                            {
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                    data-bs-target="#order_@order.Id" aria-expanded="true"
+                                                    aria-controls="order_@order.Id">
+                                                    <table class="table table-sm">
+                                                        <tr>
+                                                            <td>@order.Id</td>
+                                                            <td>@order.OrderDate</td>
+                                                            <td>@order.FirstName @order.LastName</td>
+                                                            <td>@($"{order.GetTotal():C0}")</td>
+                                                        </tr>
+                                                    </table>
+                                                </button>
+                                            </h2>
+                                            <div id="order_@order.Id" class="accordion-collapse collapse"
+                                                data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                                                    <table class="table table-sm table-warning table-striped">
+                                                        <tr class="table-info">
+                                                            <th>Resim</th>
+                                                            <th>Ürün</th>
+                                                            <th>Fiyat</th>
+                                                            <th>Adet</th>
+                                                            <th>Toplam</th>
+                                                        </tr>
+                                                @foreach (var orderItem in order.OrderItems)
+                                                {
+                                                                <tr>
+                                                                    <td>
+                                                                        <div class="d-flex align-items-center mt-2">
+                                                                            <img src="@orderItem.Product.ImageUrl"
+                                                                                class="img-fluid rounded-circle  ms-2"
+                                                                                style="width: 45px; height: 45px;" alt="">
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <a asp-area="" asp-controller="Product" asp-action="Details"
+                                                                            asp-route-id="@orderItem.Product.Id">
+                                                                @orderItem.Product.Name
+                                                                        </a>
+                                                                    </td>
+                                                                    <td>@($"{orderItem.Price:C0}")</td>
+                                                                    <td>@orderItem.Quantity</td>
+                                                                    <td>@($"{(orderItem.Price * orderItem.Quantity):C0}")</td>
+                                                                </tr>
+                                                }
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                            }
+
+                            </div>
+                    }
+                    else
+                    {
+                            <div class="alert alert-warning">Hiç siparişiniz bulunmamaktadır.</div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

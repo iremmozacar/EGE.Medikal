@@ -1,0 +1,115 @@
+﻿@model List<EgeApp.Frontend.Mvc.Models.Product.ProductViewModel>
+@{
+    ViewData["PageHeader"] = "Ürünler Anasayfa";
+    ViewData["ShowButton"] = true;
+    ViewData["ButtonTitle"] = "Ürün Ekle";
+    ViewData["ButtonLink"] = "/admin/product/create";
+}
+
+
+<div class="card">
+    <div class="card-body">
+        <table id="my-data-table" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th width="70">Id</th>
+                    <th width="80">Resim</th>
+                    <th>Ürün</th>
+                    <th width="100">Fiyat</th>
+                    <th width="70">Aktif</th>
+                    <th width="70">Anasayfa</th>
+                    <th width="80">İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in Model)
+                {
+                    <tr>
+                        <td>@p.Id</td>
+                        <td>
+                            <img src="@p.ImageUrl" width="40" />
+                        </td>
+                        <td>@p.Name</td>
+                        <td>@($"{p.Price:C0}")</td>
+                        <td>
+                            <div class="form-group">
+                                <div class="custom-control custom-switch">
+                                    <input asp-for="@p.IsActive" type="checkbox" class="custom-control-input"
+                                        id="isActive-@p.Id" onchange="changeIsActive('@p.Id')">
+                                    <label class="custom-control-label" for="isActive-@p.Id"></label>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <div class="custom-control custom-switch">
+                                    <input asp-for="@p.IsHome" type="checkbox" class="custom-control-input"
+                                        id="isHome-@p.Id" onchange="changeIsHome('@p.Id')">
+                                    <label class="custom-control-label" for="isHome-@p.Id"></label>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <a asp-area="Admin" asp-controller="Product" asp-action="Edit" asp-route-id="@p.Id"
+                                class="btn btn-warning btn-sm">Detay</a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <!-- /.card-body -->
+</div>
+
+@section Scripts {
+    <!-- DataTables  & Plugins -->
+    <script src="~/admin/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/admin/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/admin/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/admin/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="~/admin/plugins/jszip/jszip.min.js"></script>
+    <script src="~/admin/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="~/admin/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="~/admin/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/admin/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="~/admin/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    @await Html.PartialAsync("_DataTablesPartial")
+    <script>
+        const changeIsActive = function (productId) {
+            $.ajax({
+                url: `/admin/product/updateisactive/${productId}`,
+                type: 'GET',
+                success: function (res) {
+                    var isActiveCheckbox = document.getElementById("isActive-" + productId);
+                    var isHomeCheckbox = document.getElementById("isHome-" + productId);
+                    if (!isActiveCheckbox.checked) {
+                        isHomeCheckbox.checked = false;
+                        isHomeCheckbox.disabled = true;
+                    } else {
+                        isHomeCheckbox.disabled = false;
+                    }
+
+                },
+                error: function (err) {
+
+                },
+            });
+        }
+
+        const changeIsHome = function (productId) {
+            $.ajax({
+                url: `/admin/product/updateishome/${productId}`,
+                type: 'GET',
+                success: function (res) {
+        @* alert(res ? 'İşlem başarılı' : 'İşlem başarısız') *@
+                                                                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        }
+    </script>
+}

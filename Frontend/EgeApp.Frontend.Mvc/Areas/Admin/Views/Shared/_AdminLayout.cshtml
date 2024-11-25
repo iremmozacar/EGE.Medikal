@@ -1,0 +1,51 @@
+﻿@using EgeApp.Frontend.Mvc.Models.Other
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MSCD-5-EgeApp-Admin</title>
+    @await Html.PartialAsync("_StylesPartial")
+    @await RenderSectionAsync("Styles", false)
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+        @await Html.PartialAsync("_PreloaderPartial")
+        @await Html.PartialAsync("_NavbarPartial")
+        @await Html.PartialAsync("_MainSidebarPartial")
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            @{
+                ContentDataModel contentDataModel = new()
+            {
+                PageHeader = ViewData["PageHeader"].ToString(),
+                ShowButton = (bool)ViewData["ShowButton"],
+                ButtonTitle = ViewData["ButtonTitle"].ToString(),
+                ButtonLink = ViewData["ButtonLink"].ToString()
+            };
+            }
+            @await Html.PartialAsync("_ContentHeaderPartial", contentDataModel)
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    @RenderBody()
+                </div><!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+
+        @await Html.PartialAsync("_FooterPartial")
+    </div>
+    <!-- ./wrapper -->
+    @await Html.PartialAsync("_ScriptsPartial")
+    @await Component.InvokeAsync("Notyf")
+    @await RenderSectionAsync("Scripts", false)
+</body>
+
+</html>

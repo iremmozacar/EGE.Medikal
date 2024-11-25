@@ -1,0 +1,91 @@
+﻿@model List<EgeApp.Frontend.Mvc.Data.Entities.AppRole>
+@{
+    ViewData["PageHeader"] = "Roller";
+    ViewData["ShowButton"] = false;
+    ViewData["ButtonTitle"] = "";
+    ViewData["ButtonLink"] = "";
+}
+
+
+<div class="card">
+    <div class="card-body">
+        <table id="my-data-table" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Rol</th>
+                    <th>Açıklama</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var role in Model)
+                {
+                    <tr>
+                        <td>@role.Id</td>
+                        <td>@role.Name</td>
+                        <td>@role.Description</td>
+                        <td>
+                            <a asp-area="Admin" asp-controller="Role" asp-action="Edit" asp-route-id="@role.Id"
+                                class="btn btn-warning btn-sm">Detay</a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <!-- /.card-body -->
+</div>
+
+@section Scripts {
+    <!-- DataTables  & Plugins -->
+    <script src="~/admin/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/admin/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/admin/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/admin/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="~/admin/plugins/jszip/jszip.min.js"></script>
+    <script src="~/admin/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="~/admin/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="~/admin/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/admin/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="~/admin/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    @await Html.PartialAsync("_DataTablesPartial")
+    <script>
+        const changeIsActive = function (productId) {
+            $.ajax({
+                url: `/admin/product/updateisactive/${productId}`,
+                type: 'GET',
+                success: function (res) {
+                    var isActiveCheckbox = document.getElementById("isActive-" + productId);
+                    var isHomeCheckbox = document.getElementById("isHome-" + productId);
+                    if (!isActiveCheckbox.checked) {
+                        isHomeCheckbox.checked = false;
+                        isHomeCheckbox.disabled = true;
+                    } else {
+                        isHomeCheckbox.disabled = false;
+                    }
+
+                },
+                error: function (err) {
+
+                },
+            });
+        }
+
+        const changeIsHome = function (productId) {
+            $.ajax({
+                url: `/admin/product/updateishome/${productId}`,
+                type: 'GET',
+                success: function (res) {
+        @* alert(res ? 'İşlem başarılı' : 'İşlem başarısız') *@
+                                                                                                                        },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        }
+    </script>
+}
