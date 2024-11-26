@@ -52,6 +52,21 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseEndpoints(endpoints =>
+{
+    // Default route ayarı
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+
+    // Account için özel route
+    endpoints.MapControllerRoute(
+        name: "account",
+        pattern: "Account/{action=Login}/{id?}",
+        defaults: new { controller = "Account", action = "Login" }
+    );
+});
+
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseSession();

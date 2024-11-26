@@ -25,7 +25,7 @@ namespace EgeApp.Frontend.Mvc.Models.Product
         public decimal Price { get; set; }
 
         [JsonPropertyName("discountedPrice")]
-        public decimal DiscountedPrice { get; set; }
+        public decimal? DiscountedPrice { get; set; }
 
         [JsonPropertyName("imageUrl")]
         public string ImageUrl { get; set; }

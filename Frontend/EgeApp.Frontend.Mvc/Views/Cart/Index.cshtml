@@ -1,157 +1,164 @@
 ﻿@model EgeApp.Frontend.Mvc.Models.Cart.CartViewModel
-<!-- Single Page Header start -->
-<div class="container-fluid page-header py-5">
-    <h1 class="text-center text-white display-6">Sepet</h1>
-</div>
-<!-- Single Page Header End -->
 
-<!-- Cart Page Start -->
-<div class="container-fluid py-5">
-    <div class="container py-5">
+<!-- Breadcrumb Begin -->
+<div class="breadcrumb-option">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__links">
+                    <a href="./index.html"><i class="fa fa-home"></i> Home</a>
+                    <span>Shopping Cart</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+
+<!-- Shop Cart Section Begin -->
+<section class="shop-cart spad">
+    <div class="container">
         @if (Model.CartItems.Count == 0)
         {
-                <div class="alert alert-warning">Sepetinizde ürün bulunmamaktadır</div>
+            <div class="alert alert-warning">Your cart is empty.</div>
         }
         else
         {
-                <div class="table-responsive">
-                <table class="table">
+            <div class="shop__cart__table">
+                <table>
                     <thead>
                         <tr>
-                            <th scope="col">Resim</th>
-                            <th scope="col">Ürün</th>
-                            <th scope="col">Fiyat</th>
-                            <th scope="col">Adet</th>
-                            <th scope="col">Toplam</th>
-                            <th scope="col">Sepetten Çıkar</th>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var cartItem in Model.CartItems)
                         {
-                                <tr>
-                                    <th scope="row">
-                                        <div class="d-flex align-items-center">
-                                            <img src="@cartItem.Product.ImageUrl" class="img-fluid me-5 rounded-circle"
-                                                style="width: 80px; height: 80px;" alt="">
-                                        </div>
-                                    </th>
-                                    <td>
-                                        <p class="mb-0 mt-4">@cartItem.Product.Name</p>
-                                    </td>
-                                    <td>
-                                        <p class="mb-0 mt-4">@($"{cartItem.Product.Price:C0}")</p>
-                                    </td>
-                                    <td>
-                                        <div class="input-group quantity mt-4" style="width: 100px;">
-                                            <div class="input-group-btn">
-                                                <button onclick="changeQuantity(this, true,true)" class="btn btn-sm btn-minus rounded-circle bg-light border" itemid="@cartItem.Id">
-                                                    <i class="fa fa-minus"></i>
-                                                </button>
-                                            </div>
-                                            <input oninput="changeQuantity(this,null,false)" id="input-quantity-@cartItem.Id" type="number" min="1" class="form-control form-control-sm text-center border-0"
-                                                value="@cartItem.Quantity" itemid="@cartItem.Id">
-                                            <div class="input-group-btn">
-                                                <button onclick="changeQuantity(this,false,true)"
-                                                    class="btn btn-sm btn-plus rounded-circle bg-light border"
-                                                    itemid="@cartItem.Id">
-                                                    <i class="fa fa-plus"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <p id="cart-item-total-@cartItem.Id" class="mb-0 mt-4">@($"{(cartItem.Product.Price * cartItem.Quantity):C0}")</p>
-                                    </td>
-                                    <td>
-                                        <a asp-area="" asp-controller="Cart" asp-action="DeleteCartItem" asp-route-id="@cartItem.Id" class="btn btn-md rounded-circle bg-light border mt-4">
-                                            <i class="fa fa-times text-danger"></i>
-                                        </a>
-                                    </td>
-
-                                </tr>
+                            <tr>
+                                <td class="cart__product__item">
+                                    <img src="@cartItem.Product.ImageUrl" alt="">
+                                    <div class="cart__product__item__title">
+                                        <h6>@cartItem.Product.Name</h6>
+                                    </div>
+                                </td>
+                                <td class="cart__price">@($"{cartItem.Product.Price:C0}")</td>
+                                <td class="cart__quantity">
+                                    <div class="pro-qty">
+                                        <button onclick="changeQuantity(this, true, true)" class="btn btn-sm btn-minus"
+                                            itemid="@cartItem.Id">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                        <input id="input-quantity-@cartItem.Id" type="number" min="1" value="@cartItem.Quantity"
+                                            oninput="changeQuantity(this, null, false)" itemid="@cartItem.Id">
+                                        <button onclick="changeQuantity(this, false, true)" class="btn btn-sm btn-plus"
+                                            itemid="@cartItem.Id">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td class="cart__total" id="cart-item-total-@cartItem.Id">
+                                    @($"{(cartItem.Product.Price * cartItem.Quantity):C0}")
+                                </td>
+                                <td class="cart__close">
+                                    <a asp-controller="Cart" asp-action="DeleteCartItem" asp-route-id="@cartItem.Id"
+                                        class="btn btn-md btn-danger">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </td>
+                            </tr>
                         }
-
                     </tbody>
                 </table>
             </div>
-            <div class="row g-4 justify-content-end">
-                <div class="col-8"></div>
-                <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
-                    <div class="bg-light rounded">
-                        <div class="p-4">
-                            <h1 class="display-6 mb-4">Sepet <span class="fw-normal">Tutarı</span></h1>
-                            <div class="d-flex justify-content-between mb-4">
-                                <h5 class="mb-0 me-4">Ara Toplam:</h5>
-                                @{
-                                    var subTotal = Model.GetTotalPrice();
-                                    var shippingLimit = 20000;
-                                    var shippingPrice = subTotal > shippingLimit ? 0 : 1000;
-                                    var total = subTotal + shippingPrice;
-                                }
-                                <p id="cart-sub-total" class="mb-0">@($"{subTotal:C0}")</p>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <h5 class="mb-0 me-4">Kargo</h5>
-                                <div class="">
-                                    <p class="mb-0">@(shippingPrice == 0 ? "Ücretsiz" : $"{shippingPrice:C0}")</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
-                            <h5 class="mb-0 ps-4 me-4">Toplam</h5>
-                            <p id="cart-total" class="mb-0 pe-4">@($"{total:C0}")</p>
-                        </div>
-                        <a asp-area="" asp-controller="Order" asp-action="Checkout" class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"
-                            type="button">Ödemeye Geç</a>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="cart__btn">
+                        <a href="./shop.html" class="site-btn">Continue Shopping</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-right">
+                    <div class="cart__btn update__btn">
+                        <a href="#"><span class="icon_loading"></span> Update Cart</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 offset-lg-8">
+                    <div class="cart__total__procced">
+                        <h6>Cart Total</h6>
+                        @{
+                            var subTotal = Model.GetTotalPrice();
+                            var shippingLimit = 20000;
+                            var shippingPrice = subTotal > shippingLimit ? 0 : 1000;
+                            var total = subTotal + shippingPrice;
+                        }
+                        <ul>
+                            <li>Subtotal <span id="cart-sub-total">@($"{subTotal:C0}")</span></li>
+                            <li>Shipping <span>@(shippingPrice == 0 ? "Free" : $"{shippingPrice:C0}")</span></li>
+                            <li>Total <span id="cart-total">@($"{total:C0}")</span></li>
+                        </ul>
+                        <a asp-controller="Order" asp-action="Checkout" class="primary-btn">Proceed to Checkout</a>
                     </div>
                 </div>
             </div>
         }
     </div>
-</div>
-<!-- Cart Page End -->
+</section>
+<!-- Shop Cart Section End -->
 
 @section Scripts {
-        <script>
-            function changeQuantity(element, status, where) {
-                const cartItemId = element.getAttribute("itemid");
-                const quantityInput = document.getElementById("input-quantity-"+cartItemId);
-                let quantity;
-                if(!where){
-                    if(quantityInput.value>0) quantity=quantityInput.value;
-                }else{
-                    console.log(quantityInput.value)
-                    if(Number(quantityInput.value)>1)
-                    {
-                        console.log(quantityInput.value)
-                        console.log("girdim")
-                        quantity = !status ?  Number(quantityInput.value) + 1 :Number(quantityInput.value) - 1 ;
-                    }else{
-                        quantity=1;
-                        quantityInput.value=1;
-                    }
-                }
-        @* const quantity = !status ?  Number(quantityInput.value) + 1 :Number(quantityInput.value) - 1 ; *@
-                const cartItemTotalElement=document.getElementById(`cart-item-total-${cartItemId}`);
-                const cartSubTotal = document.getElementById("cart-sub-total");
-                const cartTotal = document.getElementById("cart-total");
-                $.ajax({
-                    url: "/cart/changequantity",
-                    type: "POST",
-                    data: {
-                        cartItemId: cartItemId,
-                        quantity: quantity
-                    },
-                    success: function (response) {
-                        cartItemTotalElement.innerText=response.cartItemTotal.toLocaleString('tr-TR', { style: 'currency', currency: 'TRY',minimumFractionDigits: 0,maximumFractionDigits: 0 });
-                        cartSubTotal.innerText=response.subTotal.toLocaleString('tr-TR', { style: 'currency', currency: 'TRY' ,minimumFractionDigits: 0,maximumFractionDigits: 0});
-                        cartTotal.innerText=response.cartTotal.toLocaleString('tr-TR', { style: 'currency', currency: 'TRY',minimumFractionDigits: 0,maximumFractionDigits: 0 });
-                    },
-                    error: function (error) {
-
-                    }
-                });
+    <script>
+        function changeQuantity(element, status, where) {
+            const cartItemId = element.getAttribute("itemid");
+            const quantityInput = document.getElementById("input-quantity-" + cartItemId);
+            let quantity;
+            if (!where) {
+                quantity = quantityInput.value > 0 ? quantityInput.value : 1;
+            } else {
+                quantity = !status ? Number(quantityInput.value) + 1 : Number(quantityInput.value) - 1;
+                if (quantity < 1) quantity = 1;
+                quantityInput.value = quantity;
             }
-        </script>
+
+            const cartItemTotalElement = document.getElementById(`cart-item-total-${cartItemId}`);
+            const cartSubTotal = document.getElementById("cart-sub-total");
+            const cartTotal = document.getElementById("cart-total");
+
+            $.ajax({
+                url: "/cart/changequantity",
+                type: "POST",
+                data: {
+                    cartItemId: cartItemId,
+                    quantity: quantity
+                },
+                success: function (response) {
+                    cartItemTotalElement.innerText = response.cartItemTotal.toLocaleString('tr-TR', {
+                        style: 'currency',
+                        currency: 'TRY',
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0
+                    });
+                    cartSubTotal.innerText = response.subTotal.toLocaleString('tr-TR', {
+                        style: 'currency',
+                        currency: 'TRY',
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0
+                    });
+                    cartTotal.innerText = response.cartTotal.toLocaleString('tr-TR', {
+                        style: 'currency',
+                        currency: 'TRY',
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0
+                    });
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        }
+    </script>
 }

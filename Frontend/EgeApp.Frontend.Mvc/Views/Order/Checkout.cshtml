@@ -1,74 +1,67 @@
 ﻿@model EgeApp.Frontend.Mvc.Models.Order.OrderCreateViewModel
 
-<!-- Single Page Header start -->
+<!-- Sayfa Başlık Alanı -->
 <div class="container-fluid page-header py-5">
     <h1 class="text-center text-white display-6">Ödeme</h1>
 </div>
-<!-- Single Page Header End -->
 
-
-<!-- Checkout Page Start -->
+<!-- Ödeme Sayfası Başlangıcı -->
 <div class="container-fluid py-5">
     <div class="container py-5">
         <h1 class="mb-4">Fatura Bilgileri</h1>
         <form asp-area="" asp-controller="Order" asp-action="Checkout" method="post">
             <div class="row g-5">
-                <!-- Fatura Bilgileri -->
+                <!-- Fatura Detayları -->
                 <div class="col-md-12 col-lg-6 col-xl-7">
                     <div class="row">
-                        <div class="col-md-12 col-lg-6">
-                            <div class="form-item w-100">
-                                <label asp-for="FirstName" class="form-label my-3"></label>
-                                <input asp-for="FirstName" class="form-control">
-                                <span class="text-danger" asp-validation-for="FirstName"></span>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="FirstName" class="form-label">Ad</label>
+                                <input asp-for="FirstName" class="form-control" placeholder="Adınız">
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
                             </div>
                         </div>
-                        <div class="col-md-12 col-lg-6">
-                            <div class="form-item w-100">
-                                <label asp-for="LastName" class="form-label my-3"></label>
-                                <input asp-for="LastName" class="form-control">
-                                <span class="text-danger" asp-validation-for="LastName"></span>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="LastName" class="form-label">Soyad</label>
+                                <input asp-for="LastName" class="form-control" placeholder="Soyadınız">
+                                <span asp-validation-for="LastName" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
-                    <div class="form-item">
-                        <label asp-for="Address" class="form-label my-3"></label>
+                    <div class="form-group">
+                        <label asp-for="Address" class="form-label">Adres</label>
                         <input asp-for="Address" class="form-control" placeholder="Adresinizi giriniz">
-                        <span class="text-danger" asp-validation-for="Address"></span>
+                        <span asp-validation-for="Address" class="text-danger"></span>
                     </div>
                     <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-item w-100">
-                                <label asp-for="City" class="form-label my-3"></label>
-                                <input asp-for="City" class="form-control">
-                                <span class="text-danger" asp-validation-for="City"></span>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-item w-100">
-                                <label asp-for="PhoneNumber" class="form-label my-3"></label>
-                                <input asp-for="PhoneNumber" class="form-control">
-                                <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="City" class="form-label">Şehir</label>
+                                <input asp-for="City" class="form-control" placeholder="Şehir">
+                                <span asp-validation-for="City" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="form-item w-100">
-                                <label asp-for="Email" class="form-label my-3"></label>
-                                <input asp-for="Email" class="form-control">
-                                <span class="text-danger" asp-validation-for="Email"></span>
+                            <div class="form-group">
+                                <label asp-for="PhoneNumber" class="form-label">Telefon</label>
+                                <input asp-for="PhoneNumber" class="form-control" placeholder="Telefon">
+                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                             </div>
                         </div>
-                        <div class="col-md-2">
-                            <div class="form-item w-100">
-                                <label asp-for="PaymentType" class="form-label my-3"></label>
-                                <input asp-for="PaymentType" class="form-control">
-                                <span class="text-danger" asp-validation-for="PaymentType"></span>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="Email" class="form-label">Email</label>
+                                <input asp-for="Email" class="form-control" placeholder="Email">
+                                <span asp-validation-for="Email" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Sipariş Verilecek Ürünler -->
+
+                <!-- Sipariş Özeti -->
                 <div class="col-md-12 col-lg-6 col-xl-5">
+                    <h4 class="mb-4">Siparişiniz</h4>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -84,81 +77,40 @@
                                 @foreach (var item in Model.Cart.CartItems)
                                 {
                                         <tr>
-                                            <th scope="row">
-                                                <div class="d-flex align-items-center mt-2">
-                                                    <img src="@item.Product.ImageUrl" class="img-fluid rounded-circle"
-                                                        style="width: 90px; height: 90px;" alt="">
-                                                </div>
-                                            </th>
-                                            <td class="py-5">@item.Product.Name</td>
-                                            <td class="py-5">@($"{item.Product.Price:C0}")</td>
-                                            <td class="py-5">@item.Quantity</td>
-                                            <td class="py-5">@($"{(item.Product.Price * item.Quantity):C0}")</td>
+                                            <td>
+                                                <img src="@item.Product.ImageUrl" class="img-fluid rounded-circle" style="width: 60px; height: 60px;" alt="Ürün Resmi">
+                                            </td>
+                                            <td>@item.Product.Name</td>
+                                            <td>@item.Product.Price.ToString("C0")</td>
+                                            <td>@item.Quantity</td>
+                                            <td>@(item.Product.Price * item.Quantity).ToString("C0")</td>
                                         </tr>
                                 }
-
-
-
                                 <tr>
-                                    <th scope="row">
-                                    </th>
-                                    <td class="py-5"></td>
-                                    <td class="py-5"></td>
-                                    <td class="py-5">
-                                        <p class="mb-0 text-dark py-3">Ara Toplam</p>
-                                    </td>
-                                    <td class="py-5">
-                                        <div class="py-3 border-bottom border-top">
-                                            <p class="mb-0 text-dark">@($"{Model.Cart.GetTotalPrice():C0}")</p>
-                                        </div>
-                                    </td>
+                                    <td colspan="4" class="text-end">Ara Toplam</td>
+                                    <td>@Model.Cart.GetTotalPrice().ToString("C0")</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">
-                                    </th>
-                                    <td class="py-5"></td>
-                                    <td class="py-5"></td>
-                                    <td class="py-5">
-                                        <p class="mb-0 text-dark py-3">Kargo</p>
-                                    </td>
                                     @{
-                                        var subTotal = Model.Cart.GetTotalPrice();
                                         var shippingLimit = 20000;
-                                        var shippingPrice = subTotal > shippingLimit ? 0 : 1000;
-                                        var total = subTotal + shippingPrice;
+                                        var shippingPrice = Model.Cart.GetTotalPrice() > shippingLimit ? 0 : 1000;
                                     }
-                                    <td class="py-5">
-                                        <div class="py-3 border-bottom border-top">
-                                            <p class="mb-0 text-dark">@(shippingPrice == 0 ? "Ücretsiz" :
-                                                $"{shippingPrice:C0}")</p>
-                                        </div>
-                                    </td>
+                                    <td colspan="4" class="text-end">Kargo</td>
+                                    <td>@(shippingPrice == 0 ? "Ücretsiz" : shippingPrice.ToString("C0"))</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">
-                                    </th>
-                                    <td class="py-5">
-                                        <p class="mb-0 text-dark text-uppercase py-3">Toplam</p>
-                                    </td>
-                                    <td class="py-5"></td>
-                                    <td class="py-5"></td>
-                                    <td class="py-5">
-                                        <div class="py-3 border-bottom border-top">
-                                            <p class="mb-0 text-dark">@($"{total:C0}")</p>
-                                        </div>
-                                    </td>
+                                    <td colspan="4" class="text-end fw-bold">Toplam</td>
+                                    <td class="fw-bold">@((Model.Cart.GetTotalPrice() + shippingPrice).ToString("C0"))</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div class="row g-4 text-center align-items-center justify-content-center pt-4">
-                        <button type="submit"
-                            class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">Ödemeyi
-                            Yap</button>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary py-3">Ödemeyi Yap</button>
                     </div>
                 </div>
             </div>
         </form>
     </div>
 </div>
-<!-- Checkout Page End -->
+<!-- Ödeme Sayfası Bitişi -->

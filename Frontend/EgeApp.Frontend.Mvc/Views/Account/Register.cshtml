@@ -1,12 +1,12 @@
-﻿@model EgeApp.Frontend.Mvc.Models.Identity.SignUpViewModel
+﻿@model EgeApp.Frontend.Mvc.Models.Identity.CreateUserProfileViewModel
 
 <div class="container-fluid contact py-5">
     <div class="container py-5">
         <div class="p-5 bg-light rounded">
-            <h3 class="text-center mb-4">Kayıt Ol</h3>
+            <h3 class="text-center mb-4">Yeni Kullanıcı Ekle</h3>
             <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <form asp-area="" asp-controller="Account" asp-action="SignUp" method="post">
+                <div class="col-md-8">
+                    <form asp-area="" asp-controller="Admin" asp-action="Register" method="post">
                         <div class="form-group mb-3">
                             <input asp-for="FirstName" class="form-control border-0 py-3" placeholder="Ad" />
                             <span class="text-danger" asp-validation-for="FirstName"></span>
@@ -16,12 +16,17 @@
                             <span class="text-danger" asp-validation-for="LastName"></span>
                         </div>
                         <div class="form-group mb-3">
+                            <input asp-for="Email" class="form-control border-0 py-3" placeholder="Email" />
+                            <span class="text-danger" asp-validation-for="Email"></span>
+                        </div>
+                        <div class="form-group mb-3">
                             <input asp-for="UserName" class="form-control border-0 py-3" placeholder="Kullanıcı Adı" />
                             <span class="text-danger" asp-validation-for="UserName"></span>
                         </div>
                         <div class="form-group mb-3">
-                            <input asp-for="Email" class="form-control border-0 py-3" placeholder="Email" />
-                            <span class="text-danger" asp-validation-for="Email"></span>
+                            <input asp-for="PhoneNumber" class="form-control border-0 py-3"
+                                placeholder="Telefon Numarası" />
+                            <span class="text-danger" asp-validation-for="PhoneNumber"></span>
                         </div>
                         <div class="form-group mb-3">
                             <input asp-for="Password" class="form-control border-0 py-3" type="password"
@@ -33,7 +38,13 @@
                                 placeholder="Parola Tekrar" />
                             <span class="text-danger" asp-validation-for="RePassword"></span>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100 py-2">Kayıt Ol</button>
+                        <div class="form-group mb-3">
+                            <label asp-for="UserRoles" class="form-label">Roller</label>
+                            <select asp-for="UserRoles" asp-items="@(new MultiSelectList(Model.Roles, "Name", "Name"))"
+                                class="form-control" multiple></select>
+                            <span class="text-danger" asp-validation-for="UserRoles"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 py-2">Kullanıcı Ekle</button>
                     </form>
                 </div>
             </div>

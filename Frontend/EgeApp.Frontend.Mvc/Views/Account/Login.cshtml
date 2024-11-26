@@ -1,23 +1,72 @@
 ﻿@model EgeApp.Frontend.Mvc.Models.Identity.LoginViewModel
-<div class="container-fluid contact py-5">
-    <div class="container py-5">
-        <div class="p-5 bg-light rounded">
-            <div class="row g-4 py-5">
-                <div class="col-md-4 m-auto mt-5">
-                    <form asp-area="" asp-controller="Account" asp-action="Login" method="post">
-                        <input type="hidden" asp-for="ReturnUrl" />
-                        <div class="text-danger" asp-validation-summary="All"></div>
-                        <input asp-for="UserName" class="w-100 form-control border-0 py-3 mb-4"
-                            placeholder="Kullanıcı Adı">
-                        <input asp-for="Password" class="w-100 form-control border-0 py-3 mb-4" placeholder="Parola">
-                        <div class="d-flex gap-2">
-                            <button class="w-100 btn btn-success py-3" type="submit">Giriş Yap</button>
-                            <a asp-area="" asp-controller="Account" asp-action="ForgotPassword"
-                                class="w-100 btn btn-info text-white py-3" type="submit">Şifremi Unuttum</a>
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Login Page">
+    <meta name="keywords" content="Login, Ashion, unique, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Giriş Yap</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+
+<body>
+    <section class="login spad">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-8">
+                    <div class="login__form">
+                        <h3>Giriş Yap</h3>
+                        <form method="post" action="/Account/Login">
+                            <div class="form-group">
+                                <label for="username">Kullanıcı Adı</label>
+                                <input type="text" class="form-control" id="username" name="Username"
+                                    placeholder="Kullanıcı Adı" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Şifre</label>
+                                <input type="password" class="form-control" id="password" name="Password"
+                                    placeholder="Şifre" required>
+                            </div>
+                            <button type="submit" class="site-btn">Giriş Yap</button>
+                        </form>
+                        <div class="login__help mt-3">
+                            <p>Hesabınız yok mu? <a href="/Account/Register">Kayıt Ol</a></p>
+                            <p><a href="/Account/ForgotPassword">Şifremi Unuttum</a></p>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </section>
+
+    <!-- Js Plugins -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/mixitup.min.js"></script>
+    <script src="js/jquery.countdown.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.nicescroll.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
