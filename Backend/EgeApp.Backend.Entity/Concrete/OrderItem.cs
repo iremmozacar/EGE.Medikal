@@ -1,4 +1,5 @@
 using System;
+using EgeApp.Backend.Models;
 
 namespace EgeApp.Backend.Entity.Concrete
 {

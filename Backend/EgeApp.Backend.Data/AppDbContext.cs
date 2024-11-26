@@ -1,6 +1,7 @@
 ﻿
 using EgeApp.Backend.Data.Concrete.Configs;
 using EgeApp.Backend.Entity.Concrete;
+using EgeApp.Backend.Models;
 using Microsoft.EntityFrameworkCore;
 
 

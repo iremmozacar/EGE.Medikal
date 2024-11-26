@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EgeApp.Backend.Entity.Concrete;
+using EgeApp.Backend.Models;
 using EgeApp.Backend.Shared.Dtos.CategoryDtos;
 using EgeApp.Backend.Shared.Dtos.OrderDtos;
 using EgeApp.Backend.Shared.Dtos.ProductDtos;

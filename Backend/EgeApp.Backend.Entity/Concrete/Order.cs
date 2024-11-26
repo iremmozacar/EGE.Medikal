@@ -16,6 +16,6 @@ namespace EgeApp.Backend.Entity.Concrete
         public string Email { get; set; }
         public PaymentType PaymentType { get; set; }
         public OrderState OrderState { get; set; }
-        public List<OrderItem> OrderItems { get; set; }
+        public List<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
     }
 }

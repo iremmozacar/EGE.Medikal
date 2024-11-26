@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>MSCD-5-EgeApp</title>
+    <title>EGE MEDİKAL</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -11,16 +11,24 @@
 </head>
 
 <body>
-    @await Html.PartialAsync("_SpinnerPartial")
-    @await Html.PartialAsync("_NavbarPartial")
-    @await Html.PartialAsync("_ModalSearchPartial")
+    @await Html.PartialAsync("_PreloderPartial")
+   @await Html.PartialAsync("_OffCanvarsMenuBeginPartial")
+    @await Html.PartialAsync("_HeaderSectionPartial")
+    @await Html.PartialAsync("_CategoriesSectionPartial")
+    @await Html.PartialAsync("_ProductSectionPartial")
+    @await Html.PartialAsync("_BannerSectionPartial")
+    @await Html.PartialAsync("_TrendSectionPartial")
+    @await Html.PartialAsync("_DiscountSectionPartial")
+    @await Html.PartialAsync("_ServicesSectionPartial")
+    @await Html.PartialAsync("_InstagramPartial")
+    
+
     @RenderBody()
     @await Html.PartialAsync("_FooterPartial")
-    @await Html.PartialAsync("_CopyrightPartial")
-    @await Html.PartialAsync("_BackToTopPartial")
+    @await Html.PartialAsync("_SearchPartial")
     @await Html.PartialAsync("_ScriptsPartial")
-    @await Component.InvokeAsync("Notyf")
-    @await RenderSectionAsync("Scripts", false);
+    @* @await Component.InvokeAsync("Notyf") *@
+    @* @await RenderSectionAsync("Scripts", false); *@
 </body>
 
 </html>

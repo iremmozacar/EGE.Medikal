@@ -10,6 +10,7 @@ using EgeApp.Backend.Shared.Dtos.CategoryDtos;
 using EgeApp.Backend.Shared.Dtos.ProductDtos;
 using EgeApp.Backend.Shared.Dtos.ResponseDtos;
 using EgeApp.Backend.Shared.Helpers;
+using EgeApp.Backend.Models;
 
 namespace EgeApp.Backend.Business.Concrete
 {
@@ -88,7 +89,7 @@ namespace EgeApp.Backend.Business.Concrete
 
         public async Task<ResponseDto<List<ProductDto>>> GetAllByCategoryIdAsync(int categoryId)
         {
-            List<Product> productList = await _productRepository.GetAllAsync(x => x.IsActive == true && x.CategoryId == categoryId, x => x.Include(y => y.Category));
+            List<Product> productList = await _productRepository.GetAllAsync(x => x.IsActive == true && x.ProductCategoryId == categoryId, x => x.Include(y => y.Category));
             var category = await _categoryRepository.GetAsync(x => x.Id == categoryId);
             if (category == null)
             {

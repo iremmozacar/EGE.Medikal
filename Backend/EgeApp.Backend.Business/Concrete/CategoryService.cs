@@ -8,6 +8,7 @@ using EgeApp.Backend.Shared.Dtos.CategoryDtos;
 using EgeApp.Backend.Shared.Dtos.ResponseDtos;
 using EgeApp.Backend.Shared.Helpers;
 using EgeApp.Backend.Shared.ResponseDtos;
+using EgeApp.Backend.Models;
 
 namespace EgeApp.Backend.Business.Concrete
 {
