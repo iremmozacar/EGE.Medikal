@@ -38,7 +38,7 @@ namespace EgeApp.Backend.Business.Concrete
                 return ResponseDto<ProductDto>.Fail("Bir hata oluştu", StatusCodes.Status400BadRequest);
             }
             ProductDto createdProductDto = _mapper.Map<ProductDto>(createdProduct);
-            createdProductDto.Category = _mapper.Map<CategoryDto>(await _categoryRepository.GetAsync(x => x.Id == createdProductDto.CategoryId));
+            createdProductDto.Category = _mapper.Map<CategoryDto>(await _categoryRepository.GetAsync(x => x.Id == createdProductDto.ProductCategoryId));
             return ResponseDto<ProductDto>.Success(createdProductDto, StatusCodes.Status201Created);
         }
 
@@ -162,7 +162,7 @@ namespace EgeApp.Backend.Business.Concrete
             product.IsActive = product.IsHome ? true : product.IsActive;
             await _productRepository.UpdateAsync(product);
             var productDto = _mapper.Map<ProductDto>(product);
-            productDto.Category = _mapper.Map<CategoryDto>(await _categoryRepository.GetAsync(x => x.Id == productDto.CategoryId));
+            productDto.Category = _mapper.Map<CategoryDto>(await _categoryRepository.GetAsync(x => x.Id == productDto.ProductCategoryId));
             return ResponseDto<ProductDto>.Success(productDto, StatusCodes.Status200OK);
         }
 

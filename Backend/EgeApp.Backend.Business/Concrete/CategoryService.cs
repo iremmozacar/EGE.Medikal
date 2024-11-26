@@ -9,12 +9,13 @@ using EgeApp.Backend.Shared.Dtos.ResponseDtos;
 using EgeApp.Backend.Shared.Helpers;
 using EgeApp.Backend.Shared.ResponseDtos;
 using EgeApp.Backend.Models;
+using Microsoft.EntityFrameworkCore;
+using EgeApp.Backend.Data;
 
 namespace EgeApp.Backend.Business.Concrete
 {
     public class CategoryService : ICategoryService
     {
-        //Dependency Injection / DI
         private readonly ICategoryRepository _categoryRepository;
         private readonly IMapper _mapper;
 
@@ -26,19 +27,55 @@ namespace EgeApp.Backend.Business.Concrete
 
         public async Task<ResponseDto<CategoryDto>> CreateAsync(CategoryCreateDto categoryCreateDto)
         {
+            // URL otomatik olarak oluşturuluyor
             string url = CustomUrlHelper.GetUrl(categoryCreateDto.Name);
             Category category = _mapper.Map<Category>(categoryCreateDto);
-            category.Url = url;
+            category.Url = url; // URL atanıyor
+
             var createdCategory = await _categoryRepository.CreateAsync(category);
             if (createdCategory == null)
             {
-                return ResponseDto<CategoryDto>.Fail("Bir hata oluştu", StatusCodes.Status400BadRequest);
+                return ResponseDto<CategoryDto>.Fail("Kategori oluşturulamadı.", StatusCodes.Status400BadRequest);
             }
-            CategoryDto categoryDto = _mapper.Map<CategoryDto>(createdCategory);
 
+            CategoryDto categoryDto = _mapper.Map<CategoryDto>(createdCategory);
             return ResponseDto<CategoryDto>.Success(categoryDto, StatusCodes.Status201Created);
         }
 
+        public async Task<ResponseDto<CategoryDto>> CreateWithSubCategoriesAsync(CategoryCreateDto categoryCreateDto)
+        {
+            // Parent kategori için URL oluşturuluyor
+            string parentUrl = CustomUrlHelper.GetUrl(categoryCreateDto.Name);
+            Category parentCategory = _mapper.Map<Category>(categoryCreateDto);
+            parentCategory.Url = parentUrl;
+
+            var createdParentCategory = await _categoryRepository.CreateAsync(parentCategory);
+            if (createdParentCategory == null)
+            {
+                return ResponseDto<CategoryDto>.Fail("Ana kategori oluşturulamadı.", StatusCodes.Status400BadRequest);
+            }
+
+            // Alt kategoriler için işleme devam ediyoruz
+            if (categoryCreateDto.SubCategories != null && categoryCreateDto.SubCategories.Any())
+            {
+                foreach (var subCategoryDto in categoryCreateDto.SubCategories)
+                {
+                    string subUrl = CustomUrlHelper.GetUrl(subCategoryDto.Name);
+                    Category subCategory = _mapper.Map<Category>(subCategoryDto);
+                    subCategory.Url = subUrl;
+                    subCategory.ParentCategoryId = createdParentCategory.Id;
+
+                    var createdSubCategory = await _categoryRepository.CreateAsync(subCategory);
+                    if (createdSubCategory == null)
+                    {
+                        return ResponseDto<CategoryDto>.Fail("Alt kategori oluşturulamadı.", StatusCodes.Status400BadRequest);
+                    }
+                }
+            }
+
+            CategoryDto result = _mapper.Map<CategoryDto>(createdParentCategory);
+            return ResponseDto<CategoryDto>.Success(result, StatusCodes.Status201Created);
+        }
         public async Task<ResponseDto<NoContent>> DeleteAsync(int id)
         {
             var category = await _categoryRepository.GetAsync(x => x.Id == id);
