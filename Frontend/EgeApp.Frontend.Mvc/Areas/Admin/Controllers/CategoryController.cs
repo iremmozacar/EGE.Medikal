@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using EgeApp.Frontend.Mvc.Models.Category;
 using EgeApp.Frontend.Mvc.Services;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -20,49 +21,67 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
             _notyfService = notyfService;
         }
 
-        [Authorize(Roles = "Super Admin")]
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Index()
         {
-            // Kategorileri al
             var response = await CategoryService.GetAllAsync();
 
             if (!response.IsSucceeded)
             {
-                // Hata durumunda uygun aksiyonu al
+                TempData["Error"] = response.Error;
+                return Redirect("/home/error");
+            }
+
+            var categories = response.Data;
+            var mainCategories = categories.Where(c => c.ParentId == 0).ToList();
+            var subCategories = categories.Where(c => c.ParentId != 0).ToList();
+
+            var viewModel = new CategoryIndexViewModel
+            {
+                MainCategories = mainCategories,
+                SubCategories = subCategories
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Create(bool isMainCategory = true)
+        {
+            var response = await CategoryService.GetAllAsync();
+
+            if (!response.IsSucceeded)
+            {
                 TempData["Error"] = response.Error;
                 return RedirectToAction("Error", "Home");
             }
 
-            // Kategorilerin listesini al
             var categories = response.Data;
 
+            // CategoryCreateViewModel oluşturuluyor
             var model = new CategoryCreateViewModel
             {
-                Categories = new SelectList(categories, "Id", "Name") // Kategorileri ViewModel'e aktar
+                IsMainCategory = isMainCategory,
+                Categories = categories
+                    .Where(c => c.ParentId == 0)
+                    .Select(c => new SelectListItem
+                    {
+                        Text = c.Name,
+                        Value = c.Id.ToString()
+                    })
+                    .ToList() // Listeye dönüştürülüyor
             };
 
             return View(model);
         }
 
-        [Authorize(Roles = "Super Admin")]
         [HttpPost]
         public async Task<IActionResult> Create(CategoryCreateViewModel model)
         {
             if (ModelState.IsValid)
             {
-                // Eğer resim varsa, dosyayı kaydet
-                if (model.Image != null)
-                {
-                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", model.Image.FileName);
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await model.Image.CopyToAsync(stream);
-                    }
-
-                    // Modelin Url özelliğini resmin yolu ile güncelle
-                    model.Url = "/images/" + model.Image.FileName;
-                }
+                // Eğer alt kategori ise ParentCategoryId ayarlanır
+                model.ParentCategoryId = model.IsMainCategory ? 0 : model.ParentCategoryId;
 
                 var result = await CategoryService.CreateAsync(model);
                 if (!result.IsSucceeded)
@@ -74,105 +93,19 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
                 _notyfService.Success("Kategori başarıyla oluşturuldu");
                 return RedirectToAction("Index");
             }
-            return View(model);
-        }
 
-        [Authorize(Roles = "Super Admin, Admin")]
-        [HttpGet]
-        public async Task<IActionResult> Edit(int id)
-        {
-            var result = await CategoryService.GetByIdAsync(id);
-            if (!result.IsSucceeded)
-            {
-                TempData["Error"] = result.Error;
-                return Redirect("/home/error");
-            }
-
-            CategoryEditViewModel model = new()
-            {
-                Id = result.Data.Id,
-                Name = result.Data.Name,
-                Description = result.Data.Description,
-                IsActive = result.Data.IsActive,
-                Url = result.Data.Url
-            };
-
-            return View(model);
-        }
-
-        [Authorize(Roles = "Super Admin, Admin")]
-        [HttpPost]
-        public async Task<IActionResult> Edit(CategoryEditViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                // Eğer resim varsa, dosyayı kaydet
-                if (model.Image != null)
+            // Model geçersizse, kategori dropdown'ı tekrar dolduruluyor
+            var categories = await CategoryService.GetAllAsync();
+            model.Categories = categories.Data
+                .Where(c => c.ParentId == 0)
+                .Select(c => new SelectListItem
                 {
-                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", model.Image.FileName);
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await model.Image.CopyToAsync(stream);
-                    }
+                    Text = c.Name,
+                    Value = c.Id.ToString()
+                })
+                .ToList();
 
-                    // Modelin Url özelliğini resmin yolu ile güncelle
-                    model.Url = "/images/" + model.Image.FileName;
-                }
-
-                var result = await CategoryService.UpdateAsync(model);
-                if (!result.IsSucceeded)
-                {
-                    ViewData["Error"] = result.Error;
-                    return Redirect("/home/error");
-                }
-
-                _notyfService.Success("Kategori başarıyla güncellendi");
-                return RedirectToAction("Index");
-            }
             return View(model);
-        }
-
-        [Authorize(Roles = "Super Admin")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            var result = await CategoryService.DeleteAsync(id);
-            if (!result.IsSucceeded)
-            {
-                TempData["Error"] = result.Error;
-                return Redirect("/home/error");
-            }
-            _notyfService.Success("Kategori başarıyla silindi");
-            return RedirectToAction("Index");
-        }
-
-        [Authorize(Roles = "Super Admin, Admin")]
-        public async Task<IActionResult> UpdateIsActive(int id)
-        {
-            var result = await CategoryService.GetByIdAsync(id);
-            if (!result.IsSucceeded)
-            {
-                TempData["Error"] = result.Error;
-                return Redirect("/home/error");
-            }
-
-            result.Data.IsActive = !result.Data.IsActive;
-            var updateResult = await CategoryService.UpdateAsync(new CategoryEditViewModel
-            {
-                Id = result.Data.Id,
-                Name = result.Data.Name,
-                Description = result.Data.Description,
-                IsActive = result.Data.IsActive,
-                Url = result.Data.Url
-            });
-
-            if (!updateResult.IsSucceeded)
-            {
-                TempData["Error"] = updateResult.Error;
-                return Redirect("/home/error");
-            }
-
-            _notyfService.Success("Kategori durumu güncellendi");
-            return Json(result.Data.IsActive);
         }
     }
 }

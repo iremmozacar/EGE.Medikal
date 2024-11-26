@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "vf3s/nTrckXw+ZPZdUAX/a6CTgzrEjGkhpW+wFInWCo=",
+  "Hash": "2UOxPSwrtSaPoPk9LcKAYFq3wIG7fEkD6f3rkzdlkvo=",
   "Source": "EgeApp.Backend.API",
   "BasePath": "_content/EgeApp.Backend.API",
   "Mode": "Default",
@@ -53,6 +53,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/images/products/amnisuretest.webp"
+    },
+    {
+      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/be0333a4-e1e7-4181-9bfd-2a0e4bced79d.png",
+      "SourceId": "EgeApp.Backend.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "BasePath": "_content/EgeApp.Backend.API",
+      "RelativePath": "images/products/be0333a4-e1e7-4181-9bfd-2a0e4bced79d.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/products/be0333a4-e1e7-4181-9bfd-2a0e4bced79d.png"
     },
     {
       "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/borutipihavalıyatak.webp",

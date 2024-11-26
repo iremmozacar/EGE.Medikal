@@ -1,0 +1,16 @@
+﻿@model IEnumerable<EgeApp.Frontend.Mvc.Models.Category.CategoryViewModel>
+
+<ul class="list-group">
+    @foreach (var category in Model)
+    {
+        <li class="list-group-item">
+            <span>@category.Name</span>
+
+            @if (category.Children.Any())  
+            {
+               
+                @await Html.PartialAsync("_CategoryTree", category.Children)
+            }
+        </li>
+    }
+</ul>
