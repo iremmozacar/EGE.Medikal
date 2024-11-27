@@ -3,11 +3,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using EgeApp.Frontend.Mvc.Data.Entities;
 using EgeApp.Frontend.Mvc.Helpers.Abstract;
-using EgeApp.Frontend.Mvc.Models.Cart;
-using EgeApp.Frontend.Mvc.Models.Email;
 using EgeApp.Frontend.Mvc.Models.Identity;
-using EgeApp.Frontend.Mvc.Services;
-using EgeApp.Frontend.Mvc.Models.Order;
+using Microsoft.Extensions.Logging;
+using EgeApp.Frontend.Mvc.Models.Category;
+using EgeApp.Frontend.Mvc.Models.Product;
 
 namespace EgeApp.Frontend.Mvc.Controllers
 {
@@ -18,8 +17,6 @@ namespace EgeApp.Frontend.Mvc.Controllers
         private readonly SignInManager<AppUser> _signInManager;
         private readonly INotyfService _notyfService;
         private readonly IEmailSenderHelper _emailSender;
-
-
         private readonly ILogger<AccountController> _logger;
 
         public AccountController(
@@ -38,80 +35,63 @@ namespace EgeApp.Frontend.Mvc.Controllers
             _logger = logger;
         }
 
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        public IActionResult Login(string returnUrl = null)
         {
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            if (user == null)
+            var categories = new List<CategoryViewModel>
             {
-                _notyfService.Error("Kullanıcı bilgilerine ulaşılamadı.");
-                return RedirectToAction("Login");
-            }
-
-            var userId = user.Id;
-            var model = new UserProfileViewModel
-            {
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email,
-                PhoneNumber = user.PhoneNumber,
-                UserName = user.UserName
+                new CategoryViewModel { Id = 1, Name = "Kategori 1" },
+                new CategoryViewModel { Id = 2, Name = "Kategori 2" },
+                new CategoryViewModel { Id = 3, Name = "Kategori 3" }
             };
 
-            // Sipariş bilgileri
-            var ordersResult = await OrderService.GetOrdersByUserIdAsync(userId);
-            model.Orders = ordersResult.IsSucceeded ? ordersResult.Data : new List<OrderViewModel>();
+            var products = new List<ProductViewModel>
+            {
+                new ProductViewModel { Id = 1, Name = "Ürün 1", Price = 100, ImageUrl = "/images/product1.jpg" },
+                new ProductViewModel { Id = 2, Name = "Ürün 2", Price = 200, ImageUrl = "/images/product2.jpg" }
+            };
 
-            // Sepet bilgisi
-            var cartResult = await CartService.GetCartAsync(userId);
-            if (cartResult.IsSucceeded)
+            var model = new LoginViewModel
             {
-                ViewBag.CountOfItems = cartResult.Data.CountOfItem;
-            }
-            else
-            {
-                _notyfService.Error(cartResult.Error ?? "Sepet bilgisi alınamadı.");
-                return Redirect("~/");
-            }
+                CategoryList = categories,
+                ProductList = products,
+                ReturnUrl = returnUrl
+            };
 
             return View(model);
         }
 
-        [HttpGet]
-        public IActionResult Login(string returnUrl = null)
-        {
-            return View(new LoginViewModel { ReturnUrl = returnUrl });
-        }
-
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid)
+            {
+                _notyfService.Error("Formda hata var!");
+                return View(model);
+            }
 
             var user = await _userManager.FindByNameAsync(model.UserName);
             if (user == null)
             {
-                _notyfService.Error("Böyle bir kullanıcı yok!");
+                ModelState.AddModelError(string.Empty, "Kullanıcı bulunamadı!");
+                _notyfService.Error("Kullanıcı bulunamadı!");
                 return View(model);
             }
 
             if (!await _userManager.IsEmailConfirmedAsync(user))
             {
-                _notyfService.Warning("Email onaylı değil!");
+                ModelState.AddModelError(string.Empty, "Email adresiniz doğrulanmamış!");
+                _notyfService.Warning("Email doğrulaması gerekiyor!");
                 return View(model);
             }
 
             var result = await _signInManager.PasswordSignInAsync(user, model.Password, true, true);
             if (!result.Succeeded)
             {
-                _notyfService.Error("Hatalı kullanıcı adı veya parola!");
+                ModelState.AddModelError(string.Empty, "Geçersiz giriş!");
+                _notyfService.Error("Giriş başarısız!");
                 return View(model);
-            }
-
-            // Admin kontrolü
-            var roles = await _userManager.GetRolesAsync(user);
-            if (roles.Contains("Admin"))
-            {
-                return RedirectToAction("Index", "Home", new { area = "Admin" });
             }
 
             return Redirect(model.ReturnUrl ?? "~/");
@@ -120,22 +100,23 @@ namespace EgeApp.Frontend.Mvc.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            _notyfService.Success("Başarıyla çıkış yapıldı.");
+            _notyfService.Success("Başarıyla çıkış yaptınız.");
             return Redirect("~/");
         }
 
         [HttpGet]
         public IActionResult Register()
         {
-            return View();
+            return View(new SignUpViewModel());
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(SignUpViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                _notyfService.Error("Kayıt işlemi sırasında bir hata oluştu!");
+                _notyfService.Error("Kayıt formunda hata var!");
                 return View(model);
             }
 
@@ -156,14 +137,14 @@ namespace EgeApp.Frontend.Mvc.Controllers
 
                 try
                 {
-                    await _emailSender.SendEmailAsync(user.Email, "Email Onayı",
-                        $"Email adresinizi doğrulamak için <a href='{confirmationLink}'>buraya tıklayın</a>");
-                    _notyfService.Success("Kayıt başarılı! Lütfen email adresinizi doğrulayın.");
+                    await _emailSender.SendEmailAsync(user.Email, "Email Doğrulama",
+                        $"Lütfen doğrulamak için <a href='{confirmationLink}'>buraya tıklayın</a>");
+                    _notyfService.Success("Email doğrulama bağlantısı gönderildi!");
                 }
                 catch (Exception ex)
                 {
-                    _notyfService.Error("Email gönderiminde bir hata oluştu. Lütfen daha sonra tekrar deneyin.");
-                    _logger.LogError(ex, "Email gönderimi başarısız.");
+                    _logger.LogError(ex, "Email gönderimi sırasında hata.");
+                    _notyfService.Error("Email gönderimi başarısız.");
                 }
 
                 return RedirectToAction("Login");
@@ -177,38 +158,13 @@ namespace EgeApp.Frontend.Mvc.Controllers
             return View(model);
         }
 
-
-        public async Task<IActionResult> ConfirmEmail(string token, string email)
-        {
-            if (string.IsNullOrEmpty(token) || string.IsNullOrEmpty(email))
-            {
-                _notyfService.Error("Geçersiz email onayı talebi!");
-                return RedirectToAction("Login");
-            }
-
-            var user = await _userManager.FindByEmailAsync(email);
-            if (user == null)
-            {
-                _notyfService.Error("Email doğrulama sırasında bir hata oluştu.");
-                return RedirectToAction("Register");
-            }
-
-            var result = await _userManager.ConfirmEmailAsync(user, token);
-            if (result.Succeeded)
-            {
-                _notyfService.Success("Email başarıyla doğrulandı!");
-                return RedirectToAction("Login");
-            }
-
-            _notyfService.Error("Email doğrulama işlemi başarısız oldu.");
-            return RedirectToAction("Register");
-        }
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateProfile(UserProfileViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                _notyfService.Error("Geçersiz bilgiler!");
+                _notyfService.Error("Profil güncellemesi başarısız!");
                 return RedirectToAction("Index");
             }
 
@@ -227,7 +183,7 @@ namespace EgeApp.Frontend.Mvc.Controllers
             var result = await _userManager.UpdateAsync(user);
             if (!result.Succeeded)
             {
-                _notyfService.Error(result.Errors.FirstOrDefault()?.Description ?? "Güncelleme hatası!");
+                _notyfService.Error(result.Errors.FirstOrDefault()?.Description ?? "Güncelleme başarısız!");
                 return RedirectToAction("Index");
             }
 
@@ -236,7 +192,7 @@ namespace EgeApp.Frontend.Mvc.Controllers
                 var passwordChangeResult = await _userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
                 if (!passwordChangeResult.Succeeded)
                 {
-                    _notyfService.Error(passwordChangeResult.Errors.FirstOrDefault()?.Description ?? "Parola değişikliği başarısız!");
+                    _notyfService.Error(passwordChangeResult.Errors.FirstOrDefault()?.Description ?? "Parola güncelleme başarısız!");
                     return RedirectToAction("Index");
                 }
             }

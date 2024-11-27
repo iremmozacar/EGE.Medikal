@@ -7,9 +7,7 @@
         public bool IsActive { get; set; }       // Aktiflik durumu
         public string Url { get; set; }          // Kategori URL (otomatik oluşturuluyor)
         public string Description { get; set; } // Kategori açıklaması
-        public int? ParentCategoryId { get; set; } // Üst kategori ID
-        public string ParentCategoryName { get; set; } // Üst kategori adı
-        public List<CategoryDto> SubCategories { get; set; } = new(); // Alt kategoriler
+        public int ProductCount { get; set; }
     }
 
 }

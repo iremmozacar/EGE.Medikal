@@ -80,11 +80,6 @@
                             <tr>
                                 <td>@category.Name</td>
                                 <td>
-                                    @{
-                                        var parentCategory = Model.MainCategories
-                                            .FirstOrDefault(m => m.Id == category.ParentId);
-                                    }
-                                    @(parentCategory?.Name ?? "Üst Kategori Yok")
                                 </td>
                                 <td>@category.Description</td>
                                 <td>

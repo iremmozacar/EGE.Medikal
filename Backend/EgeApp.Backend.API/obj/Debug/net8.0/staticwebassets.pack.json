@@ -1,140 +1,140 @@
 {
   "Files": [
     {
-      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/açıayarlıbreysi.webp",
-      "PackagePath": "staticwebassets/images/products/açıayarlıbreysi.webp"
-    },
-    {
-      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/amnisuretest.webp",
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/amnisuretest.webp",
       "PackagePath": "staticwebassets/images/products/amnisuretest.webp"
     },
     {
-      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/be0333a4-e1e7-4181-9bfd-2a0e4bced79d.png",
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/açıayarlıbreysi.webp",
+      "PackagePath": "staticwebassets/images/products/açıayarlıbreysi.webp"
+    },
+    {
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/be0333a4-e1e7-4181-9bfd-2a0e4bced79d.png",
       "PackagePath": "staticwebassets/images/products/be0333a4-e1e7-4181-9bfd-2a0e4bced79d.png"
     },
     {
-      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/borutipihavalıyatak.webp",
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/borutipihavalıyatak.webp",
       "PackagePath": "staticwebassets/images/products/borutipihavalıyatak.webp"
     },
     {
-      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/bpapcihazı.webp",
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/bpapcihazı.webp",
       "PackagePath": "staticwebassets/images/products/bpapcihazı.webp"
     },
     {
-      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/cpap-bpapmaskeleri.webp",
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/cpap-bpapmaskeleri.webp",
       "PackagePath": "staticwebassets/images/products/cpap-bpapmaskeleri.webp"
     },
     {
-      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/cpapcihazı.webp",
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/cpapcihazı.webp",
       "PackagePath": "staticwebassets/images/products/cpapcihazı.webp"
     },
     {
-      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/çelikkorse.webp",
-      "PackagePath": "staticwebassets/images/products/çelikkorse.webp"
-    },
-    {
-      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/devisbissoksijen.webp",
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/devisbissoksijen.webp",
       "PackagePath": "staticwebassets/images/products/devisbissoksijen.webp"
     },
     {
-      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/dorselumberkorse.webp",
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/dorselumberkorse.webp",
       "PackagePath": "staticwebassets/images/products/dorselumberkorse.webp"
     },
     {
-      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/evtipimekanikventilatör.webp",
-      "PackagePath": "staticwebassets/images/products/evtipimekanikventilatör.webp"
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/evtipimekanikventilatör.webp",
+      "PackagePath": "staticwebassets/images/products/evtipimekanikventilatör.webp"
     },
     {
-      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/ithalwalker.webp",
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/ithalwalker.webp",
       "PackagePath": "staticwebassets/images/products/ithalwalker.webp"
     },
     {
-      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/kifidisalçıkoruyucu.webp",
-      "PackagePath": "staticwebassets/images/products/kifidisalçıkoruyucu.webp"
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/kifidisalçıkoruyucu.webp",
+      "PackagePath": "staticwebassets/images/products/kifidisalçıkoruyucu.webp"
     },
     {
-      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/koltukaltıdeğnek.webp",
-      "PackagePath": "staticwebassets/images/products/koltukaltıdeğnek.webp"
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/koltukaltıdeğnek.webp",
+      "PackagePath": "staticwebassets/images/products/koltukaltıdeğnek.webp"
     },
     {
-      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/motorluhastakaryolası.webp",
-      "PackagePath": "staticwebassets/images/products/motorluhastakaryolası.webp"
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/motorluhastakaryolasi.webp",
+      "PackagePath": "staticwebassets/images/products/motorluhastakaryolasi.webp"
     },
     {
-      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/nebülizatör.webp",
-      "PackagePath": "staticwebassets/images/products/nebülizatör.webp"
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/nebülizatör.webp",
+      "PackagePath": "staticwebassets/images/products/nebülizatör.webp"
     },
     {
-      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/oksijenkonsantratörü.webp",
-      "PackagePath": "staticwebassets/images/products/oksijenkonsantratörü.webp"
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/oksijenkonsantratörü.webp",
+      "PackagePath": "staticwebassets/images/products/oksijenkonsantratörü.webp"
     },
     {
-      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/oksijentüpü.webp",
-      "PackagePath": "staticwebassets/images/products/oksijentüpü.webp"
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/oksijentüpü.webp",
+      "PackagePath": "staticwebassets/images/products/oksijentüpü.webp"
     },
     {
-      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/oksijentüpü1.webp",
-      "PackagePath": "staticwebassets/images/products/oksijentüpü1.webp"
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/oksijentüpü1.webp",
+      "PackagePath": "staticwebassets/images/products/oksijentüpü1.webp"
     },
     {
-      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/parmaktipipulseoksimetre.webp",
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/parmaktipipulseoksimetre.webp",
       "PackagePath": "staticwebassets/images/products/parmaktipipulseoksimetre.webp"
     },
     {
-      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/phlipsdreamwearnazalmaske.webp",
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/phlipsdreamwearnazalmaske.webp",
       "PackagePath": "staticwebassets/images/products/phlipsdreamwearnazalmaske.webp"
     },
     {
-      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/phlipsoksijenkonsantratörü.webp",
-      "PackagePath": "staticwebassets/images/products/phlipsoksijenkonsantratörü.webp"
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/phlipsoksijenkonsantratörü.webp",
+      "PackagePath": "staticwebassets/images/products/phlipsoksijenkonsantratörü.webp"
     },
     {
-      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/resmedmaske.webp",
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/resmedmaske.webp",
       "PackagePath": "staticwebassets/images/products/resmedmaske.webp"
     },
     {
-      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/respiroxg2sautocbapcihazı.webp",
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/respiroxg2sautocbapcihazı.webp",
       "PackagePath": "staticwebassets/images/products/respiroxg2sautocbapcihazı.webp"
     },
     {
-      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/tamyüzmaskesi.webp",
-      "PackagePath": "staticwebassets/images/products/tamyüzmaskesi.webp"
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/tamyuzmaskesi.webp",
+      "PackagePath": "staticwebassets/images/products/tamyuzmaskesi.webp"
     },
     {
-      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/tansiyonaleti.webp",
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/tansiyonaleti.webp",
       "PackagePath": "staticwebassets/images/products/tansiyonaleti.webp"
     },
     {
-      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/taşınabilirnebülizatör.webp",
-      "PackagePath": "staticwebassets/images/products/taşınabilirnebülizatör.webp"
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/taşınabilirnebülizatör.webp",
+      "PackagePath": "staticwebassets/images/products/taşınabilirnebülizatör.webp"
     },
     {
-      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/taşınabiliroksijencihazı.webp",
-      "PackagePath": "staticwebassets/images/products/taşınabiliroksijencihazı.webp"
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/taşınabiliroksijencihazı.webp",
+      "PackagePath": "staticwebassets/images/products/taşınabiliroksijencihazı.webp"
     },
     {
-      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/tekerleklisandalye1.webp",
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/tekerleklisandalye1.webp",
       "PackagePath": "staticwebassets/images/products/tekerleklisandalye1.webp"
     },
     {
-      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/tümortapediürünleri.webp",
-      "PackagePath": "staticwebassets/images/products/tümortapediürünleri.webp"
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/tümortapediürünleri.webp",
+      "PackagePath": "staticwebassets/images/products/tümortapediürünleri.webp"
     },
     {
-      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/tümsarfmalzemeler.webp",
-      "PackagePath": "staticwebassets/images/products/tümsarfmalzemeler.webp"
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/tümsarfmalzemeler.webp",
+      "PackagePath": "staticwebassets/images/products/tümsarfmalzemeler.webp"
     },
     {
-      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/velpobandajı.webp",
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/velpobandajı.webp",
       "PackagePath": "staticwebassets/images/products/velpobandajı.webp"
     },
     {
-      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/wcklozetyükseltici.webp",
-      "PackagePath": "staticwebassets/images/products/wcklozetyükseltici.webp"
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/wcklozetyükseltici.webp",
+      "PackagePath": "staticwebassets/images/products/wcklozetyükseltici.webp"
     },
     {
-      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/wcuracdbg.webp",
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/wcuracdbg.webp",
       "PackagePath": "staticwebassets/images/products/wcuracdbg.webp"
+    },
+    {
+      "Id": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/çelikkorse.webp",
+      "PackagePath": "staticwebassets/images/products/çelikkorse.webp"
     },
     {
       "Id": "obj/Debug/net8.0/staticwebassets/msbuild.EgeApp.Backend.API.Microsoft.AspNetCore.StaticWebAssets.props",

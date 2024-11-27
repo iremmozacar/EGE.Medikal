@@ -11,18 +11,21 @@ using EgeApp.Backend.Shared.ResponseDtos;
 using EgeApp.Backend.Models;
 using Microsoft.EntityFrameworkCore;
 using EgeApp.Backend.Data;
+using System.Xml.Serialization;
 
 namespace EgeApp.Backend.Business.Concrete
 {
     public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _categoryRepository;
+        private readonly IProductRepository _productRepository;
         private readonly IMapper _mapper;
 
-        public CategoryService(ICategoryRepository categoryRepository, IMapper mapper)
+        public CategoryService(ICategoryRepository categoryRepository, IMapper mapper, IProductRepository productRepository)
         {
             _categoryRepository = categoryRepository;
             _mapper = mapper;
+            _productRepository = productRepository;
         }
 
         public async Task<ResponseDto<CategoryDto>> CreateAsync(CategoryCreateDto categoryCreateDto)
@@ -44,36 +47,18 @@ namespace EgeApp.Backend.Business.Concrete
 
         public async Task<ResponseDto<CategoryDto>> CreateWithSubCategoriesAsync(CategoryCreateDto categoryCreateDto)
         {
-            // Parent kategori için URL oluşturuluyor
-            string parentUrl = CustomUrlHelper.GetUrl(categoryCreateDto.Name);
-            Category parentCategory = _mapper.Map<Category>(categoryCreateDto);
-            parentCategory.Url = parentUrl;
+            // Kategori için URL oluşturuluyor
+            string url = CustomUrlHelper.GetUrl(categoryCreateDto.Name);
+            Category category = _mapper.Map<Category>(categoryCreateDto);
+            category.Url = url;
 
-            var createdParentCategory = await _categoryRepository.CreateAsync(parentCategory);
-            if (createdParentCategory == null)
+            var createdCategory = await _categoryRepository.CreateAsync(category);
+            if (createdCategory == null)
             {
-                return ResponseDto<CategoryDto>.Fail("Ana kategori oluşturulamadı.", StatusCodes.Status400BadRequest);
+                return ResponseDto<CategoryDto>.Fail("Kategori oluşturulamadı.", StatusCodes.Status400BadRequest);
             }
 
-            // Alt kategoriler için işleme devam ediyoruz
-            if (categoryCreateDto.SubCategories != null && categoryCreateDto.SubCategories.Any())
-            {
-                foreach (var subCategoryDto in categoryCreateDto.SubCategories)
-                {
-                    string subUrl = CustomUrlHelper.GetUrl(subCategoryDto.Name);
-                    Category subCategory = _mapper.Map<Category>(subCategoryDto);
-                    subCategory.Url = subUrl;
-                    subCategory.ParentCategoryId = createdParentCategory.Id;
-
-                    var createdSubCategory = await _categoryRepository.CreateAsync(subCategory);
-                    if (createdSubCategory == null)
-                    {
-                        return ResponseDto<CategoryDto>.Fail("Alt kategori oluşturulamadı.", StatusCodes.Status400BadRequest);
-                    }
-                }
-            }
-
-            CategoryDto result = _mapper.Map<CategoryDto>(createdParentCategory);
+            CategoryDto result = _mapper.Map<CategoryDto>(createdCategory);
             return ResponseDto<CategoryDto>.Success(result, StatusCodes.Status201Created);
         }
         public async Task<ResponseDto<NoContent>> DeleteAsync(int id)
@@ -96,6 +81,11 @@ namespace EgeApp.Backend.Business.Concrete
                 return ResponseDto<List<CategoryDto>>.Fail($"Hiç {statusText} kategori bulunamadı!", StatusCodes.Status404NotFound);
             }
             var categoryDtoList = _mapper.Map<List<CategoryDto>>(categoryList);
+            foreach (var categoryDto in categoryDtoList)
+            {
+                categoryDto.ProductCount = await _productRepository.GetCountAsync(x => x.ProductCategoryId == categoryDto.Id);
+            }
+
             return ResponseDto<List<CategoryDto>>.Success(categoryDtoList, StatusCodes.Status200OK);
         }
 

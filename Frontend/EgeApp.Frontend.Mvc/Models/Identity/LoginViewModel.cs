@@ -1,15 +1,16 @@
-using System;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
+using EgeApp.Frontend.Mvc.Models.Category;
+using EgeApp.Frontend.Mvc.Models.Product;
 
-namespace EgeApp.Frontend.Mvc.Models.Identity;
-
-public class LoginViewModel
+namespace EgeApp.Frontend.Mvc.Models.Identity
 {
-    [Required(ErrorMessage = "Kullanıcı adı boş bırakılamaz!")]
-    public string UserName { get; set; }
+    public class LoginViewModel
+    {
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public string ReturnUrl { get; set; }
 
-    [Required(ErrorMessage = "Parola boş bırakılamaz!")]
-    [DataType(DataType.Password)]
-    public string Password { get; set; }
-    public string ReturnUrl { get; set; }
+        public List<ProductViewModel> ProductList { get; set; }
+        public List<CategoryViewModel> CategoryList { get; set; }
+    }
 }

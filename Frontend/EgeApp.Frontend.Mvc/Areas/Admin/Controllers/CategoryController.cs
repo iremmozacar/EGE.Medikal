@@ -33,16 +33,10 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
             }
 
             var categories = response.Data;
-            var mainCategories = categories.Where(c => c.ParentId == 0).ToList();
-            var subCategories = categories.Where(c => c.ParentId != 0).ToList();
 
-            var viewModel = new CategoryIndexViewModel
-            {
-                MainCategories = mainCategories,
-                SubCategories = subCategories
-            };
 
-            return View(viewModel);
+
+            return View(categories);
         }
 
         [HttpGet]
@@ -63,7 +57,6 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
             {
                 IsMainCategory = isMainCategory,
                 Categories = categories
-                    .Where(c => c.ParentId == 0)
                     .Select(c => new SelectListItem
                     {
                         Text = c.Name,
@@ -97,7 +90,6 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
             // Model geçersizse, kategori dropdown'ı tekrar dolduruluyor
             var categories = await CategoryService.GetAllAsync();
             model.Categories = categories.Data
-                .Where(c => c.ParentId == 0)
                 .Select(c => new SelectListItem
                 {
                     Text = c.Name,

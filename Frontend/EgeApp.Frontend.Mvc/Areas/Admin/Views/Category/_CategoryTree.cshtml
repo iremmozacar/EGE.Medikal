@@ -5,12 +5,6 @@
     {
         <li class="list-group-item">
             <span>@category.Name</span>
-
-            @if (category.Children.Any())  
-            {
-               
-                @await Html.PartialAsync("_CategoryTree", category.Children)
-            }
         </li>
     }
 </ul>

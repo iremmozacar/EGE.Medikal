@@ -186,12 +186,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19IZWFkZXJTZWN0aW9uUGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/Views/Shared/_InstagramPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19JbnN0YWdyYW1QYXJ0aWFsLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/Views/Shared/_NavbarPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19OYXZiYXJQYXJ0aWFsLmNzaHRtbA==
+[/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/Views/Shared/_OffCanvarsMenuBeginPartial.cshtml]
@@ -233,7 +229,3 @@ build_metadata.AdditionalFiles.CssScope =
 [/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/Views/Shared/_Layout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = b-h200xax80w

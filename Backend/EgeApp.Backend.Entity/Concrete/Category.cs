@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EgeApp.Backend.Models
 {
@@ -10,14 +11,6 @@ namespace EgeApp.Backend.Models
         public string Description { get; set; } // Kategori açıklaması
         public string Url { get; set; } // Kategori URL
         public bool IsActive { get; set; } // Kategorinin aktif olup olmadığı
-
-        // Üst kategori ID'si (nullable)
-        public int? ParentCategoryId { get; set; }
-        // Üst kategori ilişkisi (nullable)
-        public Category ParentCategory { get; set; }
-
-        // Alt kategoriler koleksiyonu, başlatılmış olarak gelir
-        public ICollection<Category> SubCategories { get; set; } = new List<Category>();
 
         // Ürünler koleksiyonu
         public ICollection<Product> Products { get; set; } = new List<Product>();

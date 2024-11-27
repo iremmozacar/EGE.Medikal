@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "2UOxPSwrtSaPoPk9LcKAYFq3wIG7fEkD6f3rkzdlkvo=",
+  "Hash": "cILQl4xYb0zm7fmqIvN00XGhN7gARacZGfhJBpj2GBU=",
   "Source": "EgeApp.Backend.API",
   "BasePath": "_content/EgeApp.Backend.API",
   "Mode": "Default",
@@ -10,19 +10,19 @@
     {
       "Name": "EgeApp.Backend.API/wwwroot",
       "Source": "EgeApp.Backend.API",
-      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/",
       "BasePath": "_content/EgeApp.Backend.API",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/açıayarlıbreysi.webp",
+      "Identity": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/açıayarlıbreysi.webp",
       "SourceId": "EgeApp.Backend.API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/",
       "BasePath": "_content/EgeApp.Backend.API",
-      "RelativePath": "images/products/açıayarlıbreysi.webp",
+      "RelativePath": "images/products/açıayarlıbreysi.webp",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -33,13 +33,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/images/products/açıayarlıbreysi.webp"
+      "OriginalItemSpec": "wwwroot/images/products/açıayarlıbreysi.webp"
     },
     {
-      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/amnisuretest.webp",
+      "Identity": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/amnisuretest.webp",
       "SourceId": "EgeApp.Backend.API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/",
       "BasePath": "_content/EgeApp.Backend.API",
       "RelativePath": "images/products/amnisuretest.webp",
       "AssetKind": "All",
@@ -55,10 +55,10 @@
       "OriginalItemSpec": "wwwroot/images/products/amnisuretest.webp"
     },
     {
-      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/be0333a4-e1e7-4181-9bfd-2a0e4bced79d.png",
+      "Identity": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/be0333a4-e1e7-4181-9bfd-2a0e4bced79d.png",
       "SourceId": "EgeApp.Backend.API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/",
       "BasePath": "_content/EgeApp.Backend.API",
       "RelativePath": "images/products/be0333a4-e1e7-4181-9bfd-2a0e4bced79d.png",
       "AssetKind": "All",
@@ -74,10 +74,10 @@
       "OriginalItemSpec": "wwwroot/images/products/be0333a4-e1e7-4181-9bfd-2a0e4bced79d.png"
     },
     {
-      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/borutipihavalıyatak.webp",
+      "Identity": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/borutipihavalıyatak.webp",
       "SourceId": "EgeApp.Backend.API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/",
       "BasePath": "_content/EgeApp.Backend.API",
       "RelativePath": "images/products/borutipihavalıyatak.webp",
       "AssetKind": "All",
@@ -93,10 +93,10 @@
       "OriginalItemSpec": "wwwroot/images/products/borutipihavalıyatak.webp"
     },
     {
-      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/bpapcihazı.webp",
+      "Identity": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/bpapcihazı.webp",
       "SourceId": "EgeApp.Backend.API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/",
       "BasePath": "_content/EgeApp.Backend.API",
       "RelativePath": "images/products/bpapcihazı.webp",
       "AssetKind": "All",
@@ -112,12 +112,12 @@
       "OriginalItemSpec": "wwwroot/images/products/bpapcihazı.webp"
     },
     {
-      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/çelikkorse.webp",
+      "Identity": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/çelikkorse.webp",
       "SourceId": "EgeApp.Backend.API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/",
       "BasePath": "_content/EgeApp.Backend.API",
-      "RelativePath": "images/products/çelikkorse.webp",
+      "RelativePath": "images/products/çelikkorse.webp",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -128,13 +128,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/images/products/çelikkorse.webp"
+      "OriginalItemSpec": "wwwroot/images/products/çelikkorse.webp"
     },
     {
-      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/cpap-bpapmaskeleri.webp",
+      "Identity": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/cpap-bpapmaskeleri.webp",
       "SourceId": "EgeApp.Backend.API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/",
       "BasePath": "_content/EgeApp.Backend.API",
       "RelativePath": "images/products/cpap-bpapmaskeleri.webp",
       "AssetKind": "All",
@@ -150,10 +150,10 @@
       "OriginalItemSpec": "wwwroot/images/products/cpap-bpapmaskeleri.webp"
     },
     {
-      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/cpapcihazı.webp",
+      "Identity": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/cpapcihazı.webp",
       "SourceId": "EgeApp.Backend.API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/",
       "BasePath": "_content/EgeApp.Backend.API",
       "RelativePath": "images/products/cpapcihazı.webp",
       "AssetKind": "All",
@@ -169,10 +169,10 @@
       "OriginalItemSpec": "wwwroot/images/products/cpapcihazı.webp"
     },
     {
-      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/devisbissoksijen.webp",
+      "Identity": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/devisbissoksijen.webp",
       "SourceId": "EgeApp.Backend.API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/",
       "BasePath": "_content/EgeApp.Backend.API",
       "RelativePath": "images/products/devisbissoksijen.webp",
       "AssetKind": "All",
@@ -188,10 +188,10 @@
       "OriginalItemSpec": "wwwroot/images/products/devisbissoksijen.webp"
     },
     {
-      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/dorselumberkorse.webp",
+      "Identity": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/dorselumberkorse.webp",
       "SourceId": "EgeApp.Backend.API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/",
       "BasePath": "_content/EgeApp.Backend.API",
       "RelativePath": "images/products/dorselumberkorse.webp",
       "AssetKind": "All",
@@ -207,12 +207,12 @@
       "OriginalItemSpec": "wwwroot/images/products/dorselumberkorse.webp"
     },
     {
-      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/evtipimekanikventilatör.webp",
+      "Identity": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/evtipimekanikventilatör.webp",
       "SourceId": "EgeApp.Backend.API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/",
       "BasePath": "_content/EgeApp.Backend.API",
-      "RelativePath": "images/products/evtipimekanikventilatör.webp",
+      "RelativePath": "images/products/evtipimekanikventilatör.webp",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -223,13 +223,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/images/products/evtipimekanikventilatör.webp"
+      "OriginalItemSpec": "wwwroot/images/products/evtipimekanikventilatör.webp"
     },
     {
-      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/ithalwalker.webp",
+      "Identity": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/ithalwalker.webp",
       "SourceId": "EgeApp.Backend.API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/",
       "BasePath": "_content/EgeApp.Backend.API",
       "RelativePath": "images/products/ithalwalker.webp",
       "AssetKind": "All",
@@ -245,12 +245,12 @@
       "OriginalItemSpec": "wwwroot/images/products/ithalwalker.webp"
     },
     {
-      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/kifidisalçıkoruyucu.webp",
+      "Identity": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/kifidisalçıkoruyucu.webp",
       "SourceId": "EgeApp.Backend.API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/",
       "BasePath": "_content/EgeApp.Backend.API",
-      "RelativePath": "images/products/kifidisalçıkoruyucu.webp",
+      "RelativePath": "images/products/kifidisalçıkoruyucu.webp",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -261,15 +261,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/images/products/kifidisalçıkoruyucu.webp"
+      "OriginalItemSpec": "wwwroot/images/products/kifidisalçıkoruyucu.webp"
     },
     {
-      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/koltukaltıdeğnek.webp",
+      "Identity": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/koltukaltıdeğnek.webp",
       "SourceId": "EgeApp.Backend.API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/",
       "BasePath": "_content/EgeApp.Backend.API",
-      "RelativePath": "images/products/koltukaltıdeğnek.webp",
+      "RelativePath": "images/products/koltukaltıdeğnek.webp",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -280,15 +280,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/images/products/koltukaltıdeğnek.webp"
+      "OriginalItemSpec": "wwwroot/images/products/koltukaltıdeğnek.webp"
     },
     {
-      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/motorluhastakaryolası.webp",
+      "Identity": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/motorluhastakaryolasi.webp",
       "SourceId": "EgeApp.Backend.API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/",
       "BasePath": "_content/EgeApp.Backend.API",
-      "RelativePath": "images/products/motorluhastakaryolası.webp",
+      "RelativePath": "images/products/motorluhastakaryolasi.webp",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -299,15 +299,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/images/products/motorluhastakaryolası.webp"
+      "OriginalItemSpec": "wwwroot/images/products/motorluhastakaryolasi.webp"
     },
     {
-      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/nebülizatör.webp",
+      "Identity": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/nebülizatör.webp",
       "SourceId": "EgeApp.Backend.API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/",
       "BasePath": "_content/EgeApp.Backend.API",
-      "RelativePath": "images/products/nebülizatör.webp",
+      "RelativePath": "images/products/nebülizatör.webp",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -318,15 +318,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/images/products/nebülizatör.webp"
+      "OriginalItemSpec": "wwwroot/images/products/nebülizatör.webp"
     },
     {
-      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/oksijenkonsantratörü.webp",
+      "Identity": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/oksijenkonsantratörü.webp",
       "SourceId": "EgeApp.Backend.API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/",
       "BasePath": "_content/EgeApp.Backend.API",
-      "RelativePath": "images/products/oksijenkonsantratörü.webp",
+      "RelativePath": "images/products/oksijenkonsantratörü.webp",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -337,15 +337,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/images/products/oksijenkonsantratörü.webp"
+      "OriginalItemSpec": "wwwroot/images/products/oksijenkonsantratörü.webp"
     },
     {
-      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/oksijentüpü.webp",
+      "Identity": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/oksijentüpü.webp",
       "SourceId": "EgeApp.Backend.API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/",
       "BasePath": "_content/EgeApp.Backend.API",
-      "RelativePath": "images/products/oksijentüpü.webp",
+      "RelativePath": "images/products/oksijentüpü.webp",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -356,15 +356,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/images/products/oksijentüpü.webp"
+      "OriginalItemSpec": "wwwroot/images/products/oksijentüpü.webp"
     },
     {
-      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/oksijentüpü1.webp",
+      "Identity": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/oksijentüpü1.webp",
       "SourceId": "EgeApp.Backend.API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/",
       "BasePath": "_content/EgeApp.Backend.API",
-      "RelativePath": "images/products/oksijentüpü1.webp",
+      "RelativePath": "images/products/oksijentüpü1.webp",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -375,13 +375,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/images/products/oksijentüpü1.webp"
+      "OriginalItemSpec": "wwwroot/images/products/oksijentüpü1.webp"
     },
     {
-      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/parmaktipipulseoksimetre.webp",
+      "Identity": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/parmaktipipulseoksimetre.webp",
       "SourceId": "EgeApp.Backend.API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/",
       "BasePath": "_content/EgeApp.Backend.API",
       "RelativePath": "images/products/parmaktipipulseoksimetre.webp",
       "AssetKind": "All",
@@ -397,10 +397,10 @@
       "OriginalItemSpec": "wwwroot/images/products/parmaktipipulseoksimetre.webp"
     },
     {
-      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/phlipsdreamwearnazalmaske.webp",
+      "Identity": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/phlipsdreamwearnazalmaske.webp",
       "SourceId": "EgeApp.Backend.API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/",
       "BasePath": "_content/EgeApp.Backend.API",
       "RelativePath": "images/products/phlipsdreamwearnazalmaske.webp",
       "AssetKind": "All",
@@ -416,12 +416,12 @@
       "OriginalItemSpec": "wwwroot/images/products/phlipsdreamwearnazalmaske.webp"
     },
     {
-      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/phlipsoksijenkonsantratörü.webp",
+      "Identity": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/phlipsoksijenkonsantratörü.webp",
       "SourceId": "EgeApp.Backend.API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/",
       "BasePath": "_content/EgeApp.Backend.API",
-      "RelativePath": "images/products/phlipsoksijenkonsantratörü.webp",
+      "RelativePath": "images/products/phlipsoksijenkonsantratörü.webp",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -432,13 +432,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/images/products/phlipsoksijenkonsantratörü.webp"
+      "OriginalItemSpec": "wwwroot/images/products/phlipsoksijenkonsantratörü.webp"
     },
     {
-      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/resmedmaske.webp",
+      "Identity": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/resmedmaske.webp",
       "SourceId": "EgeApp.Backend.API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/",
       "BasePath": "_content/EgeApp.Backend.API",
       "RelativePath": "images/products/resmedmaske.webp",
       "AssetKind": "All",
@@ -454,10 +454,10 @@
       "OriginalItemSpec": "wwwroot/images/products/resmedmaske.webp"
     },
     {
-      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/respiroxg2sautocbapcihazı.webp",
+      "Identity": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/respiroxg2sautocbapcihazı.webp",
       "SourceId": "EgeApp.Backend.API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/",
       "BasePath": "_content/EgeApp.Backend.API",
       "RelativePath": "images/products/respiroxg2sautocbapcihazı.webp",
       "AssetKind": "All",
@@ -473,12 +473,12 @@
       "OriginalItemSpec": "wwwroot/images/products/respiroxg2sautocbapcihazı.webp"
     },
     {
-      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/tamyüzmaskesi.webp",
+      "Identity": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/tamyuzmaskesi.webp",
       "SourceId": "EgeApp.Backend.API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/",
       "BasePath": "_content/EgeApp.Backend.API",
-      "RelativePath": "images/products/tamyüzmaskesi.webp",
+      "RelativePath": "images/products/tamyuzmaskesi.webp",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -489,13 +489,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/images/products/tamyüzmaskesi.webp"
+      "OriginalItemSpec": "wwwroot/images/products/tamyuzmaskesi.webp"
     },
     {
-      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/tansiyonaleti.webp",
+      "Identity": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/tansiyonaleti.webp",
       "SourceId": "EgeApp.Backend.API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/",
       "BasePath": "_content/EgeApp.Backend.API",
       "RelativePath": "images/products/tansiyonaleti.webp",
       "AssetKind": "All",
@@ -511,12 +511,12 @@
       "OriginalItemSpec": "wwwroot/images/products/tansiyonaleti.webp"
     },
     {
-      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/taşınabilirnebülizatör.webp",
+      "Identity": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/taşınabilirnebülizatör.webp",
       "SourceId": "EgeApp.Backend.API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/",
       "BasePath": "_content/EgeApp.Backend.API",
-      "RelativePath": "images/products/taşınabilirnebülizatör.webp",
+      "RelativePath": "images/products/taşınabilirnebülizatör.webp",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -527,15 +527,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/images/products/taşınabilirnebülizatör.webp"
+      "OriginalItemSpec": "wwwroot/images/products/taşınabilirnebülizatör.webp"
     },
     {
-      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/taşınabiliroksijencihazı.webp",
+      "Identity": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/taşınabiliroksijencihazı.webp",
       "SourceId": "EgeApp.Backend.API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/",
       "BasePath": "_content/EgeApp.Backend.API",
-      "RelativePath": "images/products/taşınabiliroksijencihazı.webp",
+      "RelativePath": "images/products/taşınabiliroksijencihazı.webp",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -546,13 +546,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/images/products/taşınabiliroksijencihazı.webp"
+      "OriginalItemSpec": "wwwroot/images/products/taşınabiliroksijencihazı.webp"
     },
     {
-      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/tekerleklisandalye1.webp",
+      "Identity": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/tekerleklisandalye1.webp",
       "SourceId": "EgeApp.Backend.API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/",
       "BasePath": "_content/EgeApp.Backend.API",
       "RelativePath": "images/products/tekerleklisandalye1.webp",
       "AssetKind": "All",
@@ -568,12 +568,12 @@
       "OriginalItemSpec": "wwwroot/images/products/tekerleklisandalye1.webp"
     },
     {
-      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/tümortapediürünleri.webp",
+      "Identity": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/tümortapediürünleri.webp",
       "SourceId": "EgeApp.Backend.API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/",
       "BasePath": "_content/EgeApp.Backend.API",
-      "RelativePath": "images/products/tümortapediürünleri.webp",
+      "RelativePath": "images/products/tümortapediürünleri.webp",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -584,15 +584,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/images/products/tümortapediürünleri.webp"
+      "OriginalItemSpec": "wwwroot/images/products/tümortapediürünleri.webp"
     },
     {
-      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/tümsarfmalzemeler.webp",
+      "Identity": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/tümsarfmalzemeler.webp",
       "SourceId": "EgeApp.Backend.API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/",
       "BasePath": "_content/EgeApp.Backend.API",
-      "RelativePath": "images/products/tümsarfmalzemeler.webp",
+      "RelativePath": "images/products/tümsarfmalzemeler.webp",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -603,13 +603,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/images/products/tümsarfmalzemeler.webp"
+      "OriginalItemSpec": "wwwroot/images/products/tümsarfmalzemeler.webp"
     },
     {
-      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/velpobandajı.webp",
+      "Identity": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/velpobandajı.webp",
       "SourceId": "EgeApp.Backend.API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/",
       "BasePath": "_content/EgeApp.Backend.API",
       "RelativePath": "images/products/velpobandajı.webp",
       "AssetKind": "All",
@@ -625,12 +625,12 @@
       "OriginalItemSpec": "wwwroot/images/products/velpobandajı.webp"
     },
     {
-      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/wcklozetyükseltici.webp",
+      "Identity": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/wcklozetyükseltici.webp",
       "SourceId": "EgeApp.Backend.API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/",
       "BasePath": "_content/EgeApp.Backend.API",
-      "RelativePath": "images/products/wcklozetyükseltici.webp",
+      "RelativePath": "images/products/wcklozetyükseltici.webp",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -641,13 +641,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/images/products/wcklozetyükseltici.webp"
+      "OriginalItemSpec": "wwwroot/images/products/wcklozetyükseltici.webp"
     },
     {
-      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/wcuracdbg.webp",
+      "Identity": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/images/products/wcuracdbg.webp",
       "SourceId": "EgeApp.Backend.API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EgeOgrencimsu/Backend/EgeApp.Backend.API/wwwroot/",
       "BasePath": "_content/EgeApp.Backend.API",
       "RelativePath": "images/products/wcuracdbg.webp",
       "AssetKind": "All",

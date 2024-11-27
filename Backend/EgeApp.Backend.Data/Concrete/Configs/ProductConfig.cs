@@ -168,7 +168,7 @@ namespace EgeApp.Backend.Data.Concrete.Configs
                     IsLimitedStock = false,
                     IsSameDayShipping = true,
                     IsSpecialProduct = false, // Ekleme
-                    ProductCategoryId = 4
+                    ProductCategoryId = 2
                 },
                 new()
                 {
@@ -206,7 +206,7 @@ namespace EgeApp.Backend.Data.Concrete.Configs
                     IsLimitedStock = false,
                     IsSameDayShipping = true,
                     IsSpecialProduct = false, // Ekleme
-                    ProductCategoryId = 6
+                    ProductCategoryId = 1
                 }
             };
             builder.HasData(products);

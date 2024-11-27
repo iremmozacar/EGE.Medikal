@@ -19,6 +19,8 @@ public class CategoryViewModel
 
     [JsonPropertyName("description")]
     public string? Description { get; set; }
-    public int? ParentId { get; set; }
-    public List<CategoryViewModel> Children { get; set; }
+
+    [JsonPropertyName("productcount")]
+    public int ProductCount { get; set; }
+
 }
