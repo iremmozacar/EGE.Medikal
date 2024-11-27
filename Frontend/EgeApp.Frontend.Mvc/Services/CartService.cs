@@ -28,10 +28,35 @@ public class CartService
         {
             HttpResponseMessage httpResponseMessage = await httpClient.GetAsync($"http://localhost:5200/api/Carts/GetCart/{userId}");
             string contentResponse = await httpResponseMessage.Content.ReadAsStringAsync();
-            var response = JsonConvert.DeserializeObject<ResponseModel<CartViewModel>>(contentResponse);
-            return response;
+
+            if (!httpResponseMessage.IsSuccessStatusCode)
+            {
+                Console.WriteLine($"HTTP Hatası: {httpResponseMessage.StatusCode}");
+                return new ResponseModel<CartViewModel>
+                {
+                    IsSucceeded = false,
+                    Error = $"HTTP Hatası: {httpResponseMessage.StatusCode}"
+                };
+            }
+
+            try
+            {
+                var response = JsonConvert.DeserializeObject<ResponseModel<CartViewModel>>(contentResponse);
+                return response;
+            }
+            catch (JsonReaderException ex)
+            {
+                Console.WriteLine($"JSON Çözümleme Hatası: {ex.Message}");
+                Console.WriteLine($"Yanıt İçeriği: {contentResponse}");
+                return new ResponseModel<CartViewModel>
+                {
+                    IsSucceeded = false,
+                    Error = "JSON formatı hatalı veya modelle uyuşmuyor."
+                };
+            }
         }
     }
+
     public static async Task<ResponseModel<CartItemViewModel>> GetCartItemAsync(int cartItemId)
     {
         using (HttpClient httpClient = new())

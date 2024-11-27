@@ -15,12 +15,12 @@ public class CartViewModel
     public string UserId { get; set; }
 
     [JsonPropertyName("cartItems")]
-    public List<CartItemViewModel> CartItems { get; set; }
+    public List<CartItemViewModel> CartItems { get; set; } = new List<CartItemViewModel>();
 
-    public int CountOfItem { get { return CartItems.Count; } }
+    public int CountOfItem => CartItems?.Count ?? 0;
 
     public decimal GetTotalPrice()
     {
-        return CartItems.Sum(x => x.Product.Price * x.Quantity);
+        return CartItems?.Sum(x => x.Product.Price * x.Quantity) ?? 0;
     }
 }
