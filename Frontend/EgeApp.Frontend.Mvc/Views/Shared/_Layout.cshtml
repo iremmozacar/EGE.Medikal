@@ -12,22 +12,19 @@
 
 <body>
     @await Html.PartialAsync("_PreloderPartial")
+    @await Html.PartialAsync("_SearchPartial")
     @await Html.PartialAsync("_OffCanvarsMenuBeginPartial")
     @await Html.PartialAsync("_HeaderSectionPartial")
-    @await Html.PartialAsync("_CategoriesSectionPartial")
     
-    @await Html.PartialAsync("_ProductSectionPartial")
-    @await Html.PartialAsync("_DiscountSectionPartial")
     
-    @await Html.PartialAsync("_TrendSectionPartial")  
-    @* @await Html.PartialAsync("_ServicesSectionPartial") *@
+ 
     
 
 
     @RenderBody()
-    @* @await Html.PartialAsync("_ServicesSectionPartial") *@
+
     @await Html.PartialAsync("_FooterPartial")
-    @await Html.PartialAsync("_SearchPartial")
+
     @await Html.PartialAsync("_ScriptsPartial")
 
 </body>

@@ -3,52 +3,57 @@
 <div class="container-fluid contact py-5">
     <div class="container py-5">
         <div class="p-5 bg-light rounded">
-            <h3 class="text-center mb-4">Yeni Kullanıcı Ekle</h3>
+            <div style="margin-left: 0;">
+                <h3 class="mb-4 text-left" style="display: inline-block; margin-left: 20px;">Üye Ol</h3>
+                <hr style="border: 1px solid #d1d1d6; margin-top: -10px; width: calc(100% - 40px); margin-left: 20px;">
+            </div>
             <div class="row justify-content-center">
                 <div class="col-md-8">
-                    <form asp-area="" asp-controller="Admin" asp-action="Register" method="post">
+                    <form asp-area="" asp-controller="Account" asp-action="Register" method="post">
                         @Html.AntiForgeryToken()
                         <div class="form-group mb-3">
-                            <input asp-for="FirstName" class="form-control border-0 py-3" placeholder="Ad" />
-                            <span class="text-danger" asp-validation-for="FirstName"></span>
+                            <input asp-for="FirstName" class="form-control border-0 py-3" placeholder="Ad"
+                                style="margin-left: 20px;" />
+                            <span class="text-danger" asp-validation-for="FirstName" style="margin-left: 20px;"></span>
                         </div>
                         <div class="form-group mb-3">
-                            <input asp-for="LastName" class="form-control border-0 py-3" placeholder="Soyad" />
-                            <span class="text-danger" asp-validation-for="LastName"></span>
+                            <input asp-for="LastName" class="form-control border-0 py-3" placeholder="Soyad"
+                                style="margin-left: 20px;" />
+                            <span class="text-danger" asp-validation-for="LastName" style="margin-left: 20px;"></span>
                         </div>
                         <div class="form-group mb-3">
-                            <input asp-for="Email" class="form-control border-0 py-3" placeholder="Email" />
-                            <span class="text-danger" asp-validation-for="Email"></span>
+                            <input asp-for="Email" class="form-control border-0 py-3" placeholder="Email"
+                                style="margin-left: 20px;" />
+                            <span class="text-danger" asp-validation-for="Email" style="margin-left: 20px;"></span>
                         </div>
                         <div class="form-group mb-3">
-                            <input asp-for="UserName" class="form-control border-0 py-3" placeholder="Kullanıcı Adı" />
-                            <span class="text-danger" asp-validation-for="UserName"></span>
+                            <input asp-for="UserName" class="form-control border-0 py-3" placeholder="Kullanıcı Adı"
+                                style="margin-left: 20px;" />
+                            <span class="text-danger" asp-validation-for="UserName" style="margin-left: 20px;"></span>
                         </div>
                         <div class="form-group mb-3">
                             <input asp-for="PhoneNumber" class="form-control border-0 py-3"
-                                placeholder="Telefon Numarası" />
-                            <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+                                placeholder="Telefon Numarası" style="margin-left: 20px;" />
+                            <span class="text-danger" asp-validation-for="PhoneNumber"
+                                style="margin-left: 20px;"></span>
                         </div>
                         <div class="form-group mb-3">
                             <input asp-for="Password" class="form-control border-0 py-3" type="password"
-                                placeholder="Parola" />
-                            <span class="text-danger" asp-validation-for="Password"></span>
+                                placeholder="Parola" style="margin-left: 20px;" />
+                            <span class="text-danger" asp-validation-for="Password" style="margin-left: 20px;"></span>
                         </div>
                         <div class="form-group mb-3">
                             <input asp-for="RePassword" class="form-control border-0 py-3" type="password"
-                                placeholder="Parola Tekrar" />
-                            <span class="text-danger" asp-validation-for="RePassword"></span>
+                                placeholder="Parola Tekrar" style="margin-left: 20px;" />
+                            <span class="text-danger" asp-validation-for="RePassword" style="margin-left: 20px;"></span>
                         </div>
-                        <div class="form-group mb-3">
-                            <label asp-for="UserRoles" class="form-label">Roller</label>
-                            <select asp-for="UserRoles" asp-items="@(new MultiSelectList(Model.Roles, "Name", "Name"))"
-                                class="form-control" multiple></select>
-                            <span class="text-danger" asp-validation-for="UserRoles"></span>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100 py-2">Kullanıcı Ekle</button>
+                        <button type="submit" class="btn w-100 py-3"
+                            style="background-color: #000080; color: white; font-size: 18px; margin-left: 20px;">Kayıt
+                            Ol</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+Z

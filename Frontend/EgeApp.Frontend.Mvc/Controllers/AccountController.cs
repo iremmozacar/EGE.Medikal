@@ -103,16 +103,16 @@ namespace EgeApp.Frontend.Mvc.Controllers
             _notyfService.Success("Başarıyla çıkış yaptınız.");
             return Redirect("~/");
         }
-
         [HttpGet]
         public IActionResult Register()
         {
-            return View(new SignUpViewModel());
+            var model = new CreateUserProfileViewModel();
+            return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(SignUpViewModel model)
+        public async Task<IActionResult> Register(CreateUserProfileViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -157,7 +157,6 @@ namespace EgeApp.Frontend.Mvc.Controllers
 
             return View(model);
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateProfile(UserProfileViewModel model)
