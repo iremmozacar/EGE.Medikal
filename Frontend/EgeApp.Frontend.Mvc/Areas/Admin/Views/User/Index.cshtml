@@ -6,16 +6,19 @@
     ViewData["ButtonLink"] = "/admin/user/create";
 }
 
+<div class="container py-5">
+    <div class="bg-white p-4 rounded shadow-sm">
+        <!-- Başlık -->
+        <h2 class="text-center text-uppercase fw-bold mb-4" style="color: #002855;">Kullanıcı Listesi</h2>
 
-<div class="card">
-    <div class="card-body">
-        <table id="my-data-table" class="table table-bordered table-striped">
-            <thead>
+        <!-- Kullanıcı Tablosu -->
+        <table id="user-data-table" class="table table-hover align-middle">
+            <thead class="table-light">
                 <tr>
-                    <th>Id</th>
                     <th>Üye</th>
                     <th>Kullanıcı Adı</th>
-                    <th>Email</th>
+                    <th>E-posta</th>
+                    <th>ID</th>
                     <th>Onaylı</th>
                     <th>İşlemler</th>
                 </tr>
@@ -24,82 +27,42 @@
                 @foreach (var user in Model)
                 {
                     <tr>
-                        <td>@user.Id</td>
                         <td>@user.FirstName @user.LastName</td>
                         <td>@user.UserName</td>
                         <td>@user.Email</td>
-                        <td>
+                        <td><small class="text-muted">@user.Id</small></td>
+                        <td class="text-center">
                             <form asp-area="Admin" asp-controller="User" asp-action="ConfirmEmail" asp-route-id="@user.Id"
                                 id="form-@user.Id">
-                                <div class="custom-control custom-switch">
-                                    <input asp-for="@user.EmailConfirmed" type="checkbox" class="custom-control-input"
+                                <div class="form-check form-switch d-flex justify-content-center">
+                                    <input asp-for="@user.EmailConfirmed" type="checkbox" class="form-check-input"
                                         id="confirm-email-@user.Id"
                                         onchange="document.getElementById('form-@user.Id').submit()">
-                                    <label class="custom-control-label" for="confirm-email-@user.Id"></label>
                                 </div>
                             </form>
                         </td>
-                        <td>
+                        <td class="text-center">
                             <a asp-area="Admin" asp-controller="User" asp-action="Edit" asp-route-id="@user.Id"
-                                class="btn btn-warning btn-sm">Detay</a>
+                                class="btn btn-sm btn-outline-danger">Detay</a>
                         </td>
                     </tr>
                 }
-
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="6" class="text-center text-muted">Kullanıcı bulunamadı.</td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
-    <!-- /.card-body -->
 </div>
 
 @section Scripts {
-    <!-- DataTables  & Plugins -->
+    <!-- DataTables Plugins -->
     <script src="~/admin/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="~/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="~/admin/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="~/admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
     <script src="~/admin/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="~/admin/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-    <script src="~/admin/plugins/jszip/jszip.min.js"></script>
-    <script src="~/admin/plugins/pdfmake/pdfmake.min.js"></script>
-    <script src="~/admin/plugins/pdfmake/vfs_fonts.js"></script>
-    <script src="~/admin/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-    <script src="~/admin/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-    <script src="~/admin/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
     @await Html.PartialAsync("_DataTablesPartial")
-    <script>
-        const changeIsActive = function (productId) {
-            $.ajax({
-                url: `/admin/product/updateisactive/${productId}`,
-                type: 'GET',
-                success: function (res) {
-                    var isActiveCheckbox = document.getElementById("isActive-" + productId);
-                    var isHomeCheckbox = document.getElementById("isHome-" + productId);
-                    if (!isActiveCheckbox.checked) {
-                        isHomeCheckbox.checked = false;
-                        isHomeCheckbox.disabled = true;
-                    } else {
-                        isHomeCheckbox.disabled = false;
-                    }
-
-                },
-                error: function (err) {
-
-                },
-            });
-        }
-
-        const changeIsHome = function (productId) {
-            $.ajax({
-                url: `/admin/product/updateishome/${productId}`,
-                type: 'GET',
-                success: function (res) {
-        @* alert(res ? 'İşlem başarılı' : 'İşlem başarısız') *@
-                                                                                                            },
-                error: function (err) {
-                    console.log(err);
-                }
-            })
-        }
-    </script>
 }

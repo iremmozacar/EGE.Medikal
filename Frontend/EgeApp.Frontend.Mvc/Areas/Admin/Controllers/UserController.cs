@@ -90,6 +90,7 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
 
         public async Task<IActionResult> Create()
         {
+            // Sistem rollerini modele ekle
             var model = new CreateUserProfileViewModel
             {
                 Roles = await _roleManager.Roles.ToListAsync()
@@ -102,11 +103,11 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
+                // Hatalı form gönderiminde rolleri tekrar yükle
                 model.Roles = await _roleManager.Roles.ToListAsync();
-                model.UserRoles = [];
-                ViewBag.ErrorRoleMessage = "En az bir kategori seçmelisiniz.";
                 return View(model);
             }
+
             var user = new AppUser
             {
                 FirstName = model.FirstName,
@@ -116,15 +117,22 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
                 PhoneNumber = model.PhoneNumber,
                 EmailConfirmed = true
             };
+
             var result = await _userManager.CreateAsync(user, model.Password);
+
             if (result.Succeeded)
             {
-                await _userManager.AddToRolesAsync(user, model.UserRoles);
-                _notyfService.Success("Kullanıcı başarıyla oluşturulmuştur");
+                // Kullanıcıya seçilen rolleri ata
+                if (model.UserRoles.Any())
+                {
+                    await _userManager.AddToRolesAsync(user, model.UserRoles);
+                }
+                _notyfService.Success("Kullanıcı başarıyla oluşturuldu.");
                 return RedirectToAction("Index");
             }
+
             model.Roles = await _roleManager.Roles.ToListAsync();
-            _notyfService.Error("Bir sorun oluştu");
+            _notyfService.Error("Kullanıcı oluşturulurken bir hata oluştu.");
             return View(model);
         }
     }

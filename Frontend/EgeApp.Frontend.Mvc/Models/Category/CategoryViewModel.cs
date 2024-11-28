@@ -14,6 +14,10 @@ public class CategoryViewModel
     [JsonPropertyName("isActive")]
     public bool IsActive { get; set; }
 
+
+    [JsonPropertyName("imageUrl")]
+    public string ImageUrl { get; set; }
+
     [JsonPropertyName("url")]
     public string Url { get; set; }
 

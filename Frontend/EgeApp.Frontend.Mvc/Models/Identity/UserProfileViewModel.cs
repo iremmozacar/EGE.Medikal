@@ -23,6 +23,6 @@ public class UserProfileViewModel
     [Display(Name = "Yeni Şifre Tekrar")]
     [Compare("NewPassword", ErrorMessage = "Şifreler aynı değil")]
     public string ReNewPassword { get; set; }
-    public List<OrderViewModel> Orders { get; set; }
+    public List<OrderViewModel> Orders { get; set; } = new List<OrderViewModel>();
 
 }

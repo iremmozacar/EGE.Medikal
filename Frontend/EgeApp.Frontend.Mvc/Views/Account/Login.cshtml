@@ -1,27 +1,34 @@
-﻿<section class="login spad">
+﻿@model EgeApp.Frontend.Mvc.Models.Identity.LoginViewModel
+
+
+<section class="login spad">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-6 col-md-8">
                 <div class="login__form">
                     <form method="post" asp-action="Login" asp-controller="Account">
+                        @Html.AntiForgeryToken()
                         <div class="form-group">
                             <label for="username">Kullanıcı Adı</label>
-                            <input type="text" class="form-control" id="username" name="UserName"
-                                placeholder="Kullanıcı Adı" required />
+                            <input asp-for="UserName" class="form-control" id="username" placeholder="Kullanıcı Adı"
+                                required />
+                            <span class="text-danger" asp-validation-for="UserName"></span>
                         </div>
                         <div class="form-group">
                             <label for="password">Şifre</label>
-                            <input type="password" class="form-control" id="password" name="Password"
+                            <input asp-for="Password" type="password" class="form-control" id="password"
                                 placeholder="Şifre" required />
+                            <span class="text-danger" asp-validation-for="Password"></span>
                         </div>
+                        <button type="submit" class="btn btn-danger btn-hover btn-lg mt-3">Giriş Yap</button>
                     </form>
+
 
                     <div class="text-right mt-3">
                         <a href="/Account/ForgotPassword" class="text-forgot">Şifreni mi unuttun?</a>
                     </div>
 
                     <div class="d-grid gap-3 mt-4">
-                        <a href="/Account/Login" class="btn btn-danger btn-hover btn-lg">Giriş Yap</a>
                         <a href="/Account/Register" class="btn btn-secondary btn-hover btn-lg">Kayıt Ol</a>
                     </div>
                 </div>
@@ -29,6 +36,7 @@
         </div>
     </div>
 </section>
+
 <style>
     /* Giriş Yap Hover (Kırmızı) */
     .btn-danger {

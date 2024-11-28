@@ -1,108 +1,111 @@
-﻿@model EgeApp.Frontend.Mvc.Models.Category.CategoryIndexViewModel
+﻿@model List<EgeApp.Frontend.Mvc.Models.Category.CategoryViewModel>
 
 @{
     ViewData["Title"] = "Kategoriler";
     ViewData["PageHeader"] = "Kategoriler";
 }
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Ana Kategoriler</h3>
-                <div class="card-tools">
-                    <a asp-area="Admin" asp-controller="Category" asp-action="Create" asp-route-isMainCategory="true" 
-                       class="btn btn-primary btn-sm">
-                        <i class="fas fa-plus"></i> Ana Kategori Ekle
-                    </a>
-                </div>
-            </div>
-            <div class="card-body">
-                <table class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>Ad</th>
-                            <th>Açıklama</th>
-                            <th>Durum</th>
-                            <th>İşlemler</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var category in Model.MainCategories)
-                        {
-                            <tr>
-                                <td>@category.Name</td>
-                                <td>@category.Description</td>
-                                <td>
-                                    <input type="checkbox" id="isActive-@category.Id" 
-                                           @(category.IsActive ? "checked" : "")
-                                           onchange="changeCategoryStatus(@category.Id)">
-                                </td>
-                                <td>
-                                    <div class="btn-group">
-                                        <a asp-area="Admin" asp-controller="Category" asp-action="Edit" asp-route-id="@category.Id"
-                                           class="btn btn-warning btn-sm">Düzenle</a>
-                                        <a href="javascript:void(0);" onclick="deleteCategory(@category.Id)"
-                                           class="btn btn-danger btn-sm">Sil</a>
-                                    </div>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
+<div class="container py-5">
+    <div class="p-4 rounded shadow-sm bg-white">
+        <!-- Başlık ve Kategori Ekle Butonu -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="text-uppercase fw-bold mb-0" style="color: #002855;">Kategoriler</h2>
+            <a asp-area="Admin" asp-controller="Category" asp-action="Create" class="btn text-white fw-bold"
+                style="background-color: #002855;">Kategori Ekle</a>
         </div>
 
-        <div class="card mt-4">
-            <div class="card-header">
-                <h3 class="card-title">Alt Kategoriler</h3>
-                <div class="card-tools">
-                    <a asp-area="Admin" asp-controller="Category" asp-action="Create" asp-route-isMainCategory="false" 
-                       class="btn btn-primary btn-sm">
-                        <i class="fas fa-plus"></i> Alt Kategori Ekle
-                    </a>
-                </div>
-            </div>
-            <div class="card-body">
-                <table class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>Ad</th>
-                            <th>Üst Kategori</th>
-                            <th>Açıklama</th>
-                            <th>Durum</th>
-                            <th>İşlemler</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var category in Model.SubCategories)
-                        {
-                            <tr>
-                                <td>@category.Name</td>
-                                <td>
-                                </td>
-                                <td>@category.Description</td>
-                                <td>
-                                    <input type="checkbox" id="isActive-@category.Id" 
-                                           @(category.IsActive ? "checked" : "")
-                                           onchange="changeCategoryStatus(@category.Id)">
-                                </td>
-                                <td>
-                                    <div class="btn-group">
-                                        <a asp-area="Admin" asp-controller="Category" asp-action="Edit" asp-route-id="@category.Id"
-                                           class="btn btn-warning btn-sm">Düzenle</a>
-                                        <a href="javascript:void(0);" onclick="deleteCategory(@category.Id)"
-                                           class="btn btn-danger btn-sm">Sil</a>
-                                    </div>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        <!-- Kategoriler Tablosu -->
+        <table id="category-data-table" class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Kategori Adı</th>
+                    <th>Açıklama</th>
+                    <th class="text-center">Aktif</th>
+                    <th class="text-center">İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var category in Model)
+                {
+                    <tr>
+                        <td>@category.Name</td>
+                        <td>@category.Description</td>
+                        <td class="text-center">
+                            <label class="switch">
+                                <input type="checkbox" id="isActive-@category.Id" @(category.IsActive ? "checked" : "")
+                                    onchange="changeCategoryStatus(@category.Id)">
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td class="text-center">
+                            <div class="btn-group">
+                                <a asp-area="Admin" asp-controller="Category" asp-action="Edit" asp-route-id="@category.Id"
+                                    class="btn btn-sm text-white fw-bold" style="background-color: #002855;">Düzenle</a>
+                                <a href="javascript:void(0);" onclick="deleteCategory(@category.Id)"
+                                    class="btn btn-sm text-white fw-bold" style="background-color: #8a0611;">Sil</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="4" class="text-center text-muted">Kategori bulunamadı.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>
+
+@section Styles {
+    <style>
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 34px;
+            height: 20px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 20px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            width: 14px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: #8a0611;
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(14px);
+        }
+    </style>
+}
 
 @section Scripts {
     <script>
@@ -110,11 +113,11 @@
             $.ajax({
                 url: '@Url.Action("UpdateIsActive", "Category")/' + id,
                 type: 'POST',
-                success: function(result) {
-                    // Handle success
+                success: function (result) {
+                    // Başarılı işlem sonrası yapılacaklar
                 },
-                error: function() {
-                    // Handle error
+                error: function () {
+                    // Hata durumu
                 }
             });
         }

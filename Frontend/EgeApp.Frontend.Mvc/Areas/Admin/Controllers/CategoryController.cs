@@ -99,5 +99,43 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
 
             return View(model);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(CategoryEditViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await CategoryService.UpdateAsync(model);
+
+                if (!result.IsSucceeded)
+                {
+                    _notyfService.Error("Kategori güncellenirken bir hata oluştu.");
+                    return RedirectToAction("Error", "Home");
+                }
+
+                _notyfService.Success("Kategori başarıyla güncellendi.");
+                return RedirectToAction("Index");
+            }
+
+            return View(model);
+        }
+
+        private async Task<List<SelectListItem>> LoadCategoriesAsync()
+        {
+            var response = await CategoryService.GetAllAsync();
+
+            if (response.IsSucceeded)
+            {
+                return response.Data
+                    .Select(c => new SelectListItem
+                    {
+                        Text = c.Name,
+                        Value = c.Id.ToString()
+                    })
+                    .ToList();
+            }
+
+            return new List<SelectListItem>();
+        }
     }
 }

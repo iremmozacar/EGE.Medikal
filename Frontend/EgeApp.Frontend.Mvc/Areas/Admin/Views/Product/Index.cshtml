@@ -1,115 +1,120 @@
-﻿@model List<EgeApp.Frontend.Mvc.Models.Product.ProductViewModel>
+﻿@model List<EgeApp.Frontend.Mvc.Models.Category.CategoryViewModel>
 @{
-    ViewData["PageHeader"] = "Ürünler Anasayfa";
-    ViewData["ShowButton"] = true;
-    ViewData["ButtonTitle"] = "Ürün Ekle";
-    ViewData["ButtonLink"] = "/admin/product/create";
+    ViewData["Title"] = "Kategoriler";
+    ViewData["PageHeader"] = "Kategoriler";
 }
 
+<div class="container py-5">
+    <div class="p-4 rounded shadow-sm bg-white">
+        <!-- Kategoriler Başlığı ve Kategori Ekle Butonu -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="text-uppercase fw-bold mb-0" style="color: #002855;">Kategoriler</h2>
+            <a href="/admin/category/create" class="btn text-white fw-bold" style="background-color: #002855;">Kategori
+                Ekle</a>
+        </div>
 
-<div class="card">
-    <div class="card-body">
-        <table id="my-data-table" class="table table-bordered table-striped">
-            <thead>
+        <!-- Kategoriler Tablosu -->
+        <table id="category-data-table" class="table table-hover align-middle">
+            <thead class="table-light">
                 <tr>
-                    <th width="70">Id</th>
-                    <th width="80">Resim</th>
-                    <th>Ürün</th>
-                    <th width="100">Fiyat</th>
-                    <th width="70">Aktif</th>
-                    <th width="70">Anasayfa</th>
-                    <th width="80">İşlemler</th>
+                    <th>Kategori Adı</th>
+                    <th>Açıklama</th>
+                    <th class="text-center">Durum</th>
+                    <th class="text-center">İşlemler</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var p in Model)
+                @foreach (var category in Model)
                 {
                     <tr>
-                        <td>@p.Id</td>
-                        <td>
-                            <img src="@p.ImageUrl" width="40" />
+                        <td>@category.Name</td>
+                        <td>@category.Description</td>
+                        <td class="text-center">
+                            <label class="switch">
+                                <input asp-for="@category.IsActive" type="checkbox" id="isActive-@category.Id"
+                                    onchange="changeCategoryStatus('@category.Id')">
+                                <span class="slider round"></span>
+                            </label>
                         </td>
-                        <td>@p.Name</td>
-                        <td>@($"{p.Price:C0}")</td>
-                        <td>
-                            <div class="form-group">
-                                <div class="custom-control custom-switch">
-                                    <input asp-for="@p.IsActive" type="checkbox" class="custom-control-input"
-                                        id="isActive-@p.Id" onchange="changeIsActive('@p.Id')">
-                                    <label class="custom-control-label" for="isActive-@p.Id"></label>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="form-group">
-                                <div class="custom-control custom-switch">
-                                    <input asp-for="@p.IsHome" type="checkbox" class="custom-control-input"
-                                        id="isHome-@p.Id" onchange="changeIsHome('@p.Id')">
-                                    <label class="custom-control-label" for="isHome-@p.Id"></label>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <a asp-area="Admin" asp-controller="Product" asp-action="Edit" asp-route-id="@p.Id"
-                                class="btn btn-warning btn-sm">Detay</a>
+                        <td class="text-center">
+                            <a asp-area="Admin" asp-controller="Category" asp-action="Edit" asp-route-id="@category.Id"
+                                class="btn btn-sm btn-outline-danger">Düzenle</a>
                         </td>
                     </tr>
                 }
-
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="4" class="text-center text-muted">Kategori bulunamadı.</td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
-    <!-- /.card-body -->
 </div>
 
+@section Styles {
+    <style>
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 34px;
+            height: 20px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 20px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            width: 14px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: #8a0611;
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(14px);
+        }
+    </style>
+}
+
 @section Scripts {
-    <!-- DataTables  & Plugins -->
-    <script src="~/admin/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="~/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="~/admin/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="~/admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-    <script src="~/admin/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="~/admin/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-    <script src="~/admin/plugins/jszip/jszip.min.js"></script>
-    <script src="~/admin/plugins/pdfmake/pdfmake.min.js"></script>
-    <script src="~/admin/plugins/pdfmake/vfs_fonts.js"></script>
-    <script src="~/admin/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-    <script src="~/admin/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-    <script src="~/admin/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-    @await Html.PartialAsync("_DataTablesPartial")
     <script>
-        const changeIsActive = function (productId) {
+        const changeCategoryStatus = function (categoryId) {
             $.ajax({
-                url: `/admin/product/updateisactive/${productId}`,
-                type: 'GET',
+                url: `/admin/category/updateisactive/${categoryId}`,
+                type: 'POST',
                 success: function (res) {
-                    var isActiveCheckbox = document.getElementById("isActive-" + productId);
-                    var isHomeCheckbox = document.getElementById("isHome-" + productId);
-                    if (!isActiveCheckbox.checked) {
-                        isHomeCheckbox.checked = false;
-                        isHomeCheckbox.disabled = true;
-                    } else {
-                        isHomeCheckbox.disabled = false;
-                    }
-
+                    console.log(res);
                 },
                 error: function (err) {
-
-                },
-            });
-        }
-
-        const changeIsHome = function (productId) {
-            $.ajax({
-                url: `/admin/product/updateishome/${productId}`,
-                type: 'GET',
-                success: function (res) {
-        @* alert(res ? 'İşlem başarılı' : 'İşlem başarısız') *@
-                                                                },
-                error: function (err) {
-                    console.log(err);
+                    console.error(err);
                 }
-            })
-        }
+            });
+        };
     </script>
 }

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "EfghvM+9gl9QPPlmXuuykOhfcRWci+2ZihRyEntTR3Q=",
+  "Hash": "vBFO0EyQgOAlQfL+LmaxGsVpr+Qivukk1MZ9qS5tB3Y=",
   "Source": "EgeApp.Frontend.Mvc",
   "BasePath": "_content/EgeApp.Frontend.Mvc",
   "Mode": "Default",
@@ -929,6 +929,44 @@
       "OriginalItemSpec": "wwwroot/admin/dist/img/icons.png"
     },
     {
+      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/admin/dist/img/logoicon.svg",
+      "SourceId": "EgeApp.Frontend.Mvc",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/",
+      "BasePath": "_content/EgeApp.Frontend.Mvc",
+      "RelativePath": "admin/dist/img/logoicon.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/admin/dist/img/logoicon.svg"
+    },
+    {
+      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/admin/dist/img/logoname.svg",
+      "SourceId": "EgeApp.Frontend.Mvc",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/",
+      "BasePath": "_content/EgeApp.Frontend.Mvc",
+      "RelativePath": "admin/dist/img/logoname.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/admin/dist/img/logoname.svg"
+    },
+    {
       "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/admin/dist/img/mscd-5-logo.png",
       "SourceId": "EgeApp.Frontend.Mvc",
       "SourceType": "Discovered",
@@ -946,6 +984,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/admin/dist/img/mscd-5-logo.png"
+    },
+    {
+      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/admin/dist/img/muhammedtopcu.jpg",
+      "SourceId": "EgeApp.Frontend.Mvc",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/",
+      "BasePath": "_content/EgeApp.Frontend.Mvc",
+      "RelativePath": "admin/dist/img/muhammedtopcu.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/admin/dist/img/muhammedtopcu.jpg"
     },
     {
       "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/admin/dist/img/photo1.png",
@@ -1138,12 +1195,12 @@
       "OriginalItemSpec": "wwwroot/admin/dist/img/user1-128x128.jpg"
     },
     {
-      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/admin/dist/img/user2-160x160.jpg",
+      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/admin/dist/img/user2-160x160.png",
       "SourceId": "EgeApp.Frontend.Mvc",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/",
       "BasePath": "_content/EgeApp.Frontend.Mvc",
-      "RelativePath": "admin/dist/img/user2-160x160.jpg",
+      "RelativePath": "admin/dist/img/user2-160x160.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1154,7 +1211,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/admin/dist/img/user2-160x160.jpg"
+      "OriginalItemSpec": "wwwroot/admin/dist/img/user2-160x160.png"
     },
     {
       "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/admin/dist/img/user3-128x128.jpg",

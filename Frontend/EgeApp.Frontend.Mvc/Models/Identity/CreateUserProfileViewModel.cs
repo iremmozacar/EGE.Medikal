@@ -1,5 +1,6 @@
-using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using EgeApp.Frontend.Mvc.Data.Entities;
 
 namespace EgeApp.Frontend.Mvc.Models.Identity
 {
@@ -15,7 +16,7 @@ namespace EgeApp.Frontend.Mvc.Models.Identity
 
         [Display(Name = "Email")]
         [Required(ErrorMessage = "Bu alan boş bırakılamaz")]
-        [DataType(DataType.EmailAddress, ErrorMessage = "Geçersiz email formatı")]
+        [EmailAddress(ErrorMessage = "Geçersiz email formatı")]
         public string Email { get; set; }
 
         [Display(Name = "Kullanıcı Adı")]
@@ -26,10 +27,18 @@ namespace EgeApp.Frontend.Mvc.Models.Identity
         public string PhoneNumber { get; set; }
 
         [Display(Name = "Şifre")]
-        public string Password { get; set; } = "Qwe123.,";
+        [Required(ErrorMessage = "Şifre alanı boş bırakılamaz")]
+        public string Password { get; set; }
 
         [Display(Name = "Şifre Tekrar")]
+        [Required(ErrorMessage = "Şifre tekrar alanı boş bırakılamaz")]
         [Compare("Password", ErrorMessage = "Şifreler aynı değil")]
-        public string RePassword { get; set; } = "Qwe123.,";
+        public string RePassword { get; set; }
+
+        // Admin tarafından atanacak roller
+        public List<string> UserRoles { get; set; } = new List<string>();
+
+        // Mevcut sistemdeki roller
+        public List<AppRole> Roles { get; set; } = new List<AppRole>();
     }
 }

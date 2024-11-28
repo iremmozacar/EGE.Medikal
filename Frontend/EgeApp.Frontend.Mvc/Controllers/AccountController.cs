@@ -5,8 +5,6 @@ using EgeApp.Frontend.Mvc.Data.Entities;
 using EgeApp.Frontend.Mvc.Helpers.Abstract;
 using EgeApp.Frontend.Mvc.Models.Identity;
 using Microsoft.Extensions.Logging;
-using EgeApp.Frontend.Mvc.Models.Category;
-using EgeApp.Frontend.Mvc.Models.Product;
 
 namespace EgeApp.Frontend.Mvc.Controllers
 {
@@ -38,23 +36,8 @@ namespace EgeApp.Frontend.Mvc.Controllers
         [HttpGet]
         public IActionResult Login(string returnUrl = null)
         {
-            var categories = new List<CategoryViewModel>
-            {
-                new CategoryViewModel { Id = 1, Name = "Kategori 1" },
-                new CategoryViewModel { Id = 2, Name = "Kategori 2" },
-                new CategoryViewModel { Id = 3, Name = "Kategori 3" }
-            };
-
-            var products = new List<ProductViewModel>
-            {
-                new ProductViewModel { Id = 1, Name = "Ürün 1", Price = 100, ImageUrl = "/images/product1.jpg" },
-                new ProductViewModel { Id = 2, Name = "Ürün 2", Price = 200, ImageUrl = "/images/product2.jpg" }
-            };
-
             var model = new LoginViewModel
             {
-                CategoryList = categories,
-                ProductList = products,
                 ReturnUrl = returnUrl
             };
 
@@ -86,7 +69,7 @@ namespace EgeApp.Frontend.Mvc.Controllers
                 return View(model);
             }
 
-            var result = await _signInManager.PasswordSignInAsync(user, model.Password, true, true);
+            var result = await _signInManager.PasswordSignInAsync(user, model.Password, isPersistent: true, lockoutOnFailure: true);
             if (!result.Succeeded)
             {
                 ModelState.AddModelError(string.Empty, "Geçersiz giriş!");
@@ -94,25 +77,38 @@ namespace EgeApp.Frontend.Mvc.Controllers
                 return View(model);
             }
 
-            return Redirect(model.ReturnUrl ?? "~/");
+            var roles = await _userManager.GetRolesAsync(user);
+
+            if (roles.Contains("Admin") || roles.Contains("Super Admin"))
+            {
+                _notyfService.Success("Admin olarak giriş yaptınız!");
+                return RedirectToAction("Index", "Home", new { area = "Admin" });
+            }
+
+            _notyfService.Success("Başarıyla giriş yaptınız!");
+            return RedirectToAction("Index", "Account");
         }
 
-        public async Task<IActionResult> Logout()
+        [HttpGet]
+        public IActionResult Index()
         {
-            await _signInManager.SignOutAsync();
-            _notyfService.Success("Başarıyla çıkış yaptınız.");
-            return Redirect("~/");
+            var model = new UserProfileViewModel
+            {
+                FirstName = User.Identity.Name
+            };
+            return View(model);
         }
+
         [HttpGet]
         public IActionResult Register()
         {
-            var model = new CreateUserProfileViewModel();
+            var model = new RegisterViewModel();
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(CreateUserProfileViewModel model)
+        public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -132,6 +128,12 @@ namespace EgeApp.Frontend.Mvc.Controllers
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
+                string defaultRole = "DefaultRole";
+                if (await _roleManager.RoleExistsAsync(defaultRole))
+                {
+                    await _userManager.AddToRoleAsync(user, defaultRole);
+                }
+
                 var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                 var confirmationLink = Url.Action("ConfirmEmail", "Account", new { token, email = user.Email }, Request.Scheme);
 
@@ -157,6 +159,7 @@ namespace EgeApp.Frontend.Mvc.Controllers
 
             return View(model);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateProfile(UserProfileViewModel model)
@@ -199,6 +202,13 @@ namespace EgeApp.Frontend.Mvc.Controllers
             await _signInManager.RefreshSignInAsync(user);
             _notyfService.Success("Profil başarıyla güncellendi!");
             return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            _notyfService.Success("Başarıyla çıkış yaptınız.");
+            return Redirect("~/");
         }
     }
 }
