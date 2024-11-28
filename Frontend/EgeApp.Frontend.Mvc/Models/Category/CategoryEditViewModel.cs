@@ -9,11 +9,9 @@ namespace EgeApp.Frontend.Mvc.Models.Category
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string Url { get; set; }
         public bool IsActive { get; set; }
-        public string ImageUrl { get; set; } // Var olan görselin URL'si
-        public IFormFile Image { get; set; } // Yeni görsel için dosya yükleme
-        public int ParentCategoryId { get; set; } // Üst kategori seçimi
-        public List<SelectListItem> Categories { get; set; } = new List<SelectListItem>(); // Üst kategoriler için liste
+        public string Url { get; set; }
+        public string ImageUrl { get; set; }
+        public IFormFile Image { get; set; }
     }
 }

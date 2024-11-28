@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="../buildMultiTargeting/EgeApp.Frontend.Mvc.props" />
-</Project>

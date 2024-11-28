@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EgeApp.Frontend.Mvc")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+793f9be81d700082882f072449edcb365796c377")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9a799ba10ddb65ad259afdf35b525852a15116c4")]
 [assembly: System.Reflection.AssemblyProductAttribute("EgeApp.Frontend.Mvc")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EgeApp.Frontend.Mvc")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -4,9 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using EgeApp.Frontend.Mvc.Models.Category;
 using EgeApp.Frontend.Mvc.Services;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
 {
@@ -25,24 +23,81 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             var response = await CategoryService.GetAllAsync();
-
             if (!response.IsSucceeded)
             {
                 TempData["Error"] = response.Error;
-                return Redirect("/home/error");
+                return RedirectToAction("Error", "Home");
             }
 
-            var categories = response.Data;
-
-
-
-            return View(categories);
+            return View(response.Data);
         }
 
         [HttpGet]
-        public async Task<IActionResult> Create(bool isMainCategory = true)
+        public IActionResult Create()
         {
-            var response = await CategoryService.GetAllAsync();
+            var model = new CategoryCreateViewModel
+            {
+                IsActive = true // Default value for new categories
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(CategoryCreateViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                _notyfService.Error("Please check the category information and try again.");
+                return View(model);
+            }
+
+            // Map the view model to the service model
+            var categoryToCreate = new CategoryCreateViewModel
+            {
+                Name = model.Name,
+                Description = model.Description,
+                Url = model.Url,
+                IsActive = model.IsActive
+            };
+
+            // Handle image upload if an image is provided
+            if (model.Image != null && model.Image.Length > 0)
+            {
+                try
+                {
+                    var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(model.Image.FileName)}";
+                    var savePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads/categories", fileName);
+
+                    using (var stream = new FileStream(savePath, FileMode.Create))
+                    {
+                        await model.Image.CopyToAsync(stream);
+                    }
+
+                    categoryToCreate.ImageUrl = $"/uploads/categories/{fileName}";
+                }
+                catch (Exception ex)
+                {
+                    _notyfService.Error($"Error while uploading image: {ex.Message}");
+                    return View(model);
+                }
+            }
+
+            var result = await CategoryService.CreateAsync(categoryToCreate);
+            if (!result.IsSucceeded)
+            {
+                TempData["Error"] = result.Error;
+                return RedirectToAction("Error", "Home");
+            }
+
+            _notyfService.Success("Category successfully created.");
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var response = await CategoryService.GetByIdAsync(id);
 
             if (!response.IsSucceeded)
             {
@@ -50,92 +105,74 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
                 return RedirectToAction("Error", "Home");
             }
 
-            var categories = response.Data;
+            var category = response.Data;
 
-            // CategoryCreateViewModel oluşturuluyor
-            var model = new CategoryCreateViewModel
+            var model = new CategoryEditViewModel
             {
-                IsMainCategory = isMainCategory,
-                Categories = categories
-                    .Select(c => new SelectListItem
-                    {
-                        Text = c.Name,
-                        Value = c.Id.ToString()
-                    })
-                    .ToList() // Listeye dönüştürülüyor
+                Id = category.Id,
+                Name = category.Name,
+                Description = category.Description,
+                Url = category.Url,
+                IsActive = category.IsActive,
+                ImageUrl = category.ImageUrl
             };
 
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CategoryCreateViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                // Eğer alt kategori ise ParentCategoryId ayarlanır
-                model.ParentCategoryId = model.IsMainCategory ? 0 : model.ParentCategoryId;
-
-                var result = await CategoryService.CreateAsync(model);
-                if (!result.IsSucceeded)
-                {
-                    TempData["Error"] = result.Error;
-                    return Redirect("/home/error");
-                }
-
-                _notyfService.Success("Kategori başarıyla oluşturuldu");
-                return RedirectToAction("Index");
-            }
-
-            // Model geçersizse, kategori dropdown'ı tekrar dolduruluyor
-            var categories = await CategoryService.GetAllAsync();
-            model.Categories = categories.Data
-                .Select(c => new SelectListItem
-                {
-                    Text = c.Name,
-                    Value = c.Id.ToString()
-                })
-                .ToList();
-
-            return View(model);
-        }
-        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(CategoryEditViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var result = await CategoryService.UpdateAsync(model);
+                _notyfService.Error("Please check the category information and try again.");
+                return View(model);
+            }
 
-                if (!result.IsSucceeded)
+            // Map the view model to the service model
+            var categoryToUpdate = new CategoryEditViewModel
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Description = model.Description,
+                Url = model.Url,
+                IsActive = model.IsActive,
+                ImageUrl = model.ImageUrl
+            };
+
+            // Handle new image upload if provided
+            if (model.Image != null && model.Image.Length > 0)
+            {
+                try
                 {
-                    _notyfService.Error("Kategori güncellenirken bir hata oluştu.");
-                    return RedirectToAction("Error", "Home");
-                }
+                    var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(model.Image.FileName)}";
+                    var savePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads/categories", fileName);
 
-                _notyfService.Success("Kategori başarıyla güncellendi.");
-                return RedirectToAction("Index");
-            }
-
-            return View(model);
-        }
-
-        private async Task<List<SelectListItem>> LoadCategoriesAsync()
-        {
-            var response = await CategoryService.GetAllAsync();
-
-            if (response.IsSucceeded)
-            {
-                return response.Data
-                    .Select(c => new SelectListItem
+                    using (var stream = new FileStream(savePath, FileMode.Create))
                     {
-                        Text = c.Name,
-                        Value = c.Id.ToString()
-                    })
-                    .ToList();
+                        await model.Image.CopyToAsync(stream);
+                    }
+
+                    categoryToUpdate.ImageUrl = $"/uploads/categories/{fileName}";
+                }
+                catch (Exception ex)
+                {
+                    _notyfService.Error($"Error while uploading image: {ex.Message}");
+                    return View(model);
+                }
             }
 
-            return new List<SelectListItem>();
+            var result = await CategoryService.UpdateAsync(categoryToUpdate);
+
+            if (!result.IsSucceeded)
+            {
+                TempData["Error"] = result.Error;
+                return RedirectToAction("Error", "Home");
+            }
+
+            _notyfService.Success("Category successfully updated.");
+            return RedirectToAction("Index");
         }
     }
 }

@@ -7,13 +7,9 @@
 
 <div class="container py-5">
     <div class="p-4 rounded shadow-sm bg-white">
-        <!-- Başlık -->
         <h2 class="text-center text-uppercase fw-bold mb-4" style="color: #002855;">@ViewData["Title"]</h2>
-
-        <!-- Form -->
         <form asp-area="Admin" asp-controller="Category" asp-action="Create" method="post"
             enctype="multipart/form-data">
-            <input asp-for="IsMainCategory" type="hidden" />
             <div class="row g-4">
                 <!-- Kategori Bilgileri -->
                 <div class="col-md-8">
