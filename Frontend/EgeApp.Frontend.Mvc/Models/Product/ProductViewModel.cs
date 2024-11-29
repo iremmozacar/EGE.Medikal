@@ -33,6 +33,8 @@ namespace EgeApp.Frontend.Mvc.Models.Product
         [JsonPropertyName("mainImage")]
         public string MainImage { get; set; }
 
+        public string CategoryName { get; set; }
+
         [JsonPropertyName("isHome")]
         public bool IsHome { get; set; }
 
