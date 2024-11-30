@@ -210,5 +210,25 @@ namespace EgeApp.Frontend.Mvc.Controllers
             _notyfService.Success("Başarıyla çıkış yaptınız.");
             return Redirect("~/");
         }
+
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        // Şifre sıfırlama işlemini gerçekleştiren action
+        [HttpPost]
+        public IActionResult ForgotPassword(ForgotPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Şifre sıfırlama işlemleri (örneğin, email gönderimi)
+                TempData["SuccessMessage"] = "Şifre sıfırlama talimatları email adresinize gönderildi.";
+                return RedirectToAction("Login");
+            }
+
+            return View(model);
+        }
     }
 }

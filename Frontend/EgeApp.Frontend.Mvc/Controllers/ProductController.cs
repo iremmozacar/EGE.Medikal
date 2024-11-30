@@ -24,7 +24,10 @@ namespace EgeApp.Frontend.Mvc.Controllers
             await Task.CompletedTask;
             return View();
         }
-
+        public IActionResult Shop()
+        {
+            return View(); 
+        }
         public async Task<IActionResult> Details(int id)
         {
             var result = await ProductService.GetByIdAsync(id);

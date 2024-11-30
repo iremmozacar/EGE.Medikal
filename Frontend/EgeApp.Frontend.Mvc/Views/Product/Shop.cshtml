@@ -1,115 +1,62 @@
 ﻿<section class="shop spad">
     <div class="container">
         <div class="row">
-            <!-- Sidebar Başlangıcı -->
-            <div class="col-lg-3 col-md-3">
-                <div class="shop__sidebar">
-                    <!-- Kategoriler -->
-                    <div class="sidebar__categories">
-                        <div class="section-title">
-                            <h4>Kategoriler</h4>
+            <!-- Ürünler Başlangıcı -->
+            <div class="col-lg-12 col-md-12">
+                <div class="row">
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="product__item">
+                            <!-- Ürün Fotoğrafı ve Link -->
+                            <a href="/Views/Product/Details.cshtml?id=1" class="product__item__pic set-bg"
+                                style="background-image: url('img/product-1.jpg'); height: 300px; background-size: cover; background-position: center;"></a>
+                            <div class="product__item__text text-center">
+                                <h6><a href="/Views/Product/Details.cshtml?id=1">Ürün 1</a></h6>
+                                <div class="product__price">$120 <span>$150</span></div>
+                                <!-- Sepete Ekle Butonu -->
+                                <form action="/Views/Cart/Index.cshtml" method="POST">
+                                    <input type="hidden" name="product_id" value="1">
+                                    <button type="submit" class="btn custom-btn btn-block mt-2">Sepete Ekle</button>
+                                </form>
+                            </div>
                         </div>
-                        <div class="categories__accordion">
-                            <div class="accordion" id="accordionExample">
-                                @if (Model.Categories != null && Model.Categories.Any())
-                                {
-                                    @foreach (var category in Model.Categories)
-                                    {
-                                        <div class="card">
-                                            <div class="card-heading">
-                                                <a data-toggle="collapse"
-                                                    data-target="#collapse-@category.Name.Replace(" ", "")">
-                                                    @category.Name
-                                                </a>
-                                            </div>
-                                            <div id="collapse-@category.Name.Replace(" ", "")" class="collapse"
-                                                data-parent="#accordionExample">
-                                                <div class="card-body">
-                                                    <ul>
-                                                        <li><a href="#">Tüm Ürünler</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    }
-                                }
-                                else
-                                {
-                                    <p>Kategori bulunamadı.</p>
-                                }
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="product__item">
+                            <a href="/Views/Product/Details.cshtml?id=2" class="product__item__pic set-bg"
+                                style="background-image: url('img/product-2.jpg'); height: 300px; background-size: cover; background-position: center;"></a>
+                            <div class="product__item__text text-center">
+                                <h6><a href="/Views/Product/Details.cshtml?id=2">Ürün 2</a></h6>
+                                <div class="product__price">$80 <span>$100</span></div>
+                                <form action="/Views/Cart/Index.cshtml" method="POST">
+                                    <input type="hidden" name="product_id" value="2">
+                                    <button type="submit" class="btn custom-btn btn-block mt-2">Sepete Ekle</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="product__item">
+                            <a href="/Views/Product/Details.cshtml?id=3" class="product__item__pic set-bg"
+                                style="background-image: url('img/product-3.jpg'); height: 300px; background-size: cover; background-position: center;"></a>
+                            <div class="product__item__text text-center">
+                                <h6><a href="/Views/Product/Details.cshtml?id=3">Ürün 3</a></h6>
+                                <div class="product__price">$50</div>
+                                <form action="/Views/Cart/Index.cshtml" method="POST">
+                                    <input type="hidden" name="product_id" value="3">
+                                    <button type="submit" class="btn custom-btn btn-block mt-2">Sepete Ekle</button>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- Sidebar Bitişi -->
-
-            <!-- Ürünler Başlangıcı -->
-            <div class="col-lg-9 col-md-9">
-                <div class="row">
-                    @if (Model.Products != null && Model.Products.Any())
-                    {
-                        @foreach (var product in Model.Products)
-                        {
-                            <div class="col-lg-4 col-md-6">
-                                <div class="product__item">
-                                    <div class="product__item__pic set-bg" data-setbg="@product.ImageUrl">
-                                        @if (product.IsOutOfStock)
-                                        {
-                                            <div class="label stockout stockblue">Stokta Yok</div>
-                                        }
-                                        @if (product.IsOnSale)
-                                        {
-                                            <div class="label">İndirim</div>
-                                        }
-                                        <ul class="product__hover">
-                                            <li>
-                                                <a href="@product.ImageUrl" class="image-popup">
-                                                    <span class="arrow_expand"></span>
-                                                </a>
-                                            </li>
-                                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="product__item__text">
-                                        <h6><a href="#">@product.Name</a></h6>
-                                        <div class="product__price">
-                                            $@product.Price
-                                            @if (product.OldPrice.HasValue)
-                                            {
-                                                <span>$@product.OldPrice</span>
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                    }
-                    else
-                    {
-                        <p>Ürün bulunamadı.</p>
-                    }
-                </div>
 
                 <!-- Sayfalama -->
-                <div class="col-lg-12 text-center">
+                <div class="col-lg-12 text-center mt-4">
                     <div class="pagination__option">
-                        @if (Model.Pagination != null)
-                        {
-                            @for (int i = 1; i <= Model.Pagination.TotalPages; i++)
-                            {
-                                <a href="?page=@i" class="@(i == Model.Pagination.CurrentPage ? "active" : "")">@i</a>
-                            }
-                            @if (Model.Pagination.CurrentPage < Model.Pagination.TotalPages)
-                            {
-                                <a href="?page=@(Model.Pagination.CurrentPage + 1)"><i class="fa fa-angle-right"></i></a>
-                            }
-                        }
-                        else
-                        {
-                            <p>Sayfa bilgisi bulunamadı.</p>
-                        }
+                        <a href="#" class="active">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#"><i class="fa fa-angle-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -117,3 +64,50 @@
         </div>
     </div>
 </section>
+
+<!-- CSS -->
+<style>
+    .product__item__pic {
+        height: 300px;
+        background-size: cover;
+        background-position: center;
+        border-radius: 8px;
+        overflow: hidden;
+        position: relative;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .product__item__pic:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .custom-btn {
+        background-color: #002147;
+        color: #fff;
+        border: none;
+        padding: 10px;
+        transition: transform 0.2s ease, background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .custom-btn:hover {
+        background-color: #003366;
+        color: #fff;
+        transform: scale(1.05);
+    }
+
+    .product__item__text h6 a {
+        color: #333;
+        font-size: 16px;
+        text-decoration: none;
+    }
+
+    .product__item__text h6 a:hover {
+        text-decoration: underline;
+    }
+
+    .product__price {
+        font-size: 14px;
+        color: #555;
+    }
+</style>

@@ -20,13 +20,15 @@
                                 placeholder="Şifre" required />
                             <span class="text-danger" asp-validation-for="Password"></span>
                         </div>
+                          <div class="text-right mt-3">
+                        <a href="/Account/ForgotPassword" class="text-forgot">Şifreni mi unuttun?</a>
+                    </div>
+
                         <button type="submit" class="btn btn-danger btn-hover btn-lg mt-3">Giriş Yap</button>
                     </form>
 
 
-                    <div class="text-right mt-3">
-                        <a href="/Account/ForgotPassword" class="text-forgot">Şifreni mi unuttun?</a>
-                    </div>
+                  
 
                     <div class="d-grid gap-3 mt-4">
                         <a href="/Account/Register" class="btn btn-secondary btn-hover btn-lg">Kayıt Ol</a>

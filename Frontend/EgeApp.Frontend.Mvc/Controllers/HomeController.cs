@@ -108,6 +108,13 @@ namespace EgeApp.Frontend.Mvc.Controllers
             return View();
         }
 
-        
+        public IActionResult Contact()
+        {
+            return View(); 
+        }
+        public IActionResult Information()
+        {
+            return View();
+        }
     }
 }

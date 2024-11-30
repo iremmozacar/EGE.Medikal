@@ -177,6 +177,10 @@
       "PackagePath": "staticwebassets/admin/dist/img/icons.png"
     },
     {
+      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/admin/dist/img/logoicon copy.svg",
+      "PackagePath": "staticwebassets/admin/dist/img/logoicon copy.svg"
+    },
+    {
       "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/admin/dist/img/logoicon.svg",
       "PackagePath": "staticwebassets/admin/dist/img/logoicon.svg"
     },
@@ -185,8 +189,8 @@
       "PackagePath": "staticwebassets/admin/dist/img/logoname.svg"
     },
     {
-      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/admin/dist/img/mscd-5-logo.png",
-      "PackagePath": "staticwebassets/admin/dist/img/mscd-5-logo.png"
+      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/admin/dist/img/ege-logo.png",
+      "PackagePath": "staticwebassets/admin/dist/img/ege-logo.png"
     },
     {
       "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/admin/dist/img/muhammedtopcu.jpg",

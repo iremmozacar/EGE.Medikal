@@ -19,21 +19,40 @@ namespace EgeApp.Frontend.Mvc.Controllers
             _userManager = userManager;
             _notyfService = notyfService;
         }
-
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             var userId = await _userManager.GetUserIdAsync(user);
             var cartResult = await CartService.GetCartAsync(userId);
 
             if (!cartResult.IsSucceeded)
             {
-                return RedirectToAction("Error", "Home");
+                _notyfService.Error("Sepet yüklenirken bir hata oluştu.");
+                return RedirectToAction("Index", "Home");
             }
-            var cart = cartResult.Data;
-            ViewBag.CountOfItems = cart.CountOfItem;
+
+            var cart = cartResult.Data ?? new CartViewModel();
             return View(cart);
         }
+        // public async Task<IActionResult> Index()
+        // {
+        //     var user = await _userManager.FindByNameAsync(User.Identity.Name);
+        //     var userId = await _userManager.GetUserIdAsync(user);
+        //     var cartResult = await CartService.GetCartAsync(userId);
+
+        //     if (!cartResult.IsSucceeded)
+        //     {
+        //         return RedirectToAction("Error", "Home");
+        //     }
+        //     var cart = cartResult.Data;
+        //     ViewBag.CountOfItems = cart.CountOfItem;
+        //     return View(cart);
+        // }
 
         public async Task<IActionResult> AddToCartAfterLogin()
         {
