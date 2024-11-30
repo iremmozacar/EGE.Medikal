@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Ew1v0r1265z7h7qWxQm2qe1xqXrN09REgl2gsW+xaxM=",
+  "Hash": "aZQvJHviucMqWay44dtzXuhv7uQsQ4QlJixMMfvIF5Y=",
   "Source": "EgeApp.Frontend.Mvc",
   "BasePath": "_content/EgeApp.Frontend.Mvc",
   "Mode": "Default",
@@ -41929,6 +41929,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/ui/Source/SlickNav-master.zip"
+    },
+    {
+      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/uploads/categories/4e7733d4-285c-4e04-b5b8-359d72a7f5c9",
+      "SourceId": "EgeApp.Frontend.Mvc",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/",
+      "BasePath": "_content/EgeApp.Frontend.Mvc",
+      "RelativePath": "uploads/categories/4e7733d4-285c-4e04-b5b8-359d72a7f5c9",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/categories/4e7733d4-285c-4e04-b5b8-359d72a7f5c9"
     },
     {
       "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/uploads/categories/547c2dfc-1787-4fee-8a2c-20964bb5aaf3",

@@ -23,18 +23,22 @@
             <div class="col-lg-3">
                 <div class="header__right">
                     <div class="header__icons">
-                        <!-- Hesabım -->
-                        <a asp-controller="Account" asp-action="Login" class="header-icon">
-                            <span>Hesabım</span> <i class="fa-solid fa-user"></i>
-                        </a>
-                        <!-- Arama -->
-                        <a href="/Search" class="header-icon">
-                            <i class="fas fa-search"></i>
-                        </a>
-                        <!-- Sepet -->
-                        <a href="/Cart" class="header-icon">
-                            <i class="fas fa-shopping-cart"></i>
-                        </a>
+                      <!-- Hesabım -->
+    <a asp-controller="Account" asp-action="Login" class="header-icon">
+        <span>Hesabım</span> <i class="fa-solid fa-user"></i>
+    </a>
+    <!-- Arama -->
+    <a asp-controller="Search" asp-action="Index" class="header-icon">
+        <i class="fas fa-search"></i>
+    </a>
+    <!-- Sepet -->
+    <a asp-controller="Cart" asp-action="Index" class="header-icon">
+        <i class="fas fa-shopping-cart"></i>
+    </a>
+    <!-- Ürünlerimiz -->
+    <a asp-controller="Product" asp-action="Shop" class="header-icon">
+        <span></span>
+    </a>
                     </div>
                 </div>
             </div>

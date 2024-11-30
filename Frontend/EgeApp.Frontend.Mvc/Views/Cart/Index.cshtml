@@ -20,145 +20,140 @@
     <div class="container">
         @if (Model.CartItems.Count == 0)
         {
-            <div class="alert alert-warning">Your cart is empty.</div>
+                <div class="alert alert-warning text-center">Your cart is empty.</div>
         }
         else
         {
-            <div class="shop__cart__table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Product</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <div class="shop__cart__table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
                         @foreach (var cartItem in Model.CartItems)
                         {
-                            <tr>
-                                <td class="cart__product__item">
-                                    <img src="@cartItem.Product.ImageUrl" alt="">
-                                    <div class="cart__product__item__title">
-                                        <h6>@cartItem.Product.Name</h6>
-                                    </div>
-                                </td>
-                                <td class="cart__price">@($"{cartItem.Product.Price:C0}")</td>
-                                <td class="cart__quantity">
-                                    <div class="pro-qty">
-                                        <button onclick="changeQuantity(this, true, true)" class="btn btn-sm btn-minus"
-                                            itemid="@cartItem.Id">
-                                            <i class="fa fa-minus"></i>
-                                        </button>
-                                        <input id="input-quantity-@cartItem.Id" type="number" min="1" value="@cartItem.Quantity"
-                                            oninput="changeQuantity(this, null, false)" itemid="@cartItem.Id">
-                                        <button onclick="changeQuantity(this, false, true)" class="btn btn-sm btn-plus"
-                                            itemid="@cartItem.Id">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                                <td class="cart__total" id="cart-item-total-@cartItem.Id">
+                                    <tr>
+                                        <td class="cart__product__item">
+                                            <img src="@cartItem.Product.ImageUrl" alt="@cartItem.Product.Name">
+                                            <div class="cart__product__item__title">
+                                                <h6>@cartItem.Product.Name</h6>
+                                            </div>
+                                        </td>
+                                        <td class="cart__price">@($"{cartItem.Product.Price:C0}")</td>
+                                        <td class="cart__quantity">
+                                            <div class="pro-qty">
+                                                <button onclick="changeQuantity(this, true, true)" class="btn btn-sm btn-minus" itemid="@cartItem.Id">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                                <input id="input-quantity-@cartItem.Id" type="number" min="1" value="@cartItem.Quantity"
+                                                    oninput="changeQuantity(this, null, false)" itemid="@cartItem.Id">
+                                                <button onclick="changeQuantity(this, false, true)" class="btn btn-sm btn-plus" itemid="@cartItem.Id">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                        <td class="cart__total" id="cart-item-total-@cartItem.Id">
                                     @($"{(cartItem.Product.Price * cartItem.Quantity):C0}")
-                                </td>
-                                <td class="cart__close">
-                                    <a asp-controller="Cart" asp-action="DeleteCartItem" asp-route-id="@cartItem.Id"
-                                        class="btn btn-md btn-danger">
-                                        <i class="fa fa-times"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                                        </td>
+                                        <td class="cart__close">
+                                            <a asp-controller="Cart" asp-action="DeleteCartItem" asp-route-id="@cartItem.Id" class="btn btn-danger">
+                                                <i class="fa fa-times"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
                         }
-                    </tbody>
-                </table>
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="cart__btn">
-                        <a href="./shop.html" class="site-btn">Continue Shopping</a>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="cart__btn">
+                            <a href="./shop.html" class="site-btn">Continue Shopping</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 text-right">
+                        <div class="cart__btn update__btn">
+                            <a href="#"><span class="icon_loading"></span> Update Cart</a>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-6 text-right">
-                    <div class="cart__btn update__btn">
-                        <a href="#"><span class="icon_loading"></span> Update Cart</a>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 offset-lg-8">
-                    <div class="cart__total__procced">
-                        <h6>Cart Total</h6>
+                <div class="row">
+                    <div class="col-lg-4 offset-lg-8">
+                        <div class="cart__total__procced">
+                            <h6>Cart Total</h6>
                         @{
                             var subTotal = Model.GetTotalPrice();
                             var shippingLimit = 20000;
                             var shippingPrice = subTotal > shippingLimit ? 0 : 1000;
                             var total = subTotal + shippingPrice;
                         }
-                        <ul>
-                            <li>Subtotal <span id="cart-sub-total">@($"{subTotal:C0}")</span></li>
-                            <li>Shipping <span>@(shippingPrice == 0 ? "Free" : $"{shippingPrice:C0}")</span></li>
-                            <li>Total <span id="cart-total">@($"{total:C0}")</span></li>
-                        </ul>
-                        <a asp-controller="Order" asp-action="Checkout" class="primary-btn">Proceed to Checkout</a>
+                            <ul>
+                                <li>Subtotal <span id="cart-sub-total">@($"{subTotal:C0}")</span></li>
+                                <li>Shipping <span>@(shippingPrice == 0 ? "Free" : $"{shippingPrice:C0}")</span></li>
+                                <li>Total <span id="cart-total">@($"{total:C0}")</span></li>
+                            </ul>
+                            <a asp-controller="Order" asp-action="Checkout" class="primary-btn">Proceed to Checkout</a>
+                        </div>
                     </div>
                 </div>
-            </div>
         }
     </div>
 </section>
 <!-- Shop Cart Section End -->
 
 @section Scripts {
-    <script>
-        function changeQuantity(element, status, where) {
-            const cartItemId = element.getAttribute("itemid");
-            const quantityInput = document.getElementById("input-quantity-" + cartItemId);
-            let quantity;
-            if (!where) {
-                quantity = quantityInput.value > 0 ? quantityInput.value : 1;
-            } else {
-                quantity = !status ? Number(quantityInput.value) + 1 : Number(quantityInput.value) - 1;
-                if (quantity < 1) quantity = 1;
-                quantityInput.value = quantity;
-            }
+        <script>
+            function changeQuantity(element, isDecrease, buttonClicked) {
+                const cartItemId = element.getAttribute("itemid");
+                const quantityInput = document.getElementById("input-quantity-" + cartItemId);
+                let quantity = parseInt(quantityInput.value);
 
-            const cartItemTotalElement = document.getElementById(`cart-item-total-${cartItemId}`);
-            const cartSubTotal = document.getElementById("cart-sub-total");
-            const cartTotal = document.getElementById("cart-total");
-
-            $.ajax({
-                url: "/cart/changequantity",
-                type: "POST",
-                data: {
-                    cartItemId: cartItemId,
-                    quantity: quantity
-                },
-                success: function (response) {
-                    cartItemTotalElement.innerText = response.cartItemTotal.toLocaleString('tr-TR', {
-                        style: 'currency',
-                        currency: 'TRY',
-                        minimumFractionDigits: 0,
-                        maximumFractionDigits: 0
-                    });
-                    cartSubTotal.innerText = response.subTotal.toLocaleString('tr-TR', {
-                        style: 'currency',
-                        currency: 'TRY',
-                        minimumFractionDigits: 0,
-                        maximumFractionDigits: 0
-                    });
-                    cartTotal.innerText = response.cartTotal.toLocaleString('tr-TR', {
-                        style: 'currency',
-                        currency: 'TRY',
-                        minimumFractionDigits: 0,
-                        maximumFractionDigits: 0
-                    });
-                },
-                error: function (error) {
-                    console.error(error);
+                if (buttonClicked) {
+                    quantity = isDecrease ? quantity - 1 : quantity + 1;
+                    quantity = Math.max(quantity, 1); // Prevent less than 1
+                    quantityInput.value = quantity;
+                } else {
+                    quantity = Math.max(parseInt(quantityInput.value), 1); // Direct input validation
                 }
-            });
-        }
-    </script>
+
+                const cartItemTotalElement = document.getElementById(`cart-item-total-${cartItemId}`);
+                const cartSubTotalElement = document.getElementById("cart-sub-total");
+                const cartTotalElement = document.getElementById("cart-total");
+
+                $.ajax({
+                    url: "/cart/changequantity",
+                    type: "POST",
+                    data: {
+                        cartItemId: cartItemId,
+                        quantity: quantity
+                    },
+                    success: function (response) {
+                        cartItemTotalElement.innerText = response.cartItemTotal.toLocaleString('tr-TR', {
+                            style: 'currency',
+                            currency: 'TRY',
+                            minimumFractionDigits: 0
+                        });
+                        cartSubTotalElement.innerText = response.subTotal.toLocaleString('tr-TR', {
+                            style: 'currency',
+                            currency: 'TRY',
+                            minimumFractionDigits: 0
+                        });
+                        cartTotalElement.innerText = response.cartTotal.toLocaleString('tr-TR', {
+                            style: 'currency',
+                            currency: 'TRY',
+                            minimumFractionDigits: 0
+                        });
+                    },
+                    error: function (error) {
+                        console.error(error);
+                    }
+                });
+            }
+        </script>
 }

@@ -8809,6 +8809,10 @@
       "PackagePath": "staticwebassets/ui/sass/style.scss"
     },
     {
+      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/uploads/categories/4e7733d4-285c-4e04-b5b8-359d72a7f5c9",
+      "PackagePath": "staticwebassets/uploads/categories"
+    },
+    {
       "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/uploads/categories/547c2dfc-1787-4fee-8a2c-20964bb5aaf3",
       "PackagePath": "staticwebassets/uploads/categories"
     },
