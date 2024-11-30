@@ -100,7 +100,7 @@ namespace EgeApp.Frontend.Mvc.Services
             return result;
         }
 
-        public static async Task<ResponseModel<bool>> CreateAsync(CategoryCreateViewModel model)
+        public static async Task<ResponseModel<CategoryViewModel>> CreateAsync(CategoryCreateViewModel model)
         {
             using (HttpClient httpClient = new())
             {
@@ -110,7 +110,7 @@ namespace EgeApp.Frontend.Mvc.Services
 
                 if (!httpResponseMessage.IsSuccessStatusCode)
                 {
-                    return new ResponseModel<bool>
+                    return new ResponseModel<CategoryViewModel>
                     {
                         IsSucceeded = false,
                         Error = $"Kategori oluşturulamadı. Hata kodu: {httpResponseMessage.StatusCode}"
@@ -118,8 +118,8 @@ namespace EgeApp.Frontend.Mvc.Services
                 }
 
                 string contentResponse = await httpResponseMessage.Content.ReadAsStringAsync();
-                var response = JsonConvert.DeserializeObject<ResponseModel<bool>>(contentResponse);
-                return response ?? new ResponseModel<bool> { IsSucceeded = false, Error = "Bilinmeyen bir hata oluştu." };
+                var response = JsonConvert.DeserializeObject<ResponseModel<CategoryViewModel>>(contentResponse);
+                return response ?? new ResponseModel<CategoryViewModel> { IsSucceeded = false, Error = "Bilinmeyen bir hata oluştu." };
             }
         }
 

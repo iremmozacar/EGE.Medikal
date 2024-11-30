@@ -35232,5 +35232,69 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\ui\Source\SlickNav-master.zip))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\categories\547c2dfc-1787-4fee-8a2c-20964bb5aaf3))">
+      <SourceType>Package</SourceType>
+      <SourceId>EgeApp.Frontend.Mvc</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/EgeApp.Frontend.Mvc</BasePath>
+      <RelativePath>uploads/categories/547c2dfc-1787-4fee-8a2c-20964bb5aaf3</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\categories\547c2dfc-1787-4fee-8a2c-20964bb5aaf3))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\categories\af238830-8f32-4c23-a206-b427d3852841))">
+      <SourceType>Package</SourceType>
+      <SourceId>EgeApp.Frontend.Mvc</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/EgeApp.Frontend.Mvc</BasePath>
+      <RelativePath>uploads/categories/af238830-8f32-4c23-a206-b427d3852841</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\categories\af238830-8f32-4c23-a206-b427d3852841))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\categories\ca8c64a2-db7b-40ab-bd73-0b0f3034e18e))">
+      <SourceType>Package</SourceType>
+      <SourceId>EgeApp.Frontend.Mvc</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/EgeApp.Frontend.Mvc</BasePath>
+      <RelativePath>uploads/categories/ca8c64a2-db7b-40ab-bd73-0b0f3034e18e</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\categories\ca8c64a2-db7b-40ab-bd73-0b0f3034e18e))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\categories\e6507dc6-32d3-4d15-bc49-3676ac1b3e06))">
+      <SourceType>Package</SourceType>
+      <SourceId>EgeApp.Frontend.Mvc</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/EgeApp.Frontend.Mvc</BasePath>
+      <RelativePath>uploads/categories/e6507dc6-32d3-4d15-bc49-3676ac1b3e06</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\categories\e6507dc6-32d3-4d15-bc49-3676ac1b3e06))</OriginalItemSpec>
+    </StaticWebAsset>
   </ItemGroup>
 </Project>

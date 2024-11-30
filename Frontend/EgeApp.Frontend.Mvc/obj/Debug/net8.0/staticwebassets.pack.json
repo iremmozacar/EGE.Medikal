@@ -8809,6 +8809,22 @@
       "PackagePath": "staticwebassets/ui/sass/style.scss"
     },
     {
+      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/uploads/categories/547c2dfc-1787-4fee-8a2c-20964bb5aaf3",
+      "PackagePath": "staticwebassets/uploads/categories"
+    },
+    {
+      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/uploads/categories/af238830-8f32-4c23-a206-b427d3852841",
+      "PackagePath": "staticwebassets/uploads/categories"
+    },
+    {
+      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/uploads/categories/ca8c64a2-db7b-40ab-bd73-0b0f3034e18e",
+      "PackagePath": "staticwebassets/uploads/categories"
+    },
+    {
+      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/uploads/categories/e6507dc6-32d3-4d15-bc49-3676ac1b3e06",
+      "PackagePath": "staticwebassets/uploads/categories"
+    },
+    {
       "Id": "obj/Debug/net8.0/staticwebassets/msbuild.EgeApp.Frontend.Mvc.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

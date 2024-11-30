@@ -93,7 +93,60 @@ button:focus,
 textarea:focus {
 	outline: none;
 }
+.urun-karti {
+	background: #fff;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	padding: 16px;
+	text-align: center;
+	margin-bottom: 20px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	transition: transform 0.2s ease-in-out;
+}
 
+.urun-karti:hover {
+	transform: translateY(-10px);
+}
+
+.urun-karti img {
+	max-width: 100%;
+	height: auto;
+	margin-bottom: 15px;
+	border-radius: 8px;
+}
+
+.urun-karti h5 {
+	font-size: 16px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.indirimli-fiyat {
+	color: #e63946;
+	font-weight: bold;
+	margin-right: 10px;
+}
+
+.sepete-ekle-btn {
+	background-color: #2a9d8f;
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background 0.2s;
+}
+
+.sepete-ekle-btn:hover {
+	background-color: #21867a;
+}
+
+/* Responsive Tasarım */
+@media (max-width: 768px) {
+	.urun-karti {
+		margin-bottom: 30px;
+	}
+}
 a:hover,
 a:focus {
 	text-decoration: none;

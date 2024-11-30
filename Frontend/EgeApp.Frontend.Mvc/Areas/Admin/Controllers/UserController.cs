@@ -3,10 +3,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using EgeApp.Frontend.Mvc.Data.Entities;
 using EgeApp.Frontend.Mvc.Models.Identity;
-using EgeApp.Frontend.Mvc.Services;
 
 namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
 {
@@ -34,6 +32,12 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
         public async Task<IActionResult> Edit(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                _notyfService.Error("Kullanıcı bulunamadı.");
+                return RedirectToAction("Index");
+            }
+
             var model = new UpdateUserProfileViewModel
             {
                 UserId = id,
@@ -51,46 +55,70 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(UpdateUserProfileViewModel model)
         {
-            var user = await _userManager.FindByIdAsync(model.UserId);
             if (!ModelState.IsValid)
             {
                 model.Roles = await _roleManager.Roles.ToListAsync();
-                model.UserRoles = [];
-                ViewBag.ErrorRoleMessage = "En az bir kategori seçmelisiniz.";
+                model.UserRoles = new List<string>();
+                _notyfService.Error("Lütfen tüm alanları doldurun.");
                 return View(model);
             }
+
+            var user = await _userManager.FindByIdAsync(model.UserId);
+            if (user == null)
+            {
+                _notyfService.Error("Kullanıcı bulunamadı.");
+                return RedirectToAction("Index");
+            }
+
             user.FirstName = model.FirstName;
             user.LastName = model.LastName;
             user.Email = model.Email;
             user.UserName = model.UserName;
             user.PhoneNumber = model.PhoneNumber;
-            var result = await _userManager.UpdateAsync(user);
 
-            //Kullanıcının halihazırdaki veritabanında yer alan rollerini alıyoruz.
-            var currentUserRoles = await _userManager.GetRolesAsync(user);
+            var updateResult = await _userManager.UpdateAsync(user);
+            if (!updateResult.Succeeded)
+            {
+                foreach (var error in updateResult.Errors)
+                {
+                    _notyfService.Error(error.Description);
+                }
+                model.Roles = await _roleManager.Roles.ToListAsync();
+                return View(model);
+            }
 
-            //Modelden gelen UserRoles içindeki YENİ rolleri, kullanıcının geçerli rolleri hariç ekle.
-            await _userManager.AddToRolesAsync(user, model.UserRoles.Except(currentUserRoles));
+            var currentRoles = await _userManager.GetRolesAsync(user);
+            await _userManager.AddToRolesAsync(user, model.UserRoles.Except(currentRoles));
+            await _userManager.RemoveFromRolesAsync(user, currentRoles.Except(model.UserRoles));
 
-            //Modelden gelen UserRoles içindeki SİLİNEN rolleri, kullanıcının veri tabanındaki var olan rollerinden sil
-            await _userManager.RemoveFromRolesAsync(user, currentUserRoles.Except(model.UserRoles));
-
-            _notyfService.Success("Güncelleme işlemi başarıyla tamamlanmıştır.");
+            _notyfService.Success("Kullanıcı başarıyla güncellendi.");
             return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> ConfirmEmail(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                _notyfService.Error("Kullanıcı bulunamadı.");
+                return RedirectToAction("Index");
+            }
+
             user.EmailConfirmed = !user.EmailConfirmed;
-            await _userManager.UpdateAsync(user);
-            await CartService.InitiliazeCartAsync(user.Id);
+            var result = await _userManager.UpdateAsync(user);
+
+            if (result.Succeeded)
+            {
+                _notyfService.Success("Kullanıcı e-posta durumu güncellendi.");
+                return RedirectToAction("Index");
+            }
+
+            _notyfService.Error("E-posta durumu güncellenemedi.");
             return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Create()
         {
-            // Sistem rollerini modele ekle
             var model = new CreateUserProfileViewModel
             {
                 Roles = await _roleManager.Roles.ToListAsync()
@@ -103,8 +131,8 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                // Hatalı form gönderiminde rolleri tekrar yükle
                 model.Roles = await _roleManager.Roles.ToListAsync();
+                _notyfService.Error("Lütfen tüm gerekli alanları doldurun.");
                 return View(model);
             }
 
@@ -119,21 +147,23 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);
-
-            if (result.Succeeded)
+            if (!result.Succeeded)
             {
-                // Kullanıcıya seçilen rolleri ata
-                if (model.UserRoles.Any())
+                foreach (var error in result.Errors)
                 {
-                    await _userManager.AddToRolesAsync(user, model.UserRoles);
+                    _notyfService.Error(error.Description);
                 }
-                _notyfService.Success("Kullanıcı başarıyla oluşturuldu.");
-                return RedirectToAction("Index");
+                model.Roles = await _roleManager.Roles.ToListAsync();
+                return View(model);
             }
 
-            model.Roles = await _roleManager.Roles.ToListAsync();
-            _notyfService.Error("Kullanıcı oluşturulurken bir hata oluştu.");
-            return View(model);
+            if (model.UserRoles.Any())
+            {
+                await _userManager.AddToRolesAsync(user, model.UserRoles);
+            }
+
+            _notyfService.Success("Kullanıcı başarıyla oluşturuldu.");
+            return RedirectToAction("Index");
         }
     }
 }

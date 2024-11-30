@@ -48,21 +48,21 @@ namespace EgeApp.Frontend.Mvc.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ed5f4adf-d1d1-4b22-b534-a45ec7e30e55",
+                            Id = "e98a6b99-03df-4f1f-b417-52c2e3d4813f",
                             Description = "Sistemdeki her türlü işi yapmaya yetkili rol",
                             Name = "Super Admin",
                             NormalizedName = "SUPER ADMIN"
                         },
                         new
                         {
-                            Id = "3f54c18a-7f11-444c-b4df-6a1c81732a80",
+                            Id = "931cfd6a-1407-4b39-b13c-83ce2dcf8790",
                             Description = "Sistemdeki yönetimsel işleri yapmaya yetkili rol",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "75a05420-3d40-41fd-8a7d-4ffe7b846122",
+                            Id = "2757fd53-eb98-4416-a9ae-c3c4ba49fc95",
                             Description = "Müşterilerin rolü",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
@@ -143,7 +143,7 @@ namespace EgeApp.Frontend.Mvc.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "190bcaae-855b-48e4-8d28-13d1da9cefaf",
+                            ConcurrencyStamp = "38bf11d9-8bb6-4e77-9906-2d2b0d5dca2c",
                             Email = "denizcoban@example.com",
                             EmailConfirmed = true,
                             FirstName = "Muhammed",
@@ -151,9 +151,9 @@ namespace EgeApp.Frontend.Mvc.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "MUHAMMEDTOPCU@EXAMPLE.COM",
                             NormalizedUserName = "MUHAMMEDTOPCU",
-                            PasswordHash = "AQAAAAIAAYagAAAAENMm4d+4JPuZCnVqy0uHZNzGQDhVW9pBAKmQhZQ5GCMtxcx8USd7lZgf29N+9kHkpg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELKhg0vPc0FFl3AA7ZUNFiF27Pf6LbADipPZoLEkkuEJAJRbHY8wafKf0/suyrzBgQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "99961506-c42f-4e2b-91ac-954fe708492b",
+                            SecurityStamp = "7bc68288-a5da-4bee-a837-70c80ba95b16",
                             TwoFactorEnabled = false,
                             UserName = "muhammedtopcu"
                         },
@@ -161,7 +161,7 @@ namespace EgeApp.Frontend.Mvc.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1c010b6e-fb8f-440e-b501-182b0af9225d",
+                            ConcurrencyStamp = "a8583315-4c1b-448a-8923-7bb93765e9fc",
                             Email = "iremozacaar@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "İrem",
@@ -169,9 +169,9 @@ namespace EgeApp.Frontend.Mvc.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "IREMOZACAAR@EXAMPLE.COM",
                             NormalizedUserName = "IREMOZACAR",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPAPvawPiyxhbCMgWJVLmucC+IjwVJtrQwUtiD64ADoDs/DQNHdfzDjfY0s/ceSjvA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAED8xw55Mi1PJK4jxQuSiuElLzzYrHK0Qc/8xAKUYvdZDEq2pbRQ3dQdQ1vRQF4WLLw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f63268ac-d14c-44e2-b5a3-e636561552d6",
+                            SecurityStamp = "5a449c3b-5ad6-4ea9-9e92-7a6d2b1ac3fe",
                             TwoFactorEnabled = false,
                             UserName = "iremozacar"
                         },
@@ -179,7 +179,7 @@ namespace EgeApp.Frontend.Mvc.Migrations
                         {
                             Id = "3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "71325787-868a-409a-b0e0-b3ad6c7a3e7f",
+                            ConcurrencyStamp = "809b7c7b-a4a5-4059-995d-a9ba908a389e",
                             Email = "fatmanuraltin@example.com",
                             EmailConfirmed = true,
                             FirstName = "Fatmanur",
@@ -187,9 +187,9 @@ namespace EgeApp.Frontend.Mvc.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "FATMANURALTIN@EXAMPLE.COM",
                             NormalizedUserName = "FATMANURALTIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAENyQXl6k0E4qaYPN3zeZh2kzi3yQvktUZogKo67oO6dcSShtK8WLnsUuq67bJ+FhWQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEH/aKwDlVKreekBepdDBSgZxMQsXlqjiMe7paSZUiFmIX84eyFpkAnTYV0dcJtLbkQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "bc48232c-2180-4f55-8d0d-80a70b81bb6c",
+                            SecurityStamp = "e0902d31-d987-44af-94bb-21a20ff06412",
                             TwoFactorEnabled = false,
                             UserName = "fatmanuraltin"
                         });
@@ -281,17 +281,17 @@ namespace EgeApp.Frontend.Mvc.Migrations
                         new
                         {
                             UserId = "1",
-                            RoleId = "ed5f4adf-d1d1-4b22-b534-a45ec7e30e55"
+                            RoleId = "e98a6b99-03df-4f1f-b417-52c2e3d4813f"
                         },
                         new
                         {
                             UserId = "2",
-                            RoleId = "3f54c18a-7f11-444c-b4df-6a1c81732a80"
+                            RoleId = "931cfd6a-1407-4b39-b13c-83ce2dcf8790"
                         },
                         new
                         {
                             UserId = "3",
-                            RoleId = "75a05420-3d40-41fd-8a7d-4ffe7b846122"
+                            RoleId = "2757fd53-eb98-4416-a9ae-c3c4ba49fc95"
                         });
                 });
 

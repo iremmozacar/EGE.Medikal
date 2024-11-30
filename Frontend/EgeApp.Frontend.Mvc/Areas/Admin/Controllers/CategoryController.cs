@@ -53,7 +53,8 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
             {
                 try
                 {
-                    var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(model.Image.FileName)}";
+                    var fileName = $"{Guid.NewGuid()}";
+                    var result2 = Directory.GetCurrentDirectory();
                     var savePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads/categories", fileName);
 
                     using (var stream = new FileStream(savePath, FileMode.Create))

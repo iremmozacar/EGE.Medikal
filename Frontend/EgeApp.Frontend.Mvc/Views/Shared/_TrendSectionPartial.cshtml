@@ -4,34 +4,36 @@
     <h1>Anasayfa</h1>
 
     <!-- Kategoriler -->
-    <section class="categories-section">
+    <section class="kategoriler-bolumu">
         <h2>Kategoriler</h2>
         <ul>
-            @foreach (var category in Model.CategoryList)
+            @foreach (var kategori in Model.CategoryList)
             {
-                <li>@category.Name</li>
+                <li>@kategori.Name</li>
             }
         </ul>
     </section>
 
     <!-- İndirimdeki Ürünler -->
-    <section class="discounted-products spad">
-        <div class="section-title">
-            <h4>Indirimdeki Ürünler</h4>
+    <section class="indirimli-urunler spad">
+        <div class="bolum-basligi">
+            <h4>İndirimdeki Ürünler</h4>
         </div>
-        <div class="row">
-            @foreach (var product in Model.DiscountedProducts)
+        <div class="satir">
+            @foreach (var urun in Model.DiscountedProducts)
             {
                 <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="product-item">
-                        <img src="@product.ImageUrl" alt="@product.Name" />
-                        <h5>@product.Name</h5>
-                        <p>@product.ProductDescription</p>
-                        <span>Fiyat: $@product.Price</span>
-                        @if (product.DiscountedPrice.HasValue)
+                    <div class="urun-karti">
+                        <img src="@(!string.IsNullOrEmpty(urun.ImageUrl) ? urun.ImageUrl : "/images/yer-tutucu.jpg")"
+                            alt="@urun.Name" />
+                        <h5>@urun.Name</h5>
+                        <p>@urun.ProductDescription</p>
+                        <span>Fiyat: @String.Format("{0:C}", urun.Price)</span>
+                        @if (urun.DiscountedPrice.HasValue && urun.DiscountedPrice > 0)
                         {
-                            <span>İndirimli: $@product.DiscountedPrice</span>
+                            <span class="indirimli-fiyat">İndirimli: @String.Format("{0:C}", urun.DiscountedPrice)</span>
                         }
+                        <button class="sepete-ekle-btn" onclick="sepeteEkle(@urun.Id)">Sepete Ekle</button>
                     </div>
                 </div>
             }
@@ -39,19 +41,21 @@
     </section>
 
     <!-- Çok Satanlar -->
-    <section class="best-sellers spad">
-        <div class="section-title">
+    <section class="cok-satanlar spad">
+        <div class="bolum-basligi">
             <h4>Çok Satanlar</h4>
         </div>
-        <div class="row">
-            @foreach (var product in Model.BestSellers)
+        <div class="satir">
+            @foreach (var urun in Model.BestSellers)
             {
                 <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="product-item">
-                        <img src="@product.ImageUrl" alt="@product.Name" />
-                        <h5>@product.Name</h5>
-                        <p>@product.ProductDescription</p>
-                        <span>Fiyat: $@product.Price</span>
+                    <div class="urun-karti">
+                        <img src="@(!string.IsNullOrEmpty(urun.ImageUrl) ? urun.ImageUrl : "/images/yer-tutucu.jpg")"
+                            alt="@urun.Name" />
+                        <h5>@urun.Name</h5>
+                        <p>@urun.ProductDescription</p>
+                        <span>Fiyat: @String.Format("{0:C}", urun.Price)</span>
+                        <button class="sepete-ekle-btn" onclick="sepeteEkle(@urun.Id)">Sepete Ekle</button>
                     </div>
                 </div>
             }
@@ -59,70 +63,27 @@
     </section>
 </div>
 
-<!-- Best Sellers Section End -->
-
 <script>
-    function addToCart(productId) {
-        alert("Ürün sepete eklendi: " + productId);
+    function sepeteEkle(urunId) {
+        fetch('/api/cart/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ productId: urunId })
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('Ürün başarıyla sepete eklendi!');
+                } else {
+                    alert('Sepete ekleme işlemi başarısız oldu!');
+                }
+            })
+            .catch(error => {
+                console.error('Hata:', error);
+                alert('Beklenmeyen bir hata oluştu.');
+            });
     }
 </script>
 
-<style>
-    .product-item {
-        background: #fff;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        padding: 16px;
-        text-align: center;
-        margin-bottom: 20px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transition: transform 0.2s ease-in-out;
-    }
-
-    .product-item:hover {
-        transform: translateY(-10px);
-    }
-
-    .product-item-pic img {
-        max-width: 100%;
-        height: auto;
-        margin-bottom: 15px;
-        border-radius: 8px;
-    }
-
-    .product-item-text h6 {
-        font-size: 16px;
-        font-weight: bold;
-        margin-bottom: 10px;
-    }
-
-    .product-prices {
-        font-size: 14px;
-        margin-bottom: 15px;
-    }
-
-    .discounted-price {
-        color: #e63946;
-        font-weight: bold;
-        margin-right: 10px;
-    }
-
-    .original-price {
-        text-decoration: line-through;
-        color: #aaa;
-    }
-
-    .add-to-cart-btn {
-        background-color: #2a9d8f;
-        color: #fff;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background 0.2s;
-    }
-
-    .add-to-cart-btn:hover {
-        background-color: #21867a;
-    }
-</style>
+<link rel="stylesheet" href="/ui/css/style.css">

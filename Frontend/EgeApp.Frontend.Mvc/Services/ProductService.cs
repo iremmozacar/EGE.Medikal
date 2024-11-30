@@ -179,7 +179,7 @@ public static class ProductService
             {
                 httpClient.BaseAddress = new Uri(BaseUrl);
 
-                var response = await httpClient.GetAsync("GetDiscountedProducts");
+                var response = await httpClient.GetAsync("http://localhost:5200/api/Products/GetDiscountedProducts/GetDiscountedProducts");
                 if (!response.IsSuccessStatusCode)
                 {
                     var errorDetails = await response.Content.ReadAsStringAsync();
@@ -218,7 +218,7 @@ public static class ProductService
             {
                 httpClient.BaseAddress = new Uri(BaseUrl);
 
-                var response = await httpClient.GetAsync($"GetBestSellers/{topCount}");
+                var response = await httpClient.GetAsync($"http://localhost:5200/api/Products/GetBestSellers/GetBestSellers/{topCount}");
                 if (!response.IsSuccessStatusCode)
                 {
                     var errorDetails = await response.Content.ReadAsStringAsync();
