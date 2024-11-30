@@ -28,47 +28,45 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
             }
             return View(result.Data);
         }
-        [Authorize(Roles = "Super Admin")]
         [HttpGet]
+        [Authorize(Roles = "Super Admin")]
         public async Task<IActionResult> Create()
         {
-            var result = await CategoryService.GetSelectListItemsAsync();
-            if (!result.IsSucceeded)
+            var categories = await CategoryService.GetSelectListItemsAsync();
+            if (!categories.IsSucceeded)
             {
-                ViewData["Error"] = result.Error;
-                return Redirect("/home/error");
+                _notyfService.Error(categories.Error ?? "Kategoriler yüklenemedi.");
+                return RedirectToAction("Index");
             }
+
             var model = new ProductCreateViewModel
             {
-                Categories = result.Data
+                Categories = categories.Data
             };
+
             return View(model);
         }
-        [Authorize(Roles = "Super Admin")]
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Super Admin")]
         public async Task<IActionResult> Create(ProductCreateViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var result = await ProductService.CreateAsync(model);
-                if (!result.IsSucceeded)
-                {
-                    TempData["Error"] = result.Error;
-                    return Redirect("/home/error");
-                }
-                _notyfService.Success("Ürün başarıyla oluşturuldu");
-                return RedirectToAction("Index");
-
-
+                _notyfService.Error("Lütfen tüm gerekli alanları doldurun.");
+                return View(model);
             }
-            var resultCategories = await CategoryService.GetSelectListItemsAsync();
-            if (!resultCategories.IsSucceeded)
+
+            var result = await ProductService.CreateAsync(model);
+            if (!result.IsSucceeded)
             {
-                TempData["Error"] = resultCategories.Error;
-                return Redirect("/home/error");
+                _notyfService.Error(result.Error ?? "Ürün oluşturulamadı.");
+                return View(model);
             }
-            model.Categories = resultCategories.Data;
-            return View(model);
+
+            _notyfService.Success("Ürün başarıyla oluşturuldu.");
+            return RedirectToAction("Index");
         }
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
@@ -155,5 +153,7 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
             };
             return Json(result.Data.IsHome);
         }
+
+        
     }
 }

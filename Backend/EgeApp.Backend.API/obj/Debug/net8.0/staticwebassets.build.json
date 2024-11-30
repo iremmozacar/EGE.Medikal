@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "2Zih/7xCBwXdQYMFAq2jDB9kbiDIDZysdkMyDKwiJxI=",
+  "Hash": "c5XHDPngBdwCkn0+5CM53DUkEFl9oSJ52x7KJQ1ONMQ=",
   "Source": "EgeApp.Backend.API",
   "BasePath": "_content/EgeApp.Backend.API",
   "Mode": "Default",
@@ -16,6 +16,25 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/89f43a46-8d89-4883-9d82-77b8194ec42d.png",
+      "SourceId": "EgeApp.Backend.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/",
+      "BasePath": "_content/EgeApp.Backend.API",
+      "RelativePath": "images/products/89f43a46-8d89-4883-9d82-77b8194ec42d.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/products/89f43a46-8d89-4883-9d82-77b8194ec42d.png"
+    },
     {
       "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/açıayarlıbreysi.webp",
       "SourceId": "EgeApp.Backend.API",

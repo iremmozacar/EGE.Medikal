@@ -50,13 +50,37 @@ namespace EgeApp.Frontend.Mvc.Services
         {
             using (HttpClient httpClient = new())
             {
-                HttpResponseMessage httpResponseMessage = await httpClient.GetAsync($"{BaseUrl}/{id}");
-                string contentResponse = await httpResponseMessage.Content.ReadAsStringAsync();
-                var response = JsonConvert.DeserializeObject<ResponseModel<CategoryViewModel>>(contentResponse);
-                return response;
+                try
+                {
+                    HttpResponseMessage httpResponseMessage = await httpClient.GetAsync($"{BaseUrl}/{id}");
+
+                    if (!httpResponseMessage.IsSuccessStatusCode)
+                    {
+                        return new ResponseModel<CategoryViewModel>
+                        {
+                            IsSucceeded = false,
+                            Error = $"Kategori bulunamadı. Hata kodu: {httpResponseMessage.StatusCode}"
+                        };
+                    }
+
+                    string contentResponse = await httpResponseMessage.Content.ReadAsStringAsync();
+                    var response = JsonConvert.DeserializeObject<ResponseModel<CategoryViewModel>>(contentResponse);
+                    return response ?? new ResponseModel<CategoryViewModel>
+                    {
+                        IsSucceeded = false,
+                        Error = "Sunucudan geçersiz bir yanıt alındı."
+                    };
+                }
+                catch (Exception ex)
+                {
+                    return new ResponseModel<CategoryViewModel>
+                    {
+                        IsSucceeded = false,
+                        Error = $"Bir hata oluştu: {ex.Message}"
+                    };
+                }
             }
         }
-
         public static async Task<ResponseModel<List<SelectListItem>>> GetSelectListItemsAsync()
         {
             ResponseModel<List<SelectListItem>> result = new();

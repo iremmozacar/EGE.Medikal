@@ -10,6 +10,7 @@ namespace EgeApp.Backend.Models
         public string Description { get; set; } // Ürün açıklaması
         public decimal Price { get; set; } // Ürün fiyatı
         public decimal? DiscountedPrice { get; set; } // İndirimli ürün fiyatı
+        public int SalesCount { get; set; }
         public string ImageUrl { get; set; } // Ürün resim URL'si
         public bool IsActive { get; set; } // Ürün aktif mi?
         public string? StockCode { get; set; } // Özel stok kodu
@@ -33,7 +34,7 @@ namespace EgeApp.Backend.Models
         public string? StorageConditions { get; set; } // Saklama koşulları
         public string? UsageInstructions { get; set; } // Kullanım talimatları
 
-        // Yeni eklenen alanlar
+     
         public string? Url { get; set; }  // Ürün URL'si
         public string? Brand { get; set; }  // Marka
         public bool IsHome { get; set; }  // Ana sayfa özelliği

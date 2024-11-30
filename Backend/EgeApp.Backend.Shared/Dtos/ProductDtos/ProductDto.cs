@@ -15,6 +15,7 @@ namespace EgeApp.Backend.Shared.Dtos.ProductDtos
         public string? WarrantyPeriod { get; set; }  // Garanti süresi
         public bool IsDiscounted { get; set; }  // İndirimli mi?
         public bool? IsFreeShipping { get; set; }  // Ücretsiz kargo mu?
+        public int SalesCount { get; set; }
         public bool? IsSpecialProduct { get; set; }  // Özel ürün mü?
         public bool? IsSameDayShipping { get; set; }  // Aynı gün kargo mu?
         public bool? IsLimitedStock { get; set; }  // Sınırlı stok mu?

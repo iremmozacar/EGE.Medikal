@@ -35,11 +35,8 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            var model = new CategoryCreateViewModel
-            {
-                IsActive = true // Default value for new categories
-            };
-            return View(model);
+            // Varsayılan model oluşturuluyor
+            return View(new CategoryCreateViewModel { IsActive = true });
         }
 
         [HttpPost]
@@ -48,24 +45,15 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                _notyfService.Error("Please check the category information and try again.");
+                _notyfService.Error("Lütfen geçerli kategori bilgileri giriniz.");
                 return View(model);
             }
 
-            // Map the view model to the service model
-            var categoryToCreate = new CategoryCreateViewModel
-            {
-                Name = model.Name,
-                Description = model.Description,
-                Url = model.Url,
-                IsActive = model.IsActive
-            };
-
-            // Handle image upload if an image is provided
-            if (model.Image != null && model.Image.Length > 0)
+            if (model.Image != null)
             {
                 try
                 {
+                    // Görselin yüklenmesi
                     var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(model.Image.FileName)}";
                     var savePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads/categories", fileName);
 
@@ -74,23 +62,23 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
                         await model.Image.CopyToAsync(stream);
                     }
 
-                    categoryToCreate.ImageUrl = $"/uploads/categories/{fileName}";
+                    model.ImageUrl = $"/uploads/categories/{fileName}";
                 }
                 catch (Exception ex)
                 {
-                    _notyfService.Error($"Error while uploading image: {ex.Message}");
+                    _notyfService.Error($"Görsel yüklenirken hata oluştu: {ex.Message}");
                     return View(model);
                 }
             }
 
-            var result = await CategoryService.CreateAsync(categoryToCreate);
+            var result = await CategoryService.CreateAsync(model);
             if (!result.IsSucceeded)
             {
-                TempData["Error"] = result.Error;
-                return RedirectToAction("Error", "Home");
+                _notyfService.Error(result.Error ?? "Kategori oluşturulamadı.");
+                return View(model);
             }
 
-            _notyfService.Success("Category successfully created.");
+            _notyfService.Success("Kategori başarıyla oluşturuldu.");
             return RedirectToAction("Index");
         }
 
@@ -101,20 +89,18 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
 
             if (!response.IsSucceeded)
             {
-                TempData["Error"] = response.Error;
-                return RedirectToAction("Error", "Home");
+                _notyfService.Error(response.Error ?? "Kategori bulunamadı.");
+                return RedirectToAction("Index");
             }
-
-            var category = response.Data;
 
             var model = new CategoryEditViewModel
             {
-                Id = category.Id,
-                Name = category.Name,
-                Description = category.Description,
-                Url = category.Url,
-                IsActive = category.IsActive,
-                ImageUrl = category.ImageUrl
+                Id = response.Data.Id,
+                Name = response.Data.Name,
+                Description = response.Data.Description,
+                Url = response.Data.Url,
+                IsActive = response.Data.IsActive,
+                ImageUrl = response.Data.ImageUrl
             };
 
             return View(model);
@@ -126,23 +112,11 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                _notyfService.Error("Please check the category information and try again.");
+                _notyfService.Error("Lütfen geçerli kategori bilgileri giriniz.");
                 return View(model);
             }
 
-            // Map the view model to the service model
-            var categoryToUpdate = new CategoryEditViewModel
-            {
-                Id = model.Id,
-                Name = model.Name,
-                Description = model.Description,
-                Url = model.Url,
-                IsActive = model.IsActive,
-                ImageUrl = model.ImageUrl
-            };
-
-            // Handle new image upload if provided
-            if (model.Image != null && model.Image.Length > 0)
+            if (model.Image != null)
             {
                 try
                 {
@@ -154,24 +128,23 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
                         await model.Image.CopyToAsync(stream);
                     }
 
-                    categoryToUpdate.ImageUrl = $"/uploads/categories/{fileName}";
+                    model.ImageUrl = $"/uploads/categories/{fileName}";
                 }
                 catch (Exception ex)
                 {
-                    _notyfService.Error($"Error while uploading image: {ex.Message}");
+                    _notyfService.Error($"Görsel yüklenirken hata oluştu: {ex.Message}");
                     return View(model);
                 }
             }
 
-            var result = await CategoryService.UpdateAsync(categoryToUpdate);
-
+            var result = await CategoryService.UpdateAsync(model);
             if (!result.IsSucceeded)
             {
-                TempData["Error"] = result.Error;
-                return RedirectToAction("Error", "Home");
+                _notyfService.Error(result.Error ?? "Kategori güncellenemedi.");
+                return View(model);
             }
 
-            _notyfService.Success("Category successfully updated.");
+            _notyfService.Success("Kategori başarıyla güncellendi.");
             return RedirectToAction("Index");
         }
     }
