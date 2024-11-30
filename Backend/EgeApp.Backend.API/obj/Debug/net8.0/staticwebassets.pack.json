@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/62df11ec-5415-432e-a112-eb191a0403f6.png",
+      "PackagePath": "staticwebassets/images/products/62df11ec-5415-432e-a112-eb191a0403f6.png"
+    },
+    {
       "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/89f43a46-8d89-4883-9d82-77b8194ec42d.png",
       "PackagePath": "staticwebassets/images/products/89f43a46-8d89-4883-9d82-77b8194ec42d.png"
     },

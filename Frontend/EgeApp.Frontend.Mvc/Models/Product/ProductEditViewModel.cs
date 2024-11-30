@@ -31,6 +31,7 @@ public class ProductEditViewModel
 
     [JsonPropertyName("imageUrl")]
     public string ImageUrl { get; set; }
+    
 
     [JsonPropertyName("isHome")]
     [Display(Name = "Anasayfa Ürünü mü?")]

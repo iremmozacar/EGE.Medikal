@@ -60,7 +60,9 @@
                                 <div class="mt-4 text-center">
                                     <img src="@Model.ImageUrl" id="imagePreview" class="img-thumbnail img-fluid"
                                         style="max-height: 200px; object-fit: cover;" alt="Kategori Resmi">
-                                    <p class="text-muted small mt-2">JPG veya PNG formatında bir resim seçiniz.</p>
+                                    <p id="imageHint" class="text-muted small mt-2">
+                                        JPG veya PNG formatında bir resim seçiniz. Maksimum boyut: 2MB.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -127,6 +129,18 @@
         input:checked+.slider:before {
             transform: translateX(14px);
         }
+
+        #imageHint {
+            font-size: 12px;
+            color: gray;
+        }
+
+        #imagePreview {
+            border: 1px solid #ddd;
+            max-height: 200px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
     </style>
 }
 
@@ -136,10 +150,27 @@
             const file = e.target.files[0];
             const reader = new FileReader();
             const preview = document.getElementById('imagePreview');
+            const hint = document.getElementById('imageHint');
+
             if (file) {
+                if (!file.type.startsWith('image/')) {
+                    hint.innerText = "Lütfen yalnızca JPG veya PNG dosyası seçiniz.";
+                    hint.style.color = "red";
+                    preview.src = "@Model.ImageUrl";
+                    return;
+                }
+
+                if (file.size > 2 * 1024 * 1024) {
+                    hint.innerText = "Resim boyutu 2MB'den fazla olmamalıdır.";
+                    hint.style.color = "red";
+                    preview.src = "@Model.ImageUrl";
+                    return;
+                }
+
                 reader.onload = function (event) {
                     preview.src = event.target.result;
-                    preview.classList.remove('d-none');
+                    hint.innerText = "Görsel önizleniyor.";
+                    hint.style.color = "gray";
                 };
                 reader.readAsDataURL(file);
             }

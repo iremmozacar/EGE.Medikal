@@ -45,7 +45,7 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                _notyfService.Error("Lütfen geçerli kategori bilgileri giriniz.");
+                _notyfService.Error("Lütfen tüm bilgileri doğru şekilde doldurun.");
                 return View(model);
             }
 
@@ -53,7 +53,6 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
             {
                 try
                 {
-                    // Görselin yüklenmesi
                     var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(model.Image.FileName)}";
                     var savePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads/categories", fileName);
 
@@ -82,37 +81,13 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Edit(int id)
-        {
-            var response = await CategoryService.GetByIdAsync(id);
-
-            if (!response.IsSucceeded)
-            {
-                _notyfService.Error(response.Error ?? "Kategori bulunamadı.");
-                return RedirectToAction("Index");
-            }
-
-            var model = new CategoryEditViewModel
-            {
-                Id = response.Data.Id,
-                Name = response.Data.Name,
-                Description = response.Data.Description,
-                Url = response.Data.Url,
-                IsActive = response.Data.IsActive,
-                ImageUrl = response.Data.ImageUrl
-            };
-
-            return View(model);
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(CategoryEditViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                _notyfService.Error("Lütfen geçerli kategori bilgileri giriniz.");
+                _notyfService.Error("Lütfen tüm bilgileri doğru şekilde doldurun.");
                 return View(model);
             }
 

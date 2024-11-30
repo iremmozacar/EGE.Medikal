@@ -108,9 +108,18 @@ namespace EgeApp.Frontend.Mvc.Services
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
                 HttpResponseMessage httpResponseMessage = await httpClient.PostAsync($"{BaseUrl}/Create", content);
 
+                if (!httpResponseMessage.IsSuccessStatusCode)
+                {
+                    return new ResponseModel<bool>
+                    {
+                        IsSucceeded = false,
+                        Error = $"Kategori oluşturulamadı. Hata kodu: {httpResponseMessage.StatusCode}"
+                    };
+                }
+
                 string contentResponse = await httpResponseMessage.Content.ReadAsStringAsync();
                 var response = JsonConvert.DeserializeObject<ResponseModel<bool>>(contentResponse);
-                return response;
+                return response ?? new ResponseModel<bool> { IsSucceeded = false, Error = "Bilinmeyen bir hata oluştu." };
             }
         }
 
@@ -122,9 +131,18 @@ namespace EgeApp.Frontend.Mvc.Services
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
                 HttpResponseMessage httpResponseMessage = await httpClient.PutAsync($"{BaseUrl}/Update", content);
 
+                if (!httpResponseMessage.IsSuccessStatusCode)
+                {
+                    return new ResponseModel<bool>
+                    {
+                        IsSucceeded = false,
+                        Error = $"Kategori güncellenemedi. Hata kodu: {httpResponseMessage.StatusCode}"
+                    };
+                }
+
                 string contentResponse = await httpResponseMessage.Content.ReadAsStringAsync();
                 var response = JsonConvert.DeserializeObject<ResponseModel<bool>>(contentResponse);
-                return response;
+                return response ?? new ResponseModel<bool> { IsSucceeded = false, Error = "Bilinmeyen bir hata oluştu." };
             }
         }
 
