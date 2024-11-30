@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using EgeApp.Frontend.Mvc.Models.Category;
 
@@ -44,7 +45,7 @@ namespace EgeApp.Frontend.Mvc.Models.Product
         [JsonPropertyName("category")]
         public CategoryViewModel Category { get; set; }
 
-        // Medikal ürünler için özel alanlar
+    
         [JsonPropertyName("stockCode")]
         public string StockCode { get; set; }
 
@@ -69,8 +70,20 @@ namespace EgeApp.Frontend.Mvc.Models.Product
         [JsonPropertyName("productDescription")]
         public string ProductDescription { get; set; }
 
-        // İlişkili ürünler listesi
+     
         [JsonPropertyName("relatedProducts")]
-        public List<ProductViewModel> RelatedProducts { get; set; } // İlişkili ürünler
+        public List<ProductViewModel> RelatedProducts { get; set; }
+
+   
+        [JsonPropertyName("inStock")]
+        public bool InStock { get; set; } 
+
+        [JsonPropertyName("stockQuantity")]
+        public int StockQuantity { get; set; } 
+
+        [JsonPropertyName("brand")]
+        public string Brand { get; set; } 
+  
+
     }
 }

@@ -1,14 +1,15 @@
+using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using EgeApp.Frontend.Mvc.Data.Entities;
-using EgeApp.Frontend.Mvc.Models;
 using EgeApp.Frontend.Mvc.Models.Product;
 using EgeApp.Frontend.Mvc.Services;
 
 namespace EgeApp.Frontend.Mvc.Controllers
 {
+ 
     public class HomeController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
@@ -30,7 +31,7 @@ namespace EgeApp.Frontend.Mvc.Controllers
                     return RedirectToAction("Error", "Home");
                 }
 
-                // Ürünleri al
+                // Genel ürünleri al
                 var resultProducts = await ProductService.GetHomesAsync();
                 if (resultProducts == null || !resultProducts.IsSucceeded)
                 {
@@ -38,11 +39,29 @@ namespace EgeApp.Frontend.Mvc.Controllers
                     return RedirectToAction("Error", "Home");
                 }
 
+                // İndirimdeki ürünleri al
+                var discountedProducts = await ProductService.GetDiscountedProductsAsync();
+                if (discountedProducts == null || !discountedProducts.IsSucceeded)
+                {
+                    TempData["Error"] = discountedProducts?.Error ?? "An error occurred while fetching discounted products.";
+                    return RedirectToAction("Error", "Home");
+                }
+
+                // Çok satanları al
+                var bestSellers = await ProductService.GetBestSellersAsync(10);
+                if (bestSellers == null || !bestSellers.IsSucceeded)
+                {
+                    TempData["Error"] = bestSellers?.Error ?? "An error occurred while fetching best sellers.";
+                    return RedirectToAction("Error", "Home");
+                }
+
                 // ViewModel'i oluştur
                 ProductsCategoriesViewModel model = new()
                 {
                     CategoryList = resultCategories.Data,
-                    ProductList = resultProducts.Data
+                    ProductList = resultProducts.Data,
+                    DiscountedProducts = discountedProducts.Data ?? new List<ProductViewModel>(),
+                    BestSellers = bestSellers.Data ?? new List<ProductViewModel>()
                 };
 
                 // Kullanıcı giriş yapmışsa sepetteki ürün sayısını al
@@ -72,10 +91,23 @@ namespace EgeApp.Frontend.Mvc.Controllers
                 return RedirectToAction("Error", "Home");
             }
         }
+        [HttpGet("GetDiscountedProducts")]
+        public async Task<IActionResult> GetDiscountedProducts()
+        {
+            var discountedProducts = await ProductService.GetDiscountedProductsAsync();
 
+            if (discountedProducts == null || !discountedProducts.IsSucceeded || discountedProducts.Data == null || !discountedProducts.Data.Any())
+            {
+                return NotFound("No discounted products found.");
+            }
+
+            return Ok(discountedProducts.Data);
+        }
         public IActionResult Error()
         {
             return View();
         }
+
+        
     }
 }

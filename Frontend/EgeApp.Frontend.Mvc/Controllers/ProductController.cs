@@ -6,6 +6,7 @@ using EgeApp.Frontend.Mvc.Services;
 
 namespace EgeApp.Frontend.Mvc.Controllers
 {
+
     public class ProductController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
@@ -27,26 +28,43 @@ namespace EgeApp.Frontend.Mvc.Controllers
         public async Task<IActionResult> Details(int id)
         {
             var result = await ProductService.GetByIdAsync(id);
+
             if (!result.IsSucceeded)
             {
-                _notyfService.Error(result.Error);
+                _notyfService.Error("Ürün detayları yüklenemedi.");
                 return RedirectToAction("Index");
             }
 
             if (User.Identity.IsAuthenticated)
             {
                 var user = await _userManager.FindByNameAsync(User.Identity.Name);
-                var userId = user.Id;
-                var cartResult = await CartService.GetCartAsync(userId);
+                var cartResult = await CartService.GetCartAsync(user.Id);
+
                 if (!cartResult.IsSucceeded)
                 {
-                    _notyfService.Error(cartResult.Error);
+                    _notyfService.Error("Sepet bilgileri alınırken bir hata oluştu.");
                     return RedirectToAction("Index");
                 }
+
                 ViewBag.CountOfItems = cartResult.Data.CountOfItem;
             }
+
             return View(result.Data);
         }
+        [HttpGet("GetDiscountedProducts")]
+        public async Task<IActionResult> GetDiscountedProducts()
+        {
+            // Asenkron sonucu bekle
+            var discountedProducts = await ProductService.GetDiscountedProductsAsync();
 
+            // Hata kontrolü
+            if (discountedProducts == null || !discountedProducts.IsSucceeded || discountedProducts.Data == null || !discountedProducts.Data.Any())
+            {
+                return NotFound("No discounted products found.");
+            }
+
+            // Başarılı sonuç döndür
+            return Ok(discountedProducts.Data);
+        }
     }
 }
