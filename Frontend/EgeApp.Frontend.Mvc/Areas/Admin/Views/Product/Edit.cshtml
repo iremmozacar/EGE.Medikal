@@ -1,4 +1,4 @@
-﻿@model EgeApp.Frontend.Mvc.Models.Product.ProductEditViewModel
+﻿@model EgeApp.Frontend.Mvc.Models.Product.ProductUpdateViewModel
 @{
     ViewData["PageHeader"] = "Ürün Güncelleme";
     ViewData["ShowButton"] = false;
@@ -12,7 +12,7 @@
         <h2 class="text-center text-uppercase fw-bold mb-4" style="color: #002855;"></h2>
 
         <!-- Form -->
-        <form asp-area="Admin" asp-controller="Product" asp-action="Edit" method="post" enctype="multipart/form-data">
+        <form asp-area="Admin" asp-controller="Product" asp-action="Update" method="post" enctype="multipart/form-data">
             <input type="hidden" asp-for="ImageUrl" />
             <div class="row g-4">
                 <!-- Ürün Bilgileri -->
@@ -102,66 +102,66 @@
 </div>
 
 @section Styles {
-    <style>
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 34px;
-            height: 20px;
-        }
+        <style>
+            .switch {
+                position: relative;
+                display: inline-block;
+                width: 34px;
+                height: 20px;
+            }
 
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
+            .switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
 
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            transition: .4s;
-            border-radius: 20px;
-        }
+            .slider {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #ccc;
+                transition: .4s;
+                border-radius: 20px;
+            }
 
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 14px;
-            width: 14px;
-            left: 3px;
-            bottom: 3px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
-        }
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 14px;
+                width: 14px;
+                left: 3px;
+                bottom: 3px;
+                background-color: white;
+                transition: .4s;
+                border-radius: 50%;
+            }
 
-        input:checked+.slider {
-            background-color: #8a0611;
-        }
+            input:checked+.slider {
+                background-color: #8a0611;
+            }
 
-        input:checked+.slider:before {
-            transform: translateX(14px);
-        }
-    </style>
+            input:checked+.slider:before {
+                transform: translateX(14px);
+            }
+        </style>
 }
 
 @section Scripts {
-    <script>
-        document.getElementById('imageUpload').addEventListener('change', function (e) {
-            const file = e.target.files[0];
-            const reader = new FileReader();
-            const preview = document.getElementById('imagePreview');
-            if (file) {
-                reader.onload = function (event) {
-                    preview.src = event.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-    </script>
+        <script>
+            document.getElementById('imageUpload').addEventListener('change', function (e) {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                const preview = document.getElementById('imagePreview');
+                if (file) {
+                    reader.onload = function (event) {
+                        preview.src = event.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        </script>
 }

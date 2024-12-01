@@ -5,6 +5,7 @@ using EgeApp.Frontend.Mvc.Models.Category;
 using EgeApp.Frontend.Mvc.Services;
 using System.IO;
 using System.Threading.Tasks;
+using EgeApp.Frontend.Mvc.Models.Category;
 
 namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
 {
@@ -35,7 +36,6 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            // Varsayılan model oluşturuluyor
             return View(new CategoryCreateViewModel { IsActive = true });
         }
 
@@ -54,7 +54,6 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
                 try
                 {
                     var fileName = $"{Guid.NewGuid()}";
-                    
                     var savePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads/categories", fileName);
 
                     using (var stream = new FileStream(savePath, FileMode.Create))
@@ -82,9 +81,31 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Update(int id)
+        {
+            var response = await CategoryService.GetByIdAsync(id);
+            if (!response.IsSucceeded)
+            {
+                _notyfService.Error(response.Error ?? "Kategori bulunamadı.");
+                return RedirectToAction("Index");
+            }
+
+            var model = new CategoryUpdateViewModel
+            {
+                Id = response.Data.Id,
+                Name = response.Data.Name,
+                Description = response.Data.Description,
+                IsActive = response.Data.IsActive,
+                ImageUrl = response.Data.ImageUrl
+            };
+
+            return View(model);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(CategoryEditViewModel model)
+        public async Task<IActionResult> Update(CategoryUpdateViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -92,6 +113,7 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
                 return View(model);
             }
 
+            // Görsel yükleme işlemi
             if (model.Image != null)
             {
                 try
@@ -99,11 +121,13 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
                     var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(model.Image.FileName)}";
                     var savePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads/categories", fileName);
 
+                    // Dosya sistemine kaydetme
                     using (var stream = new FileStream(savePath, FileMode.Create))
                     {
                         await model.Image.CopyToAsync(stream);
                     }
 
+                    // Görsel URL'sini modelde güncelleme
                     model.ImageUrl = $"/uploads/categories/{fileName}";
                 }
                 catch (Exception ex)
@@ -113,13 +137,25 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
                 }
             }
 
-            var result = await CategoryService.UpdateAsync(model);
+            // API'ye gönderilecek DTO'nun hazırlanması
+            var updateDto = new CategoryUpdateDto
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Description = model.Description,
+                IsActive = model.IsActive,
+                ImageUrl = model.ImageUrl
+            };
+
+            // API'ye güncelleme talebi gönderme
+            var result = await CategoryService.UpdateAsync(updateDto);
             if (!result.IsSucceeded)
             {
                 _notyfService.Error(result.Error ?? "Kategori güncellenemedi.");
                 return View(model);
             }
 
+            // Başarılı işlem
             _notyfService.Success("Kategori başarıyla güncellendi.");
             return RedirectToAction("Index");
         }

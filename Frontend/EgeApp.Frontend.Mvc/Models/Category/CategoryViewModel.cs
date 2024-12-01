@@ -11,19 +11,25 @@ namespace EgeApp.Frontend.Mvc.Models.Category
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
+        [JsonPropertyName("description")]
+        public string Description { get; set; }
+
+        [JsonPropertyName("url")]
+        public string Url { get; set; }
+
         [JsonPropertyName("isActive")]
         public bool IsActive { get; set; }
 
         [JsonPropertyName("imageUrl")]
-        public string ImageUrl { get; set; } // Görsel URL'si için string türünde özellik
+        public string ImageUrl { get; set; }
 
-        [JsonPropertyName("url")]
-        public string Url { get; set; } // Kategori URL'si
+        [JsonPropertyName("productCount")]
+        public int ProductCount { get; set; }
 
-        [JsonPropertyName("description")]
-        public string? Description { get; set; } // Opsiyonel açıklama
+        [JsonPropertyName("createdDate")]
+        public DateTime CreatedDate { get; set; }
 
-        [JsonPropertyName("productcount")]
-        public int ProductCount { get; set; } // Kategoriye bağlı ürün sayısı
+        [JsonPropertyName("modifiedDate")]
+        public DateTime ModifiedDate { get; set; }
     }
 }

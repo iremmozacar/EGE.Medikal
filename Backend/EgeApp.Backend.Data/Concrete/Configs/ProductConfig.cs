@@ -39,48 +39,34 @@ namespace EgeApp.Backend.Data.Concrete.Configs
             builder.Property(x => x.IsActive)
                 .IsRequired();
 
-            // Stok kodu, nullable
-            builder.Property(x => x.StockCode)
-                .HasMaxLength(100);
-
-            // Garanti süresi, nullable
-            builder.Property(x => x.WarrantyPeriod)
-                .HasMaxLength(100);
-
-            // İndirimli ürün, ücretsiz kargo, özel ürün vb. alanlar
+            // İndirimli ürün
             builder.Property(x => x.IsDiscounted)
                 .IsRequired();
+
+            // Ücretsiz kargo
             builder.Property(x => x.IsFreeShipping)
-                .IsRequired();
+                .IsRequired(false);
+
+            // Özel ürün
             builder.Property(x => x.IsSpecialProduct)
-                .IsRequired();
+                .IsRequired(false);
+
+            // Aynı gün kargo
             builder.Property(x => x.IsSameDayShipping)
+                .IsRequired(false);
+
+            // Ana sayfa ürünü
+            builder.Property(x => x.IsHome)
                 .IsRequired();
-            builder.Property(x => x.IsLimitedStock)
-                .IsRequired();
 
-            // Kategori ilişkisi (Foreign Key)
-            builder.HasOne(x => x.Category)  // Category ile olan ilişki
-                .WithMany()  // Eğer Category modelinde bir koleksiyon varsa, bunu kullanabilirsin
-                .HasForeignKey(x => x.ProductCategoryId)  // CategoryId property’si foreign key
-                .IsRequired();  // Foreign key gerekli
-
-            // Medikal ürünlere özgü alanlar
-            builder.Property(x => x.PrescriptionRequired)
+            // Marka
+            builder.Property(x => x.Brand)
+                .HasMaxLength(100)
                 .IsRequired(false);
 
-            builder.Property(x => x.ManufacturingDate)
-                .IsRequired(false);
-
-            builder.Property(x => x.ExpirationDate)
-                .IsRequired(false);
-
-            builder.Property(x => x.StorageConditions)
-                .HasMaxLength(500)
-                .IsRequired(false);
-
-            builder.Property(x => x.UsageInstructions)
-                .HasMaxLength(500)
+            // URL
+            builder.Property(x => x.Url)
+                .HasMaxLength(250)
                 .IsRequired(false);
 
             // Tarih alanlarının varsayılan değerlerini SQLite ile uyumlu hale getirme
@@ -90,6 +76,11 @@ namespace EgeApp.Backend.Data.Concrete.Configs
             builder.Property(x => x.ModifiedDate)
                 .HasDefaultValueSql("date('now')");
 
+            // Kategori ilişkisi (Foreign Key)
+            builder.HasOne(x => x.Category)  // Category ile olan ilişki
+                .WithMany(x => x.Products)  // Category içinde Products koleksiyonu
+                .HasForeignKey(x => x.ProductCategoryId)  // Foreign key
+                .IsRequired();
 
             // Veritabanına önceden eklenmiş ürün verileri
             var products = new List<Product>
@@ -102,15 +93,15 @@ namespace EgeApp.Backend.Data.Concrete.Configs
                     Description = "Diz ve sırt destekleyici",
                     Url = "dorselumber-korse",
                     ImageUrl = "http://localhost:5200/images/products/dorselumberkorse.webp",
-                    Brand = null,
+                    Brand = "KorseMarka",
                     IsHome = true,
                     CreatedDate = DateTime.Now,
                     ModifiedDate = DateTime.Now,
                     IsActive = true,
                     IsFreeShipping = true,
-                    IsLimitedStock = false,
                     IsSameDayShipping = true,
-                    IsSpecialProduct = false, // Ekleme
+                    IsSpecialProduct = false,
+                    IsDiscounted = true,
                     ProductCategoryId = 1
                 },
                 new()
@@ -121,15 +112,15 @@ namespace EgeApp.Backend.Data.Concrete.Configs
                     Description = "Profesyonel solunum cihazı",
                     Url = "devisbiss-oksijen-konsantratoru",
                     ImageUrl = "http://localhost:5200/images/products/devisbissoksijen.webp",
-                    Brand = null,
+                    Brand = "SolunumMarka",
                     IsHome = true,
                     CreatedDate = DateTime.Now,
                     ModifiedDate = DateTime.Now,
                     IsActive = true,
                     IsFreeShipping = true,
-                    IsLimitedStock = false,
                     IsSameDayShipping = true,
-                    IsSpecialProduct = false, // Ekleme
+                    IsSpecialProduct = false,
+                    IsDiscounted = false,
                     ProductCategoryId = 2
                 },
                 new()
@@ -140,75 +131,19 @@ namespace EgeApp.Backend.Data.Concrete.Configs
                     Description = "Solunum desteği için maske",
                     Url = "tam-yuz-maskesi",
                     ImageUrl = "http://localhost:5200/images/products/tamyuzmaskesi.webp",
-                    Brand = null,
+                    Brand = "MaskeMarka",
                     IsHome = true,
                     CreatedDate = DateTime.Now,
                     ModifiedDate = DateTime.Now,
                     IsActive = true,
-                    IsFreeShipping = true,
-                    IsLimitedStock = false,
+                    IsFreeShipping = false,
                     IsSameDayShipping = true,
-                    IsSpecialProduct = false, // Ekleme
+                    IsSpecialProduct = true,
+                    IsDiscounted = false,
                     ProductCategoryId = 3
-                },
-                new()
-                {
-                    Id = 4,
-                    Name = "2 Motorlu Hasta Karyolası",
-                    Price = 12000,
-                    Description = "Hasta bakım için motorlu yatak",
-                    Url = "2-motorlu-hasta-karyolasi",
-                    ImageUrl = "http://localhost:5200/images/products/motorluhastakaryolasi.webp",
-                    Brand = null,
-                    IsHome = true,
-                    CreatedDate = DateTime.Now,
-                    ModifiedDate = DateTime.Now,
-                    IsFreeShipping = true,
-                    IsActive = true,
-                    IsLimitedStock = false,
-                    IsSameDayShipping = true,
-                    IsSpecialProduct = false, // Ekleme
-                    ProductCategoryId = 2
-                },
-                new()
-                {
-                    Id = 5,
-                    Name = "W Cura C",
-                    Price = 700,
-                    Description = "Hızlı tıbbi test malzemesi",
-                    Url = "w-cura-c",
-                    ImageUrl = "http://localhost:5200/images/products/wcuracdbg.webp",
-                    Brand = null,
-                    IsHome = true,
-                    CreatedDate = DateTime.Now,
-                    ModifiedDate = DateTime.Now,
-                    IsActive = true,
-                    IsFreeShipping = true,
-                    IsLimitedStock = false,
-                    IsSameDayShipping = true,
-                    IsSpecialProduct = false, // Ekleme
-                    ProductCategoryId = 5
-                },
-                new()
-                {
-                    Id = 6,
-                    Name = "Tansiyon Aleti",
-                    Price = 500,
-                    Description = "Hassas tansiyon ölçer",
-                    Url = "tansiyon-aleti",
-                    ImageUrl = "http://localhost:5200/images/products/tansiyonaleti.webp",
-                    Brand = null,
-                    IsHome = true,
-                    CreatedDate = DateTime.Now,
-                    ModifiedDate = DateTime.Now,
-                    IsActive = true,
-                    IsFreeShipping = true,
-                    IsLimitedStock = false,
-                    IsSameDayShipping = true,
-                    IsSpecialProduct = false, // Ekleme
-                    ProductCategoryId = 1
                 }
             };
+
             builder.HasData(products);
             builder.ToTable("Products");
         }

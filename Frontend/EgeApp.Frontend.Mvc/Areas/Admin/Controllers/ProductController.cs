@@ -71,7 +71,7 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Update(int id)
         {
             var result = await ProductService.GetByIdAsync(id);
             if (!result.IsSucceeded)
@@ -80,7 +80,7 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
                 return RedirectToAction("Error", "Home");
             }
 
-            var model = new ProductEditViewModel
+            var model = new ProductUpdateViewModel
             {
                 Id = result.Data.Id,
                 Name = result.Data.Name,
@@ -104,12 +104,12 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(ProductEditViewModel model)
+        public async Task<IActionResult> Update(ProductUpdateViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 _notyfService.Error("Lütfen tüm gerekli alanları doldurun.");
-                return await ReloadEditModelWithCategories(model);
+                return await ReloadUpdateModelWithCategories(model);
             }
 
             var result = await ProductService.UpdateAsync(model);
@@ -136,7 +136,7 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
             return View("Create", model);
         }
 
-        private async Task<IActionResult> ReloadEditModelWithCategories(ProductEditViewModel model)
+        private async Task<IActionResult> ReloadEditModelWithCategories(ProductUpdateViewModel model)
         {
             var categories = await CategoryService.GetSelectListItemsAsync();
             if (!categories.IsSucceeded)

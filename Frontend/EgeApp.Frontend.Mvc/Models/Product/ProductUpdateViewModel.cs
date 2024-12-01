@@ -5,17 +5,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EgeApp.Frontend.Mvc.Models.Product;
 
-public class ProductCreateViewModel
+public class ProductUpdateViewModel
 {
+
+    [JsonPropertyName("id")]
+    public int Id { get; set; }
+
     [JsonPropertyName("name")]
-    [Required(ErrorMessage = "Ürün adı gereklidir.")]
     public string Name { get; set; }
 
     [JsonPropertyName("description")]
     public string Description { get; set; }
 
     [JsonPropertyName("price")]
-    [Required(ErrorMessage = "Fiyat gereklidir.")]
     public decimal Price { get; set; }
 
     [JsonPropertyName("discountedPrice")]
@@ -25,10 +27,7 @@ public class ProductCreateViewModel
     public string ImageUrl { get; set; }
 
     [JsonPropertyName("isActive")]
-    public bool IsActive { get; set; } = true;
-
-    [JsonPropertyName("warrantyPeriod")]
-    public string WarrantyPeriod { get; set; }
+    public bool IsActive { get; set; }
 
     [JsonPropertyName("isDiscounted")]
     public bool IsDiscounted { get; set; }
@@ -53,4 +52,14 @@ public class ProductCreateViewModel
 
     [JsonPropertyName("isHome")]
     public bool IsHome { get; set; }
+
+    [JsonPropertyName("salesCount")]
+    public int SalesCount { get; set; }
+
+    [JsonPropertyName("createdDate")]
+    public DateTime CreatedDate { get; set; }
+
+    [JsonPropertyName("modifiedDate")]
+    public DateTime ModifiedDate { get; set; }
+
 }

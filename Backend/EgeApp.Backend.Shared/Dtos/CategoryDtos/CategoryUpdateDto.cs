@@ -2,9 +2,11 @@
 {
     public class CategoryUpdateDto
     {
-        public int Id { get; set; }               // Kategori ID
-        public string Name { get; set; }         // Kategori adı
-        public bool IsActive { get; set; }       // Aktiflik durumu
-        public string Description { get; set; } // Kategori açıklaması
+        public int Id { get; set; }             
+        public string Name { get; set; }        
+        public string Description { get; set; }
+        public bool IsActive { get; set; }
+        public string ImageUrl { get; set; }
+
     }
 }

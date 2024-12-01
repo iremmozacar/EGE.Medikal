@@ -123,7 +123,7 @@ namespace EgeApp.Frontend.Mvc.Services
             }
         }
 
-        public static async Task<ResponseModel<bool>> UpdateAsync(CategoryEditViewModel model)
+        public static async Task<ResponseModel<bool>> UpdateAsync(CategoryUpdateViewModel model)
         {
             using (HttpClient httpClient = new())
             {

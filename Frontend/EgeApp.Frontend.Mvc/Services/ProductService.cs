@@ -79,7 +79,7 @@ public static class ProductService
         }
 
     }
-    public static async Task<ResponseModel<NoContent>> UpdateAsync(ProductEditViewModel model)
+    public static async Task<ResponseModel<NoContent>> UpdateAsync(ProductUpdateViewModel model)
     {
         using (HttpClient httpClient = new())
         {
@@ -169,7 +169,7 @@ public static class ProductService
             }
             return result;
         }
-        
+
     }
     public static async Task<ResponseModel<List<ProductViewModel>>> GetDiscountedProductsAsync()
     {
