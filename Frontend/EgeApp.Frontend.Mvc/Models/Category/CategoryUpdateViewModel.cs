@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EgeApp.Frontend.Mvc.Models.Category
 {
-    public class ProductUpdateViewModel
+    public class CategoryUpdateViewModel
     {
         [JsonPropertyName("id")]
         [Required]
@@ -25,5 +25,8 @@ namespace EgeApp.Frontend.Mvc.Models.Category
         [JsonPropertyName("imageUrl")]
         [Display(Name = "Kategori Resmi")]
         public string ImageUrl { get; set; }
+
+        [JsonIgnore]
+        public IFormFile Image { get; set; }
     }
 }

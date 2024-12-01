@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using EgeApp.Frontend.Mvc.Models.Category;
 using EgeApp.Frontend.Mvc.Services;
+using System;
 using System.IO;
 using System.Threading.Tasks;
-using EgeApp.Frontend.Mvc.Models.Category;
 
 namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
 {
@@ -53,7 +53,7 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
             {
                 try
                 {
-                    var fileName = $"{Guid.NewGuid()}";
+                    var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(model.Image.FileName)}";
                     var savePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads/categories", fileName);
 
                     using (var stream = new FileStream(savePath, FileMode.Create))
@@ -113,7 +113,7 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
                 return View(model);
             }
 
-            // Görsel yükleme işlemi
+            // Fotoğraf yükleme işlemi
             if (model.Image != null)
             {
                 try
@@ -121,13 +121,11 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
                     var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(model.Image.FileName)}";
                     var savePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads/categories", fileName);
 
-                    // Dosya sistemine kaydetme
                     using (var stream = new FileStream(savePath, FileMode.Create))
                     {
                         await model.Image.CopyToAsync(stream);
                     }
 
-                    // Görsel URL'sini modelde güncelleme
                     model.ImageUrl = $"/uploads/categories/{fileName}";
                 }
                 catch (Exception ex)
@@ -137,27 +135,16 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
                 }
             }
 
-            // API'ye gönderilecek DTO'nun hazırlanması
-            var updateDto = new CategoryUpdateDto
-            {
-                Id = model.Id,
-                Name = model.Name,
-                Description = model.Description,
-                IsActive = model.IsActive,
-                ImageUrl = model.ImageUrl
-            };
-
-            // API'ye güncelleme talebi gönderme
-            var result = await CategoryService.UpdateAsync(updateDto);
+            // API'ye gönderilecek model
+            var result = await CategoryService.UpdateAsync(model);
             if (!result.IsSucceeded)
             {
                 _notyfService.Error(result.Error ?? "Kategori güncellenemedi.");
                 return View(model);
             }
 
-            // Başarılı işlem
             _notyfService.Success("Kategori başarıyla güncellendi.");
             return RedirectToAction("Index");
         }
     }
-}
+    }

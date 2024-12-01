@@ -27,9 +27,9 @@
                                 <span class="text-danger" asp-validation-for="Name"></span>
                             </div>
                             <div class="mb-3">
-                                <label asp-for="Properties" class="form-label text-dark">Ürün Özellikleri</label>
-                                <textarea asp-for="Properties" class="form-control" rows="4"></textarea>
-                                <span class="text-danger" asp-validation-for="Properties"></span>
+                                <label asp-for="Description" class="form-label text-dark">Ürün Açıklaması</label>
+                                <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                                <span class="text-danger" asp-validation-for="Description"></span>
                             </div>
                             <div class="row align-items-center">
                                 <div class="col-md-4 mb-3">
@@ -37,10 +37,29 @@
                                     <input asp-for="Price" class="form-control">
                                     <span class="text-danger" asp-validation-for="Price"></span>
                                 </div>
+                                <div class="col-md-4 mb-3">
+                                    <label asp-for="DiscountedPrice" class="form-label text-dark">İndirimli Fiyat</label>
+                                    <input asp-for="DiscountedPrice" class="form-control">
+                                    <span class="text-danger" asp-validation-for="DiscountedPrice"></span>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label asp-for="WarrantyPeriod" class="form-label text-dark">Garanti Süresi</label>
+                                    <input asp-for="WarrantyPeriod" class="form-control">
+                                    <span class="text-danger" asp-validation-for="WarrantyPeriod"></span>
+                                </div>
+                            </div>
+                            <div class="row align-items-center">
                                 <div class="col-md-4 mb-3 d-flex align-items-center">
                                     <label class="form-label text-dark me-2">Aktif</label>
                                     <label class="switch">
                                         <input asp-for="IsActive" type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                                <div class="col-md-4 mb-3 d-flex align-items-center">
+                                    <label class="form-label text-dark me-2">İndirimli</label>
+                                    <label class="switch">
+                                        <input asp-for="IsDiscounted" type="checkbox">
                                         <span class="slider round"></span>
                                     </label>
                                 </div>
@@ -64,9 +83,11 @@
                         </div>
                         <div class="card-body">
                             <div class="mb-3">
-                                <label asp-for="Categories" class="form-label text-dark">Kategori</label>
-                                <select asp-for="CategoryId" asp-items="@Model.Categories" class="form-control">
+                                <label asp-for="CategoryId" class="form-label text-dark">Kategori</label>
+                                <select asp-for="CategoryId" asp-items="Model.CategoryList" class="form-control">
+                                    <option value="">Kategori Seçin</option>
                                 </select>
+                                <span class="text-danger" asp-validation-for="CategoryId"></span>
                             </div>
                             <div class="mb-3">
                                 <label asp-for="Image" class="form-label text-dark">Ürün Resmi</label>

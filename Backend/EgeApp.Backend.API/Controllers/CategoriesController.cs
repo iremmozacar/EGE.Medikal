@@ -10,11 +10,13 @@ namespace EgeApp.Backend.API.Controllers
     public class CategoriesController : CustomControllerBase
     {
         private readonly ICategoryService _categoryService;
+
         public CategoriesController(ICategoryService categoryService)
         {
             _categoryService = categoryService;
         }
 
+        // Kategori oluşturma
         [HttpPost]
         public async Task<IActionResult> Create(CategoryCreateDto categoryCreateDto)
         {
@@ -22,8 +24,7 @@ namespace EgeApp.Backend.API.Controllers
             return CreateActionResult(response);
         }
 
-
-   
+        // Kategori güncelleme
         [HttpPut]
         public async Task<IActionResult> Update(CategoryUpdateDto categoryUpdateDto)
         {
@@ -31,7 +32,7 @@ namespace EgeApp.Backend.API.Controllers
             return CreateActionResult(response);
         }
 
-     
+        // Kategori silme
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -39,7 +40,7 @@ namespace EgeApp.Backend.API.Controllers
             return CreateActionResult(response);
         }
 
-
+        // Tüm kategorileri getirme (Kategori Listesi için kullanılacak)
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -47,27 +48,12 @@ namespace EgeApp.Backend.API.Controllers
             return CreateActionResult(response);
         }
 
-        [HttpGet("{isActive?}")]
-        public async Task<IActionResult> GetActives(bool isActive = true)
+        // ID'ye göre bir kategori getirme
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
         {
-            var response = await _categoryService.GetActivesAsync(isActive);
+            var response = await _categoryService.GetByIdAsync(id);
             return CreateActionResult(response);
         }
-
-        [HttpGet("{isActive?}")]
-        public async Task<IActionResult> GetActivesCount(bool isActive = true)
-        {
-            var response = await _categoryService.GetActivesCountAsync(isActive);
-            return CreateActionResult(response);
-        }
-
-     
-        [HttpGet]
-        public async Task<IActionResult> GetCount()
-        {
-            var response = await _categoryService.GetCountAsync();
-            return CreateActionResult(response);
-        }
-
     }
 }

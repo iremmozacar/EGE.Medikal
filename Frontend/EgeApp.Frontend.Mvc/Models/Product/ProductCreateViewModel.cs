@@ -42,8 +42,8 @@ public class ProductCreateViewModel
     [JsonPropertyName("isSameDayShipping")]
     public bool? IsSameDayShipping { get; set; }
 
-    [JsonPropertyName("productCategoryId")]
-    public int ProductCategoryId { get; set; }
+    [JsonPropertyName("CategoryId")]
+    public int CategoryId { get; set; }
 
     [JsonPropertyName("url")]
     public string Url { get; set; }
@@ -53,4 +53,11 @@ public class ProductCreateViewModel
 
     [JsonPropertyName("isHome")]
     public bool IsHome { get; set; }
+   
+
+    [JsonPropertyName("categoryList")]
+    public IEnumerable<SelectListItem> CategoryList { get; set; }
+
+    [JsonIgnore]
+    public IFormFile Image { get; set; }
 }

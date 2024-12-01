@@ -41,8 +41,8 @@ public class ProductUpdateViewModel
     [JsonPropertyName("isSameDayShipping")]
     public bool? IsSameDayShipping { get; set; }
 
-    [JsonPropertyName("productCategoryId")]
-    public int ProductCategoryId { get; set; }
+    [JsonPropertyName("CategoryId")]
+    public int CategoryId { get; set; }
 
     [JsonPropertyName("url")]
     public string Url { get; set; }
@@ -62,4 +62,11 @@ public class ProductUpdateViewModel
     [JsonPropertyName("modifiedDate")]
     public DateTime ModifiedDate { get; set; }
 
+    [JsonIgnore]
+    public IFormFile Image { get; set; }
+
+  
+
+    [JsonPropertyName("categoryList")]
+    public IEnumerable<SelectListItem> CategoryList { get; set; }
 }

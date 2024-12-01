@@ -27,7 +27,7 @@
                         <img src="@(!string.IsNullOrEmpty(urun.ImageUrl) ? urun.ImageUrl : "/images/yer-tutucu.jpg")"
                             alt="@urun.Name" />
                         <h5>@urun.Name</h5>
-                        <p>@urun.ProductDescription</p>
+                        <p>@urun.Description</p>
                         <span>Fiyat: @String.Format("{0:C}", urun.Price)</span>
                         @if (urun.DiscountedPrice.HasValue && urun.DiscountedPrice > 0)
                         {
@@ -53,7 +53,7 @@
                         <img src="@(!string.IsNullOrEmpty(urun.ImageUrl) ? urun.ImageUrl : "/images/yer-tutucu.jpg")"
                             alt="@urun.Name" />
                         <h5>@urun.Name</h5>
-                        <p>@urun.ProductDescription</p>
+                        <p>@urun.Description</p>
                         <span>Fiyat: @String.Format("{0:C}", urun.Price)</span>
                         <button class="sepete-ekle-btn" onclick="sepeteEkle(@urun.Id)">Sepete Ekle</button>
                     </div>

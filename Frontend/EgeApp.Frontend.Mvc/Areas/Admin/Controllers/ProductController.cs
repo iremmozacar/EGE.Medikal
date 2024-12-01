@@ -1,5 +1,9 @@
+using System;
+using System.IO;
+using System.Threading.Tasks;
 using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using EgeApp.Frontend.Mvc.Models.Product;
 using EgeApp.Frontend.Mvc.Services;
@@ -31,39 +35,40 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Super Admin")]
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
-            var categories = await CategoryService.GetSelectListItemsAsync();
-            if (!categories.IsSucceeded)
-            {
-                TempData["Error"] = categories.Error ?? "Kategoriler yüklenemedi.";
-                return RedirectToAction("Error", "Home");
-            }
-
-            var model = new ProductCreateViewModel
-            {
-                Categories = categories.Data
-            };
-
+            var model = new ProductCreateViewModel();
             return View(model);
         }
 
         [HttpPost]
         [Authorize(Roles = "Super Admin")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(ProductCreateViewModel model)
+        public async Task<IActionResult> Create(ProductCreateViewModel model, IFormFile imageFile)
         {
             if (!ModelState.IsValid)
             {
                 _notyfService.Error("Lütfen tüm gerekli alanları doldurun.");
-                return await ReloadCreateModelWithCategories(model);
+                return View(model);
+            }
+
+            if (imageFile != null && imageFile.Length > 0)
+            {
+                var uploadResult = await UploadImageAsync(imageFile);
+                if (!uploadResult.IsSuccess)
+                {
+                    TempData["Error"] = "Fotoğraf yüklenirken bir hata oluştu.";
+                    return View(model);
+                }
+
+                model.ImageUrl = uploadResult.ImageUrl; // Fotoğraf URL'si API'ye gönderilecek.
             }
 
             var result = await ProductService.CreateAsync(model);
             if (!result.IsSucceeded)
             {
                 TempData["Error"] = result.Error ?? "Ürün oluşturulamadı.";
-                return await ReloadCreateModelWithCategories(model);
+                return View(model);
             }
 
             _notyfService.Success("Ürün başarıyla oluşturuldu.");
@@ -84,71 +89,56 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
             {
                 Id = result.Data.Id,
                 Name = result.Data.Name,
-                Properties = result.Data.Properties,
                 Price = result.Data.Price,
+                DiscountedPrice = result.Data.DiscountedPrice,
+                ImageUrl = result.Data.ImageUrl,
                 IsActive = result.Data.IsActive,
-                IsHome = result.Data.IsHome,
+                IsDiscounted = result.Data.IsDiscounted,
+                IsFreeShipping = result.Data.IsFreeShipping,
+                IsSpecialProduct = result.Data.IsSpecialProduct,
+                IsSameDayShipping = result.Data.IsSameDayShipping,
                 CategoryId = result.Data.CategoryId,
-                ImageUrl = result.Data.ImageUrl
+                Url = result.Data.Url,
+                Brand = result.Data.Brand,
+                IsHome = result.Data.IsHome
             };
 
-            var categories = await CategoryService.GetSelectListItemsAsync();
-            if (!categories.IsSucceeded)
-            {
-                TempData["Error"] = categories.Error ?? "Kategoriler yüklenemedi.";
-                return RedirectToAction("Error", "Home");
-            }
-
-            model.Categories = categories.Data;
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(ProductUpdateViewModel model)
+        public async Task<IActionResult> Update(ProductUpdateViewModel model, IFormFile imageFile)
         {
             if (!ModelState.IsValid)
             {
                 _notyfService.Error("Lütfen tüm gerekli alanları doldurun.");
-                return await ReloadUpdateModelWithCategories(model);
+                return View(model);
+            }
+
+            if (imageFile != null && imageFile.Length > 0)
+            {
+                var uploadResult = await UploadImageAsync(imageFile);
+                if (!uploadResult.IsSuccess)
+                {
+                    TempData["Error"] = "Fotoğraf yüklenirken bir hata oluştu.";
+                    return View(model);
+                }
+
+                model.ImageUrl = uploadResult.ImageUrl; // Fotoğraf URL'si API'ye gönderilecek.
             }
 
             var result = await ProductService.UpdateAsync(model);
             if (!result.IsSucceeded)
             {
                 TempData["Error"] = result.Error ?? "Ürün güncellenemedi.";
-                return await ReloadEditModelWithCategories(model);
+                return View(model);
             }
 
             _notyfService.Success("Ürün başarıyla güncellendi.");
             return RedirectToAction("Index");
         }
 
-        private async Task<IActionResult> ReloadCreateModelWithCategories(ProductCreateViewModel model)
-        {
-            var categories = await CategoryService.GetSelectListItemsAsync();
-            if (!categories.IsSucceeded)
-            {
-                TempData["Error"] = categories.Error ?? "Kategoriler yüklenemedi.";
-                return RedirectToAction("Error", "Home");
-            }
-
-            model.Categories = categories.Data;
-            return View("Create", model);
-        }
-
-        private async Task<IActionResult> ReloadEditModelWithCategories(ProductUpdateViewModel model)
-        {
-            var categories = await CategoryService.GetSelectListItemsAsync();
-            if (!categories.IsSucceeded)
-            {
-                TempData["Error"] = categories.Error ?? "Kategoriler yüklenemedi.";
-                return RedirectToAction("Error", "Home");
-            }
-
-            model.Categories = categories.Data;
-            return View("Edit", model);
-        }
-
+        [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await ProductService.DeleteAsync(id);
@@ -161,26 +151,58 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
             _notyfService.Success("Ürün başarıyla silindi.");
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
         public async Task<IActionResult> UpdateIsHome(int id)
         {
             var result = await ProductService.UpdateIsHomeAsync(id);
             if (!result.IsSucceeded)
             {
-                ViewData["Error"] = result.Error;
+                ViewData["Error"] = result.Error ?? "Ürün güncellenemedi.";
                 return Redirect("/home/error");
-            };
-            return Json(result.Data.IsHome);
+            }
+
+            return Json(new { isHome = result.Data.IsHome });
         }
+
+        [HttpPost]
         public async Task<IActionResult> UpdateIsActive(int id)
         {
             var result = await ProductService.UpdateIsActiveAsync(id);
             if (!result.IsSucceeded)
             {
-                ViewData["Error"] = result.Error;
+                ViewData["Error"] = result.Error ?? "Ürün güncellenemedi.";
                 return Redirect("/home/error");
-            };
-            return Json(result.Data.IsActive);
+            }
+
+            return Json(new { isActive = result.Data.IsActive });
         }
 
+        private async Task<(bool IsSuccess, string ImageUrl)> UploadImageAsync(IFormFile imageFile)
+        {
+            try
+            {
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+                if (!Directory.Exists(uploadsFolder))
+                {
+                    Directory.CreateDirectory(uploadsFolder);
+                }
+
+                var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
+                var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await imageFile.CopyToAsync(fileStream);
+                }
+
+                var imageUrl = $"/images/{uniqueFileName}";
+                return (true, imageUrl);
+            }
+            catch
+            {
+                return (false, null);
+            }
+        }
     }
 }

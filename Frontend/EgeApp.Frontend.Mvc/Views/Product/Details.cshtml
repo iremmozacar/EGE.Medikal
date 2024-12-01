@@ -4,124 +4,63 @@
 <section class="product-details spad">
     <div class="container">
         <div class="row">
+            <!-- Ürün Görseli -->
             <div class="col-lg-6">
                 <div class="product__details__pic">
-                    <img class="product__big__img" src="@Model.MainImage" alt="Main image">
+                    <img class="product__big__img" src="@Model.ImageUrl" alt="@Model.Name">
                 </div>
             </div>
+            <!-- Ürün Bilgileri -->
             <div class="col-lg-6">
                 <div class="product__details__text">
                     <h3>@Model.Name</h3>
-                    <div class="rating">
-                        <!-- Burada yıldız yorum sistemi eklenebilir -->
+                    <div class="product__details__price">
+                        @Model.Price.ToString("C")
+                        @if (Model.DiscountedPrice.HasValue)
+                        {
+                            <span>@Model.DiscountedPrice.Value.ToString("C")</span>
+                        }
                     </div>
-                    <div class="product__details__price">@Model.Price <span>@Model.DiscountedPrice</span></div>
-                    <p>@Model.ProductDescription</p>
+                    <p>@Model.Description</p>
                     <div class="product__details__button">
                         <div class="quantity">
-                            <span>Quantity:</span>
+                            <span>Adet:</span>
                             <div class="pro-qty">
                                 <input type="text" value="1">
                             </div>
                         </div>
-                        <a href="#" class="cart-btn"><span class="icon_bag_alt"></span> Add to cart</a>
+                        <a href="#" class="cart-btn"><span class="icon_bag_alt"></span> Sepete Ekle</a>
                     </div>
 
+                    <!-- Ürün Özellikleri -->
                     <div class="product__details__widget">
                         <ul>
                             <li>
-                                <span>Stock Code:</span>
-                                <p>@Model.StockCode</p>
+                                <span>Garanti Süresi:</span>
+                                <p>@Model.Brand ?? "Belirtilmemiş"</p>
                             </li>
                             <li>
-                                <span>Warranty Period:</span>
-                                <p>@Model.WarrantyPeriod</p>
+                                <span>İndirimli:</span>
+                                <p>@(Model.IsDiscounted ? "Evet" : "Hayır")</p>
                             </li>
                             <li>
-                                <span>Discounted:</span>
-                                <p>@if (Model.IsDiscounted)
-                                    {
-                                        <span>Yes</span>
-                                    }
-                                    else
-                                    {
-                                        <span>No</span>
-                                    }</p>
+                                <span>Ücretsiz Kargo:</span>
+                                <p>@(Model.IsFreeShipping.HasValue && Model.IsFreeShipping.Value ? "Evet" : "Hayır")</p>
                             </li>
                             <li>
-                                <span>Free Shipping:</span>
-                                <p>@if (Model.IsFreeShipping)
-                                    {
-                                        <span>Yes</span>
-                                    }
-                                    else
-                                    {
-                                        <span>No</span>
-                                    }</p>
+                                <span>Özel Ürün:</span>
+                                <p>@(Model.IsSpecialProduct.HasValue && Model.IsSpecialProduct.Value ? "Evet" : "Hayır")
+                                </p>
                             </li>
                             <li>
-                                <span>Special Product:</span>
-                                <p>@if (Model.IsSpecialProduct)
-                                    {
-                                        <span>Yes</span>
-                                    }
-                                    else
-                                    {
-                                        <span>No</span>
-                                    }</p>
-                            </li>
-                            <li>
-                                <span>Same Day Shipping:</span>
-                                <p>@if (Model.IsSameDayShipping)
-                                    {
-                                        <span>Yes</span>
-                                    }
-                                    else
-                                    {
-                                        <span>No</span>
-                                    }</p>
-                            </li>
-                            <li>
-                                <span>Limited Stock:</span>
-                                <p>@if (Model.IsLimitedStock)
-                                    {
-                                        <span>Yes</span>
-                                    }
-                                    else
-                                    {
-                                        <span>No</span>
-                                    }</p>
+                                <span>Aynı Gün Kargo:</span>
+                                <p>@(Model.IsSameDayShipping.HasValue && Model.IsSameDayShipping.Value ? "Evet" :
+                                         "Hayır")</p>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- İlişkili Ürünler -->
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <div class="related__title">
-                    <h5>RELATED PRODUCTS</h5>
-                </div>
-            </div>
-            @foreach (var relatedProduct in Model.RelatedProducts)
-            {
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="@relatedProduct.MainImage">
-                            <ul class="product__hover">
-                                <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                            </ul>
-                        </div>
-                        <div class="product__item__text">
-                            <h6><a href="#">@relatedProduct.Name</a></h6>
-                            <div class="product__price">@relatedProduct.Price</div>
-                        </div>
-                    </div>
-                </div>
-            }
         </div>
     </div>
 </section>

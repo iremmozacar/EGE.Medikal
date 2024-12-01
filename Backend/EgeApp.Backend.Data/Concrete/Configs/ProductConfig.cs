@@ -79,7 +79,7 @@ namespace EgeApp.Backend.Data.Concrete.Configs
             // Kategori ilişkisi (Foreign Key)
             builder.HasOne(x => x.Category)  // Category ile olan ilişki
                 .WithMany(x => x.Products)  // Category içinde Products koleksiyonu
-                .HasForeignKey(x => x.ProductCategoryId)  // Foreign key
+                .HasForeignKey(x => x.CategoryId)  // Foreign key
                 .IsRequired();
 
             // Veritabanına önceden eklenmiş ürün verileri
@@ -102,7 +102,7 @@ namespace EgeApp.Backend.Data.Concrete.Configs
                     IsSameDayShipping = true,
                     IsSpecialProduct = false,
                     IsDiscounted = true,
-                    ProductCategoryId = 1
+                    CategoryId = 1
                 },
                 new()
                 {
@@ -121,7 +121,7 @@ namespace EgeApp.Backend.Data.Concrete.Configs
                     IsSameDayShipping = true,
                     IsSpecialProduct = false,
                     IsDiscounted = false,
-                    ProductCategoryId = 2
+                    CategoryId = 2
                 },
                 new()
                 {
@@ -140,7 +140,7 @@ namespace EgeApp.Backend.Data.Concrete.Configs
                     IsSameDayShipping = true,
                     IsSpecialProduct = true,
                     IsDiscounted = false,
-                    ProductCategoryId = 3
+                    CategoryId = 3
                 }
             };
 

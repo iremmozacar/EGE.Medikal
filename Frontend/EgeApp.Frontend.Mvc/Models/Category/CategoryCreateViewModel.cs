@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace EgeApp.Frontend.Mvc.Models.Category
 {
-    public class ProductCreateViewModel
+    public class CategoryCreateViewModel
     {
         [JsonPropertyName("name")]
         [Required(ErrorMessage = "Kategori adı gereklidir.")]
@@ -19,5 +19,9 @@ namespace EgeApp.Frontend.Mvc.Models.Category
         [JsonPropertyName("imageUrl")]
         [Display(Name = "Kategori Resmi")]
         public string ImageUrl { get; set; }
+
+
+        [JsonIgnore]
+        public IFormFile Image { get; set; }
     }
 }

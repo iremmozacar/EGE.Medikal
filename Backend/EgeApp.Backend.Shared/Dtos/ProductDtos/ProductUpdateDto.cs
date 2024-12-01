@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EgeApp.Backend.Shared.Dtos.ProductDtos
 {
@@ -24,7 +25,8 @@ namespace EgeApp.Backend.Shared.Dtos.ProductDtos
         public string? Brand { get; set; }  // Marka
         public bool IsHome { get; set; }  // Ana sayfa ürünü mü?
         [Required]
-        public int ProductCategoryId { get; set; }  // Kategori ID
-  
+        public int CategoryId { get; set; }
+        public IEnumerable<SelectListItem> CategoryList { get; set; }
+
     }
 }

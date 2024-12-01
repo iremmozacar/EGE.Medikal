@@ -17,7 +17,7 @@ namespace EgeApp.Backend.Models
         public bool? IsFreeShipping { get; set; } 
         public bool? IsSpecialProduct { get; set; } 
         public bool? IsSameDayShipping { get; set; } 
-        public int ProductCategoryId { get; set; } 
+        public int CategoryId { get; set; } 
         public Category Category { get; set; }  
         public string? Url { get; set; } 
         public string? Brand { get; set; }  

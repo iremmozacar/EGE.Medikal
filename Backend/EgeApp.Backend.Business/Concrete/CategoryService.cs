@@ -83,7 +83,7 @@ namespace EgeApp.Backend.Business.Concrete
             var categoryDtoList = _mapper.Map<List<CategoryDto>>(categoryList);
             foreach (var categoryDto in categoryDtoList)
             {
-                categoryDto.ProductCount = await _productRepository.GetCountAsync(x => x.ProductCategoryId == categoryDto.Id);
+                categoryDto.ProductCount = await _productRepository.GetCountAsync(x => x.CategoryId == categoryDto.Id);
             }
 
             return ResponseDto<List<CategoryDto>>.Success(categoryDtoList, StatusCodes.Status200OK);

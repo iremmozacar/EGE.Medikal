@@ -19,5 +19,8 @@ namespace EgeApp.Backend.Business.Abstract
         Task<ResponseDto<int>> GetHomeCountAsync(bool isHome = true);
         Task<ResponseDto<NoContent>> UpdateIsActiveAsync(int id);
         Task<ResponseDto<NoContent>> UpdateIsHomeAsync(int id);
-    }
+        Task<ResponseDto<List<ProductDto>>> GetDiscountedProductsAsync();
+        Task<ResponseDto<List<ProductDto>>> GetBestSellersAsync(int topCount = 10);
+    
+}
 }

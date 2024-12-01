@@ -29,12 +29,12 @@
                 {
                     <tr>
                         <td>@product.Name</td>
-                        <td>@product.CategoryName</td>
+                        <td>@(product.Category?.Name ?? "Kategori Yok")</td>
                         <td>@product.Price.ToString("C")</td>
                         <td class="text-center">
                             <label class="switch">
-                                <input asp-for="@product.IsActive" type="checkbox" id="isActive-@product.Id"
-                                    onchange="changeProductStatus('@product.Id')">
+                                <input type="checkbox" id="isActive-@product.Id"
+                                    onchange="changeProductStatus('@product.Id')" @(product.IsActive ? "checked" : "")>
                                 <span class="slider round"></span>
                             </label>
                         </td>
@@ -43,6 +43,7 @@
                                 class="btn btn-sm btn-outline-danger">Düzenle</a>
                         </td>
                     </tr>
+                }
                 }
                 @if (!Model.Any())
                 {
