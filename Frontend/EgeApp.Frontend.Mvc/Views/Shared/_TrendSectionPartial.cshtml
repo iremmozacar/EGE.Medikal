@@ -1,69 +1,4 @@
-﻿@model EgeApp.Frontend.Mvc.Models.Product.ProductsCategoriesViewModel
-
-<div class="container">
-    <h1>Anasayfa</h1>
-
-    <!-- Kategoriler -->
-    <section class="kategoriler-bolumu">
-        <h2>Kategoriler</h2>
-        <ul>
-            @foreach (var kategori in Model.CategoryList)
-            {
-                <li>@kategori.Name</li>
-            }
-        </ul>
-    </section>
-
-    <!-- İndirimdeki Ürünler -->
-    <section class="indirimli-urunler spad">
-        <div class="bolum-basligi">
-            <h4>İndirimdeki Ürünler</h4>
-        </div>
-        <div class="satir">
-            @foreach (var urun in Model.DiscountedProducts)
-            {
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="urun-karti">
-                        <img src="@(!string.IsNullOrEmpty(urun.ImageUrl) ? urun.ImageUrl : "/images/yer-tutucu.jpg")"
-                            alt="@urun.Name" />
-                        <h5>@urun.Name</h5>
-                        <p>@urun.Description</p>
-                        <span>Fiyat: @String.Format("{0:C}", urun.Price)</span>
-                        @if (urun.DiscountedPrice.HasValue && urun.DiscountedPrice > 0)
-                        {
-                            <span class="indirimli-fiyat">İndirimli: @String.Format("{0:C}", urun.DiscountedPrice)</span>
-                        }
-                        <button class="sepete-ekle-btn" onclick="sepeteEkle(@urun.Id)">Sepete Ekle</button>
-                    </div>
-                </div>
-            }
-        </div>
-    </section>
-
-    <!-- Çok Satanlar -->
-    <section class="cok-satanlar spad">
-        <div class="bolum-basligi">
-            <h4>Çok Satanlar</h4>
-        </div>
-        <div class="satir">
-            @foreach (var urun in Model.BestSellers)
-            {
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="urun-karti">
-                        <img src="@(!string.IsNullOrEmpty(urun.ImageUrl) ? urun.ImageUrl : "/images/yer-tutucu.jpg")"
-                            alt="@urun.Name" />
-                        <h5>@urun.Name</h5>
-                        <p>@urun.Description</p>
-                        <span>Fiyat: @String.Format("{0:C}", urun.Price)</span>
-                        <button class="sepete-ekle-btn" onclick="sepeteEkle(@urun.Id)">Sepete Ekle</button>
-                    </div>
-                </div>
-            }
-        </div>
-    </section>
-</div>
-
-<script>
+﻿<script>
     function sepeteEkle(urunId) {
         fetch('/api/cart/add', {
             method: 'POST',
@@ -85,5 +20,3 @@
             });
     }
 </script>
-
-<link rel="stylesheet" href="/ui/css/style.css">

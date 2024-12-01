@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Ac5BcK46e9vnhfQ3vXO2ctN7i3/PQKeWECl/u6Qv3es=",
+  "Hash": "DKVF1/A14A1ysSxMOWB2VFGQwhYAdjCL0m7TfGZMO8s=",
   "Source": "EgeApp.Frontend.Mvc",
   "BasePath": "_content/EgeApp.Frontend.Mvc",
   "Mode": "Default",
@@ -42024,6 +42024,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/uploads/categories/ca8c64a2-db7b-40ab-bd73-0b0f3034e18e"
+    },
+    {
+      "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/uploads/categories/d23f95c8-aa63-4e09-a08d-11eecabd0429_category6.png",
+      "SourceId": "EgeApp.Frontend.Mvc",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/",
+      "BasePath": "_content/EgeApp.Frontend.Mvc",
+      "RelativePath": "uploads/categories/d23f95c8-aa63-4e09-a08d-11eecabd0429_category6.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/categories/d23f95c8-aa63-4e09-a08d-11eecabd0429_category6.png"
     },
     {
       "Identity": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/uploads/categories/e6507dc6-32d3-4d15-bc49-3676ac1b3e06",

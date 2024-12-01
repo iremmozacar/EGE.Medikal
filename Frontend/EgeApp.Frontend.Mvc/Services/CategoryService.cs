@@ -13,147 +13,111 @@ namespace EgeApp.Frontend.Mvc.Services
     public static class CategoryService
     {
         private const string BaseUrl = "http://localhost:5200/api/Categories";
+        private static readonly HttpClient HttpClient = new();
 
         public static async Task<ResponseModel<List<CategoryViewModel>>> GetActives(bool isActive = true)
         {
-            using (HttpClient httpClient = new())
-            {
-                HttpResponseMessage httpResponseMessage = new();
-                try
-                {
-                    httpResponseMessage = await httpClient.GetAsync($"{BaseUrl}/GetActives/{isActive}");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    return new ResponseModel<List<CategoryViewModel>> { Data = null, Error = "Server Hatası!", IsSucceeded = false };
-                }
-
-                string contentResponse = await httpResponseMessage.Content.ReadAsStringAsync();
-                var response = JsonConvert.DeserializeObject<ResponseModel<List<CategoryViewModel>>>(contentResponse);
-                return response;
-            }
+            return await GetAsync<List<CategoryViewModel>>($"{BaseUrl}/GetActives/{isActive}");
         }
 
         public static async Task<ResponseModel<List<CategoryViewModel>>> GetAllAsync()
         {
-            using (HttpClient httpClient = new())
-            {
-                HttpResponseMessage httpResponseMessage = await httpClient.GetAsync($"{BaseUrl}/GetAll");
-                string contentResponse = await httpResponseMessage.Content.ReadAsStringAsync();
-                var response = JsonConvert.DeserializeObject<ResponseModel<List<CategoryViewModel>>>(contentResponse);
-                return response;
-            }
+            return await GetAsync<List<CategoryViewModel>>($"{BaseUrl}/GetAll");
         }
 
         public static async Task<ResponseModel<CategoryViewModel>> GetByIdAsync(int id)
         {
-            using (HttpClient httpClient = new())
-            {
-                try
-                {
-                    HttpResponseMessage httpResponseMessage = await httpClient.GetAsync($"{BaseUrl}/{id}");
-
-                    if (!httpResponseMessage.IsSuccessStatusCode)
-                    {
-                        return new ResponseModel<CategoryViewModel>
-                        {
-                            IsSucceeded = false,
-                            Error = $"Kategori bulunamadı. Hata kodu: {httpResponseMessage.StatusCode}"
-                        };
-                    }
-
-                    string contentResponse = await httpResponseMessage.Content.ReadAsStringAsync();
-                    var response = JsonConvert.DeserializeObject<ResponseModel<CategoryViewModel>>(contentResponse);
-                    return response ?? new ResponseModel<CategoryViewModel>
-                    {
-                        IsSucceeded = false,
-                        Error = "Sunucudan geçersiz bir yanıt alındı."
-                    };
-                }
-                catch (Exception ex)
-                {
-                    return new ResponseModel<CategoryViewModel>
-                    {
-                        IsSucceeded = false,
-                        Error = $"Bir hata oluştu: {ex.Message}"
-                    };
-                }
-            }
+            return await GetAsync<CategoryViewModel>($"{BaseUrl}/{id}");
         }
+
         public static async Task<ResponseModel<List<SelectListItem>>> GetSelectListItemsAsync()
         {
-            ResponseModel<List<SelectListItem>> result = new();
             var response = await GetActives();
-            if (response.IsSucceeded)
+            if (!response.IsSucceeded)
             {
-                result.Data = response.Data
-                    .Select(x => new SelectListItem
-                    {
-                        Text = x.Name,
-                        Value = x.Id.ToString()
-                    }).ToList();
-                result.IsSucceeded = true;
+                return new ResponseModel<List<SelectListItem>> { IsSucceeded = false, Error = response.Error };
             }
-            result.Error = response.Error;
-            result.IsSucceeded = response.IsSucceeded;
-            return result;
+
+            return new ResponseModel<List<SelectListItem>>
+            {
+                IsSucceeded = true,
+                Data = response.Data.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList()
+            };
         }
 
         public static async Task<ResponseModel<CategoryViewModel>> CreateAsync(CategoryCreateViewModel model)
         {
-            using (HttpClient httpClient = new())
-            {
-                var jsonContent = JsonConvert.SerializeObject(model);
-                var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-                HttpResponseMessage httpResponseMessage = await httpClient.PostAsync($"{BaseUrl}/Create", content);
-
-                if (!httpResponseMessage.IsSuccessStatusCode)
-                {
-                    return new ResponseModel<CategoryViewModel>
-                    {
-                        IsSucceeded = false,
-                        Error = $"Kategori oluşturulamadı. Hata kodu: {httpResponseMessage.StatusCode}"
-                    };
-                }
-
-                string contentResponse = await httpResponseMessage.Content.ReadAsStringAsync();
-                var response = JsonConvert.DeserializeObject<ResponseModel<CategoryViewModel>>(contentResponse);
-                return response ?? new ResponseModel<CategoryViewModel> { IsSucceeded = false, Error = "Bilinmeyen bir hata oluştu." };
-            }
+            return await PostAsync<CategoryCreateViewModel, CategoryViewModel>($"{BaseUrl}/Create", model);
         }
 
         public static async Task<ResponseModel<bool>> UpdateAsync(CategoryUpdateViewModel model)
         {
-            using (HttpClient httpClient = new())
-            {
-                var jsonContent = JsonConvert.SerializeObject(model);
-                var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-                HttpResponseMessage httpResponseMessage = await httpClient.PutAsync($"{BaseUrl}/Update", content);
-
-                if (!httpResponseMessage.IsSuccessStatusCode)
-                {
-                    return new ResponseModel<bool>
-                    {
-                        IsSucceeded = false,
-                        Error = $"Kategori güncellenemedi. Hata kodu: {httpResponseMessage.StatusCode}"
-                    };
-                }
-
-                string contentResponse = await httpResponseMessage.Content.ReadAsStringAsync();
-                var response = JsonConvert.DeserializeObject<ResponseModel<bool>>(contentResponse);
-                return response ?? new ResponseModel<bool> { IsSucceeded = false, Error = "Bilinmeyen bir hata oluştu." };
-            }
+            return await PutAsync<CategoryUpdateViewModel, bool>($"{BaseUrl}/Update", model);
         }
 
         public static async Task<ResponseModel<bool>> DeleteAsync(int id)
         {
-            using (HttpClient httpClient = new())
+            return await DeleteAsync<bool>($"{BaseUrl}/Delete/{id}");
+        }
+
+        // Yardımcı Metotlar
+        private static async Task<ResponseModel<T>> GetAsync<T>(string url)
+        {
+            try
             {
-                HttpResponseMessage httpResponseMessage = await httpClient.DeleteAsync($"{BaseUrl}/Delete/{id}");
-                string contentResponse = await httpResponseMessage.Content.ReadAsStringAsync();
-                var response = JsonConvert.DeserializeObject<ResponseModel<bool>>(contentResponse);
-                return response;
+                var response = await HttpClient.GetAsync(url);
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<ResponseModel<T>>(content) ?? new ResponseModel<T> { IsSucceeded = false, Error = "Invalid response" };
+            }
+            catch (Exception ex)
+            {
+                return new ResponseModel<T> { IsSucceeded = false, Error = $"Exception: {ex.Message}" };
+            }
+        }
+
+        private static async Task<ResponseModel<TResult>> PostAsync<TRequest, TResult>(string url, TRequest request)
+        {
+            try
+            {
+                var jsonContent = JsonConvert.SerializeObject(request);
+                var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                var response = await HttpClient.PostAsync(url, content);
+                var contentResponse = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<ResponseModel<TResult>>(contentResponse) ?? new ResponseModel<TResult> { IsSucceeded = false, Error = "Invalid response" };
+            }
+            catch (Exception ex)
+            {
+                return new ResponseModel<TResult> { IsSucceeded = false, Error = $"Exception: {ex.Message}" };
+            }
+        }
+
+        private static async Task<ResponseModel<TResult>> PutAsync<TRequest, TResult>(string url, TRequest request)
+        {
+            try
+            {
+                var jsonContent = JsonConvert.SerializeObject(request);
+                var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                var response = await HttpClient.PutAsync(url, content);
+                var contentResponse = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<ResponseModel<TResult>>(contentResponse) ?? new ResponseModel<TResult> { IsSucceeded = false, Error = "Invalid response" };
+            }
+            catch (Exception ex)
+            {
+                return new ResponseModel<TResult> { IsSucceeded = false, Error = $"Exception: {ex.Message}" };
+            }
+        }
+
+        private static async Task<ResponseModel<TResult>> DeleteAsync<TResult>(string url)
+        {
+            try
+            {
+                var response = await HttpClient.DeleteAsync(url);
+                var contentResponse = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<ResponseModel<TResult>>(contentResponse) ?? new ResponseModel<TResult> { IsSucceeded = false, Error = "Invalid response" };
+            }
+            catch (Exception ex)
+            {
+                return new ResponseModel<TResult> { IsSucceeded = false, Error = $"Exception: {ex.Message}" };
             }
         }
     }

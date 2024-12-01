@@ -55,5 +55,27 @@ namespace EgeApp.Backend.API.Controllers
             var response = await _categoryService.GetByIdAsync(id);
             return CreateActionResult(response);
         }
+
+        [HttpGet("{isActive?}")]
+        public async Task<IActionResult> GetActives(bool isActive = true)
+        {
+            var response = await _categoryService.GetActivesAsync(isActive);
+            return CreateActionResult(response);
+        }
+
+        [HttpGet("{isActive?}")]
+        public async Task<IActionResult> GetActivesCount(bool isActive = true)
+        {
+            var response = await _categoryService.GetActivesCountAsync(isActive);
+            return CreateActionResult(response);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetCount()
+        {
+            var response = await _categoryService.GetCountAsync();
+            return CreateActionResult(response);
+        }
+
     }
 }
