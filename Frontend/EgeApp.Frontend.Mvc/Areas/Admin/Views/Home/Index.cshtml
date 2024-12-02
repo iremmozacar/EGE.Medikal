@@ -1,72 +1,99 @@
 ﻿@{
-  ViewData["PageHeader"] = "Admin Panel Anasayfa";
+  ViewData["PageHeader"] = "Yönetim Paneli - Ana Sayfa";
   ViewData["ShowButton"] = false;
   ViewData["ButtonTitle"] = "";
   ViewData["ButtonLink"] = "";
 }
 
-
-<!-- Small boxes (Stat box) -->
 <div class="row">
-  <div class="col-lg-3 col-6">
-    <!-- small box -->
-    <div class="small-box bg-info">
-      <div class="inner">
-        <h3>150</h3>
-
-        <p>New Orders</p>
+  <!-- Yeni Siparişler -->
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header bg-info text-white">
+        <h3 class="card-title"><i class="ion ion-bag"></i> Yeni Siparişler</h3>
       </div>
-      <div class="icon">
-        <i class="ion ion-bag"></i>
+      <div class="card-body">
+        <ul class="list-group">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            İrem Özacar
+            <span class="badge bg-primary rounded-pill">2 saat önce</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Ali Yıldırım
+            <span class="badge bg-primary rounded-pill">4 saat önce</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Ayşe Demir
+            <span class="badge bg-primary rounded-pill">6 saat önce</span>
+          </li>
+        </ul>
       </div>
-      <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
     </div>
   </div>
-  <!-- ./col -->
-  <div class="col-lg-3 col-6">
-    <!-- small box -->
-    <div class="small-box bg-success">
-      <div class="inner">
-        <h3>53<sup style="font-size: 20px">%</sup></h3>
 
-        <p>Bounce Rate</p>
+  <!-- Yeni Kullanıcılar -->
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header bg-success text-white">
+        <h3 class="card-title"><i class="ion ion-person-add"></i> Yeni Kullanıcılar</h3>
       </div>
-      <div class="icon">
-        <i class="ion ion-stats-bars"></i>
+      <div class="card-body">
+        <ul class="list-group">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Louie
+            <span class="badge bg-success rounded-pill">33 dakika önce</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Zeynep Koç
+            <span class="badge bg-success rounded-pill">2 saat önce</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Mehmet Çetin
+            <span class="badge bg-success rounded-pill">4 saat önce</span>
+          </li>
+        </ul>
       </div>
-      <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
     </div>
   </div>
-  <!-- ./col -->
-  <div class="col-lg-3 col-6">
-    <!-- small box -->
-    <div class="small-box bg-warning">
-      <div class="inner">
-        <h3>44</h3>
-
-        <p>User Registrations</p>
-      </div>
-      <div class="icon">
-        <i class="ion ion-person-add"></i>
-      </div>
-      <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-    </div>
-  </div>
-  <!-- ./col -->
-  <div class="col-lg-3 col-6">
-    <!-- small box -->
-    <div class="small-box bg-danger">
-      <div class="inner">
-        <h3>65</h3>
-
-        <p>Unique Visitors</p>
-      </div>
-      <div class="icon">
-        <i class="ion ion-pie-graph"></i>
-      </div>
-      <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-    </div>
-  </div>
-  <!-- ./col -->
 </div>
-<!-- /.row -->
+
+<!-- Son Aktiviteler - Genişletilmiş -->
+<div class="row mt-4">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header bg-primary text-white">
+        <h3 class="card-title"><i class="ion ion-stats-bars"></i> Son Aktiviteler</h3>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Aktivite</th>
+                <th>Tarih/Saat</th>
+                <th>Detaylar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Yeni sipariş alındı</td>
+                <td>03/12/2024 10:45</td>
+                <td>İrem Özacar - 200 TL</td>
+              </tr>
+              <tr>
+                <td>Yeni kullanıcı kaydı</td>
+                <td>03/12/2024 09:30</td>
+                <td>Louie - louie@gmail.com</td>
+              </tr>
+              <tr>
+                <td>Sistem güncellemesi</td>
+                <td>02/12/2024 18:00</td>
+                <td>Sunucu optimize edildi</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
