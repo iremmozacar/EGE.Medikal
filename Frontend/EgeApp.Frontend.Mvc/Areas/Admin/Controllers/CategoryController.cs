@@ -84,8 +84,14 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int id)
         {
+            if (id <= 0)
+            {
+                _notyfService.Error("Geçersiz kategori ID'si.");
+                return RedirectToAction("Index");
+            }
+
             var response = await CategoryService.GetByIdAsync(id);
-            if (!response.IsSucceeded)
+            if (!response.IsSucceeded || response.Data == null)
             {
                 _notyfService.Error(response.Error ?? "Kategori bulunamadı.");
                 return RedirectToAction("Index");
@@ -97,6 +103,7 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
                 Name = response.Data.Name,
                 Description = response.Data.Description,
                 IsActive = response.Data.IsActive,
+                IsHome = response.Data.IsHome,
                 ImageUrl = response.Data.ImageUrl
             };
 
@@ -113,11 +120,11 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
                 return View(model);
             }
 
-            // Fotoğraf yükleme işlemi
             if (model.Image != null)
             {
                 try
                 {
+                    // Yeni fotoğraf kaydet
                     var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(model.Image.FileName)}";
                     var savePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads/categories", fileName);
 
@@ -126,6 +133,7 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
                         await model.Image.CopyToAsync(stream);
                     }
 
+                    // Eski fotoğrafı güncelle
                     model.ImageUrl = $"/uploads/categories/{fileName}";
                 }
                 catch (Exception ex)
@@ -135,7 +143,6 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
                 }
             }
 
-            // API'ye gönderilecek model
             var result = await CategoryService.UpdateAsync(model);
             if (!result.IsSucceeded)
             {
@@ -143,8 +150,49 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
                 return View(model);
             }
 
-            _notyfService.Success("Kategori başarıyla güncellendi.");
+            TempData["SuccessMessage"] = "Kategori başarıyla güncellendi!";
+            return RedirectToAction("Update", new { id = model.Id });
+        }
+
+        
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (id <= 0)
+            {
+                _notyfService.Error("Geçersiz kategori ID'si.");
+                return RedirectToAction("Index");
+            }
+
+            var response = await CategoryService.GetByIdAsync(id);
+            if (!response.IsSucceeded || response.Data == null)
+            {
+                _notyfService.Error(response.Error ?? "Kategori bulunamadı.");
+                return RedirectToAction("Index");
+            }
+
+            return View(response.Data);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ConfirmDelete(int id)
+        {
+            if (id <= 0)
+            {
+                _notyfService.Error("Geçersiz kategori ID'si.");
+                return RedirectToAction("Index");
+            }
+
+            var response = await CategoryService.DeleteAsync(id);
+            if (!response.IsSucceeded)
+            {
+                _notyfService.Error(response.Error ?? "Kategori silinemedi.");
+                return RedirectToAction("Index");
+            }
+
+            _notyfService.Success("Kategori başarıyla silindi.");
             return RedirectToAction("Index");
         }
     }
-    }
+}

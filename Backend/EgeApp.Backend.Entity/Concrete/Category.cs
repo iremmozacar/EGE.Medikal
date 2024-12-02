@@ -11,6 +11,8 @@ namespace EgeApp.Backend.Models
         public string Description { get; set; }
         public string Url { get; set; }
         public bool IsActive { get; set; }
+        public bool IsHome { get; set; }
+
         public string ImageUrl { get; set; }
         public ICollection<Product> Products { get; set; } = new List<Product>();
         public DateTime CreatedDate { get; set; } = DateTime.Now;

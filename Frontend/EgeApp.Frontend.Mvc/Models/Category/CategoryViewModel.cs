@@ -25,6 +25,9 @@ namespace EgeApp.Frontend.Mvc.Models.Category
 
         [JsonPropertyName("productCount")]
         public int ProductCount { get; set; }
+        
+        [JsonPropertyName("isHome")]
+        public bool IsHome { get; set; }
 
         [JsonPropertyName("createdDate")]
         public DateTime CreatedDate { get; set; }

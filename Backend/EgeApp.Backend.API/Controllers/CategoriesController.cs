@@ -2,6 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using EgeApp.Backend.Business.Abstract;
 using EgeApp.Backend.Shared.Dtos.CategoryDtos;
 using EgeApp.Backend.Shared.Helpers;
+using System.Linq.Expressions;
+using EgeApp.Backend.Models;
+using EgeApp.Backend.Shared.Dtos.ResponseDtos;
 
 namespace EgeApp.Backend.API.Controllers
 {
@@ -32,14 +35,35 @@ namespace EgeApp.Backend.API.Controllers
             return CreateActionResult(response);
         }
 
-        // Kategori silme
+        // // Kategori silme
+        // [HttpDelete("{id}")]
+        // public async Task<IActionResult> Delete(int id)
+        // {
+        //     var response = await _categoryService.DeleteAsync(id);
+        //     return CreateActionResult(response);
+        // }
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var response = await _categoryService.DeleteAsync(id);
-            return CreateActionResult(response);
-        }
 
+            if (response.IsSucceeded)
+            {
+                return Ok(new ResponseDto<bool>
+                {
+                    Data = true,
+                    IsSucceeded = true,
+                    Error = null
+                });
+            }
+
+            return BadRequest(new ResponseDto<bool>
+            {
+                Data = false,
+                IsSucceeded = false,
+                Error = response.Error ?? "Silme işlemi başarısız."
+            });
+        }
         // Tüm kategorileri getirme (Kategori Listesi için kullanılacak)
         [HttpGet]
         public async Task<IActionResult> GetAll()
@@ -76,6 +100,23 @@ namespace EgeApp.Backend.API.Controllers
             var response = await _categoryService.GetCountAsync();
             return CreateActionResult(response);
         }
+        [HttpGet]
+        public async Task<IActionResult> GetHomeCategories()
+        {
+            var response = await _categoryService.GetHomeCategoriesAsync();
+            return StatusCode(response.StatusCode, response);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetPagedCategories(int pageIndex, int pageSize)
+        {
+            var response = await _categoryService.GetPagedCategoriesAsync(pageIndex, pageSize);
+            return StatusCode(response.StatusCode, response);
+        }
+
+
+
+
 
     }
 }

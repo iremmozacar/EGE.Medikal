@@ -15,7 +15,9 @@ namespace EgeApp.Backend.Business.Mappings
             CreateMap<Category, CategoryCreateDto>().ReverseMap();
             CreateMap<Category, CategoryUpdateDto>().ReverseMap();
 
-            CreateMap<Product, ProductDto>().ReverseMap();
+            CreateMap<Product, ProductDto>()
+         .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category)); 
+            CreateMap<Category, CategoryDto>();
             CreateMap<Product, ProductCreateDto>().ReverseMap();
             CreateMap<Product, ProductUpdateDto>().ReverseMap();
 

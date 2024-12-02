@@ -33,47 +33,73 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
             return View(result.Data);
         }
 
-        [HttpGet]
+        [HttpGet("Create")]
         [Authorize(Roles = "Super Admin")]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             var model = new ProductCreateViewModel();
+
+            var categoriesResponse = await CategoryService.GetSelectListItemsAsync();
+            if (categoriesResponse.IsSucceeded)
+            {
+                model.CategoryList = categoriesResponse.Data;
+            }
+            else
+            {
+                TempData["Error"] = categoriesResponse.Error ?? "Kategoriler yüklenemedi.";
+            }
+
             return View(model);
         }
 
-        [HttpPost]
+        [HttpPost("Create")]
         [Authorize(Roles = "Super Admin")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(ProductCreateViewModel model, IFormFile imageFile)
+        public async Task<IActionResult> Create(ProductCreateViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                _notyfService.Error("Lütfen tüm gerekli alanları doldurun.");
+                _notyfService.Error("Lütfen tüm alanları doldurun.");
+                var categoriesResponse = await CategoryService.GetSelectListItemsAsync();
+                if (categoriesResponse.IsSucceeded)
+                {
+                    model.CategoryList = categoriesResponse.Data;
+                }
                 return View(model);
             }
 
-            if (imageFile != null && imageFile.Length > 0)
+            if (model.Image != null)
             {
-                var uploadResult = await UploadImageAsync(imageFile);
-                if (!uploadResult.IsSuccess)
+                try
                 {
-                    TempData["Error"] = "Fotoğraf yüklenirken bir hata oluştu.";
+                    var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(model.Image.FileName)}";
+                    var savePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads/products", fileName);
+
+                    using (var stream = new FileStream(savePath, FileMode.Create))
+                    {
+                        await model.Image.CopyToAsync(stream);
+                    }
+
+                    model.ImageUrl = $"/uploads/products/{fileName}";
+                }
+                catch (Exception ex)
+                {
+                    _notyfService.Error($"Görsel yüklenirken hata oluştu: {ex.Message}");
                     return View(model);
                 }
-
-                model.ImageUrl = uploadResult.ImageUrl; // Fotoğraf URL'si API'ye gönderilecek.
             }
 
             var result = await ProductService.CreateAsync(model);
             if (!result.IsSucceeded)
             {
-                TempData["Error"] = result.Error ?? "Ürün oluşturulamadı.";
+                _notyfService.Error(result.Error ?? "Ürün oluşturulamadı.");
                 return View(model);
             }
 
             _notyfService.Success("Ürün başarıyla oluşturuldu.");
             return RedirectToAction("Index");
         }
+
 
         [HttpGet]
         public async Task<IActionResult> Update(int id)
@@ -182,26 +208,31 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
         {
             try
             {
+                // Yükleme dizini
                 var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
                 if (!Directory.Exists(uploadsFolder))
                 {
-                    Directory.CreateDirectory(uploadsFolder);
+                    Directory.CreateDirectory(uploadsFolder); // Dizini oluştur
                 }
 
+                // Benzersiz dosya adı oluştur
                 var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
                 var filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
+                // Dosyayı belirtilen yere kaydet
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
                     await imageFile.CopyToAsync(fileStream);
                 }
 
+                // URL oluştur
                 var imageUrl = $"/images/{uniqueFileName}";
                 return (true, imageUrl);
             }
-            catch
+            catch (Exception ex)
             {
-                return (false, null);
+                Console.WriteLine($"Fotoğraf yükleme hatası: {ex.Message}");
+                return (false, null); // Hata durumunda geri döndür
             }
         }
     }

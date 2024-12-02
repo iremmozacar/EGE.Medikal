@@ -29,53 +29,58 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
             return View(roles);
         }
 
-        [NonAction]
-        public async Task<RoleAssignViewModel> InitializeUsers(string id)
+        public async Task<IActionResult> Edit(string id)
         {
+            if (string.IsNullOrEmpty(id))
+            {
+                _notyfService.Error("Rol ID'si eksik veya geçersiz.");
+                return RedirectToAction("Index");
+            }
+
             var role = await _roleManager.FindByIdAsync(id);
+            if (role == null)
+            {
+                _notyfService.Error("Rol bulunamadı.");
+                return RedirectToAction("Index");
+            }
+
             var users = await _userManager.Users.ToListAsync();
-            List<AppUser> members = [];
-            List<AppUser> nonMembers = [];
+            var members = new List<AppUser>();
+            var nonMembers = new List<AppUser>();
+
             foreach (var user in users)
             {
-                var list = await _userManager.IsInRoleAsync(user, role.Name)
-                            ? members
-                            : nonMembers;
+                var list = await _userManager.IsInRoleAsync(user, role.Name) ? members : nonMembers;
                 list.Add(user);
             }
-            RoleAssignViewModel model = new()
+
+            var model = new RoleAssignViewModel
             {
+                RoleId = role.Id,
                 Role = role,
                 Members = members,
                 NonMembers = nonMembers
             };
-            return model;
-        }
 
-        public async Task<IActionResult> Edit(string id)
-        {
-            var model = await InitializeUsers(id);
             return View(model);
         }
+
         [HttpPost]
         public async Task<IActionResult> Edit(RoleAssignViewModel model)
         {
-            // RoleId'nin eksikliğini kontrol et
             if (string.IsNullOrEmpty(model.RoleId))
             {
                 _notyfService.Error("Rol ID'si eksik veya gönderilmedi.");
                 return RedirectToAction("Index");
             }
 
-            // RoleManager üzerinden rolü yükle
-            model.Role = await _roleManager.FindByIdAsync(model.RoleId);
-            if (model.Role == null)
+            var role = await _roleManager.FindByIdAsync(model.RoleId);
+            if (role == null)
             {
-                _notyfService.Error($"Rol bulunamadı. RoleId: {model.RoleId}");
+                _notyfService.Error("Rol bulunamadı.");
                 return RedirectToAction("Index");
             }
 
-            // Kullanıcıları role ekleme
             foreach (var userId in model.IdsAdd ?? new List<string>())
             {
                 var user = await _userManager.FindByIdAsync(userId);
@@ -85,15 +90,16 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
                     continue;
                 }
 
-                var result = await _userManager.AddToRoleAsync(user, model.Role.Name);
+                var result = await _userManager.AddToRoleAsync(user, role.Name);
                 if (!result.Succeeded)
                 {
-                    _notyfService.Error(result.Errors.FirstOrDefault()?.Description ?? "Bilinmeyen bir hata oluştu.");
-                    return View(await InitializeUsers(model.RoleId));
+                    foreach (var error in result.Errors)
+                    {
+                        _notyfService.Error(error.Description);
+                    }
                 }
             }
 
-            // Kullanıcıları rolden çıkarma
             foreach (var userId in model.IdsRemove ?? new List<string>())
             {
                 var user = await _userManager.FindByIdAsync(userId);
@@ -103,15 +109,17 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
                     continue;
                 }
 
-                var result = await _userManager.RemoveFromRoleAsync(user, model.Role.Name);
+                var result = await _userManager.RemoveFromRoleAsync(user, role.Name);
                 if (!result.Succeeded)
                 {
-                    _notyfService.Error(result.Errors.FirstOrDefault()?.Description ?? "Bilinmeyen bir hata oluştu.");
-                    return View(await InitializeUsers(model.RoleId));
+                    foreach (var error in result.Errors)
+                    {
+                        _notyfService.Error(error.Description);
+                    }
                 }
             }
 
-            _notyfService.Success("Rol/Kullanıcı Atama değişiklikleri başarıyla uygulandı!");
+            _notyfService.Success("Rol/Kullanıcı atama işlemleri başarıyla tamamlandı.");
             return RedirectToAction("Index");
         }
     }

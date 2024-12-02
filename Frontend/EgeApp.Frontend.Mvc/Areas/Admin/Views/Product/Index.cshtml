@@ -1,10 +1,11 @@
 ﻿@model List<EgeApp.Frontend.Mvc.Models.Product.ProductViewModel>
+
 @{
     ViewData["Title"] = "Ürünler";
-    ViewData["PageHeader"] = "Ürünler";
+    ViewData["PageHeader"] = "";
 }
 
-<div class="container py-5">
+<div class="container-fluid py-5">
     <div class="p-4 rounded shadow-sm bg-white">
         <!-- Ürünler Başlığı ve Ürün Ekle Butonu -->
         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -14,50 +15,65 @@
         </div>
 
         <!-- Ürünler Tablosu -->
-        <table id="product-data-table" class="table table-hover align-middle">
-            <thead class="table-light">
-                <tr>
-                    <th>Ürün Adı</th>
-                    <th>Kategori</th>
-                    <th>Fiyat</th>
-                    <th class="text-center">Durum</th>
-                    <th class="text-center">İşlemler</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var product in Model)
-                {
+        <div class="table-responsive">
+            <table id="product-data-table" class="table table-hover align-middle">
+                <thead class="table-light">
                     <tr>
-                        <td>@product.Name</td>
-                        <td>@(product.Category?.Name ?? "Kategori Yok")</td>
-                        <td>@product.Price.ToString("C")</td>
-                        <td class="text-center">
-                            <label class="switch">
-                                <input type="checkbox" id="isActive-@product.Id"
-                                    onchange="changeProductStatus('@product.Id')" @(product.IsActive ? "checked" : "")>
-                                <span class="slider round"></span>
-                            </label>
-                        </td>
-                        <td class="text-center">
-                            <a asp-area="Admin" asp-controller="Product" asp-action="Update" asp-route-id="@product.Id"
-                                class="btn btn-sm btn-outline-danger">Düzenle</a>
-                        </td>
+                        <th>Ürün Adı</th>
+                        <th>Kategori</th>
+                        <th>Fiyat</th>
+                        <th class="text-center">Aktif</th> <!-- Aktif mi? Sütunu -->
+                        <th class="text-center">Anasayfa</th> <!-- Anasayfa mı? Sütunu -->
+                        <th class="text-center">İşlemler</th>
                     </tr>
-                }
-                }
-                @if (!Model.Any())
-                {
-                    <tr>
-                        <td colspan="5" class="text-center text-muted">Ürün bulunamadı.</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var product in Model)
+                    {
+                        <tr>
+                            <td>@product.Name</td>
+                            <td>@(product.Category?.Name ?? "Kategori Yok")</td>
+                            <td>@product.Price.ToString("C")</td>
+                            <td class="text-center">
+                                <label class="switch">
+                                    <input type="checkbox" id="isActive-@product.Id"
+                                        onchange="changeProductStatus('@product.Id', 'IsActive')" @(product.IsActive ?
+                                    "checked" : "")>
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                            <td class="text-center">
+                                <label class="switch">
+                                    <input type="checkbox" id="isHome-@product.Id"
+                                        onchange="changeProductStatus('@product.Id', 'IsHome')" @(product.IsHome ? "checked"
+                                    : "")>
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                            <td class="text-center">
+                                <a asp-area="Admin" asp-controller="Product" asp-action="Update" asp-route-id="@product.Id"
+                                    class="btn btn-sm btn-outline-danger">Düzenle</a>
+                            </td>
+                        </tr>
+                    }
+                    @if (!Model.Any())
+                    {
+                        <tr>
+                            <td colspan="6" class="text-center text-muted">Ürün bulunamadı.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
 @section Styles {
     <style>
+        .container-fluid {
+            max-width: 95%;
+        }
+
         .switch {
             position: relative;
             display: inline-block;
@@ -107,15 +123,15 @@
 
 @section Scripts {
     <script>
-        const changeProductStatus = function (productId) {
+        const changeProductStatus = function (productId, field) {
             $.ajax({
-                url: `/admin/product/updateisactive/${productId}`,
+                url: `/admin/product/updatefield/${productId}?field=${field}`,
                 type: 'POST',
                 success: function (res) {
-                    console.log(res);
+                    console.log(`${field} güncellendi:`, res);
                 },
                 error: function (err) {
-                    console.error(err);
+                    console.error(`${field} güncellenemedi:`, err);
                 }
             });
         };

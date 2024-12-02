@@ -19,6 +19,8 @@ namespace EgeApp.Frontend.Mvc.Models.Category
         [JsonPropertyName("imageUrl")]
         [Display(Name = "Kategori Resmi")]
         public string ImageUrl { get; set; }
+        [JsonPropertyName("isHome")]
+        public bool IsHome { get; set; }
 
 
         [JsonIgnore]

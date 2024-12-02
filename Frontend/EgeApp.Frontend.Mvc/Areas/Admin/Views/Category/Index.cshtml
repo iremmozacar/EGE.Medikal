@@ -1,8 +1,7 @@
 ﻿@model List<EgeApp.Frontend.Mvc.Models.Category.CategoryViewModel>
-
 @{
     ViewData["Title"] = "Kategoriler";
-    ViewData["PageHeader"] = "Kategoriler";
+    ViewData["PageHeader"] = "";
 }
 
 <div class="container py-5">
@@ -14,6 +13,7 @@
                 style="background-color: #002855;">Kategori Ekle</a>
         </div>
 
+
         <!-- Kategoriler Tablosu -->
         <table id="category-data-table" class="table table-hover align-middle">
             <thead class="table-light">
@@ -21,36 +21,47 @@
                     <th>Kategori Adı</th>
                     <th>Açıklama</th>
                     <th class="text-center">Aktif</th>
+                    <th class="text-center">Ana Sayfa</th>
                     <th class="text-center">İşlemler</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var category in Model)
+                @if (Model.Any())
                 {
-                    <tr>
-                        <td>@category.Name</td>
-                        <td>@category.Description</td>
-                        <td class="text-center">
-                            <label class="switch">
-                                <input type="checkbox" id="isActive-@category.Id" @(category.IsActive ? "checked" : "")
-                                    onchange="changeCategoryStatus(@category.Id)">
-                                <span class="slider round"></span>
-                            </label>
-                        </td>
-                        <td class="text-center">
-                            <div class="btn-group">
-                                <a asp-area="Admin" asp-controller="Category" asp-action="Edit" asp-route-id="@category.Id"
-                                    class="btn btn-sm text-white fw-bold" style="background-color: #002855;">Düzenle</a>
-                                <a href="javascript:void(0);" onclick="deleteCategory(@category.Id)"
-                                    class="btn btn-sm text-white fw-bold" style="background-color: #8a0611;">Sil</a>
-                            </div>
-                        </td>
-                    </tr>
+                    foreach (var category in Model)
+                    {
+                        <tr>
+                            <td>@category.Name</td>
+                            <td>@category.Description</td>
+                            <td class="text-center">
+                                <label class="switch">
+                                    <input type="checkbox" id="isActive-@category.Id" @(category.IsActive ? "checked" : "")
+                                        onchange="changeCategoryStatus(@category.Id)">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                            <td class="text-center">
+                                <label class="switch">
+                                    <input type="checkbox" id="isHome-@category.Id" @(category.IsHome ? "checked" : "")
+                                        onchange="changeHomeStatus(@category.Id)">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                            <td class="text-center">
+                                <div class="btn-group">
+                                    <a asp-area="Admin" asp-controller="Category" asp-action="Update" asp-route-id="@category.Id"
+                                        class="btn btn-sm text-white fw-bold" style="background-color: #002855;">Düzenle</a>
+                                    <a href="javascript:void(0);" onclick="deleteCategory(@category.Id)"
+                                        class="btn btn-sm text-white fw-bold" style="background-color: #8a0611;">Sil</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
                 }
-                @if (!Model.Any())
+                else
                 {
                     <tr>
-                        <td colspan="4" class="text-center text-muted">Kategori bulunamadı.</td>
+                        <td colspan="5" class="text-center text-muted">Kategori bulunamadı.</td>
                     </tr>
                 }
             </tbody>
@@ -112,6 +123,19 @@
         function changeCategoryStatus(id) {
             $.ajax({
                 url: '@Url.Action("UpdateIsActive", "Category")/' + id,
+                type: 'POST',
+                success: function (result) {
+                    // Başarılı işlem sonrası yapılacaklar
+                },
+                error: function () {
+                    // Hata durumu
+                }
+            });
+        }
+
+        function changeHomeStatus(id) {
+            $.ajax({
+                url: '@Url.Action("UpdateIsHome", "Category")/' + id,
                 type: 'POST',
                 success: function (result) {
                     // Başarılı işlem sonrası yapılacaklar

@@ -5,6 +5,8 @@
         public int Id { get; set; }               // Kategori ID
         public string Name { get; set; }         // Kategori adı
         public bool IsActive { get; set; }       // Aktiflik durumu
+        public bool IsHome { get; set; }       
+
         public string Url { get; set; }          // Kategori URL (otomatik oluşturuluyor)
         public string Description { get; set; } // Kategori açıklaması
         public int ProductCount { get; set; }

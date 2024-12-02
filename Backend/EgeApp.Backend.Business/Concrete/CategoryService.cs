@@ -12,6 +12,7 @@ using EgeApp.Backend.Models;
 using Microsoft.EntityFrameworkCore;
 using EgeApp.Backend.Data;
 using System.Xml.Serialization;
+using System.Linq.Expressions;
 
 namespace EgeApp.Backend.Business.Concrete
 {
@@ -133,6 +134,42 @@ namespace EgeApp.Backend.Business.Concrete
             }
             return ResponseDto<int>.Success(count, StatusCodes.Status200OK);
         }
+
+        public async Task<ResponseDto<List<CategoryDto>>> GetHomeCategoriesAsync()
+        {
+            var homeCategories = await _categoryRepository.GetHomeAsync();
+            var mappedCategories = _mapper.Map<List<CategoryDto>>(homeCategories);
+            return ResponseDto<List<CategoryDto>>.Success(mappedCategories, StatusCodes.Status200OK);
+        }
+
+        public async Task<ResponseDto<(List<CategoryDto>, int)>> GetPagedCategoriesAsync(int pageIndex, int pageSize)
+        {
+            var (categories, totalCount) = await _categoryRepository.GetPagedAsync(pageIndex, pageSize);
+            var mappedCategories = _mapper.Map<List<CategoryDto>>(categories);
+            return ResponseDto<(List<CategoryDto>, int)>.Success((mappedCategories, totalCount), StatusCodes.Status200OK);
+        }
+
+        public async Task<ResponseDto<List<CategoryDto>>> GetSortedCategoriesAsync<TKey>(Expression<Func<Category, TKey>> orderBy, bool isDescending = false)
+        {
+            var sortedCategories = await _categoryRepository.GetSortedAsync(orderBy, isDescending);
+            var mappedCategories = _mapper.Map<List<CategoryDto>>(sortedCategories);
+            return ResponseDto<List<CategoryDto>>.Success(mappedCategories, StatusCodes.Status200OK);
+        }
+
+        public async Task<ResponseDto<NoContent>> AddCategoriesAsync(IEnumerable<CategoryCreateDto> categories)
+        {
+            var entities = _mapper.Map<IEnumerable<Category>>(categories);
+            await _categoryRepository.AddRangeAsync(entities);
+            return ResponseDto<NoContent>.Success(StatusCodes.Status201Created);
+        }
+
+        public async Task<ResponseDto<NoContent>> UpdateCategoriesAsync(IEnumerable<CategoryUpdateDto> categories)
+        {
+            var entities = _mapper.Map<IEnumerable<Category>>(categories);
+            await _categoryRepository.UpdateRangeAsync(entities);
+            return ResponseDto<NoContent>.Success(StatusCodes.Status200OK);
+        }
+
 
         public async Task<ResponseDto<CategoryDto>> UpdateAsync(CategoryUpdateDto categoryUpdateDto)
         {

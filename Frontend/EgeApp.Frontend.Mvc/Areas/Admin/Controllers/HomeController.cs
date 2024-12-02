@@ -12,5 +12,12 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
             return View();
         }
 
+        
+            public IActionResult Error()
+            {
+                return View();
+            }
+        }
+
     }
-}
+

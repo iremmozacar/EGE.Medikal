@@ -27,24 +27,108 @@ namespace EgeApp.Frontend.Mvc.Services
 
         public static async Task<ResponseModel<CategoryViewModel>> GetByIdAsync(int id)
         {
-            return await GetAsync<CategoryViewModel>($"{BaseUrl}/{id}");
+            return await GetAsync<CategoryViewModel>($"{BaseUrl}/GetById/{id}");
         }
 
         public static async Task<ResponseModel<List<SelectListItem>>> GetSelectListItemsAsync()
         {
-            var response = await GetActives();
-            if (!response.IsSucceeded)
+            try
             {
-                return new ResponseModel<List<SelectListItem>> { IsSucceeded = false, Error = response.Error };
-            }
+                // Aktif kategorileri getir
+                var response = await GetActives();
+                if (!response.IsSucceeded)
+                {
+                    return new ResponseModel<List<SelectListItem>>
+                    {
+                        IsSucceeded = false,
+                        Error = response.Error ?? "Kategoriler yüklenemedi."
+                    };
+                }
 
-            return new ResponseModel<List<SelectListItem>>
+                // Kategorileri SelectListItem formatına çevir
+                var selectListItems = response.Data.Select(c => new SelectListItem
+                {
+                    Value = c.Id.ToString(),
+                    Text = c.Name
+                }).ToList();
+
+                return new ResponseModel<List<SelectListItem>>
+                {
+                    IsSucceeded = true,
+                    Data = selectListItems
+                };
+            }
+            catch (Exception ex)
             {
-                IsSucceeded = true,
-                Data = response.Data.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList()
+                return new ResponseModel<List<SelectListItem>>
+                {
+                    IsSucceeded = false,
+                    Error = $"Exception: {ex.Message}"
+                };
+            }
+        }
+        public static async Task<ResponseModel<List<CategoryViewModel>>> GetAllCategoriesWithStatusAsync()
+        {
+            try
+            {
+                // Tüm kategorileri getir
+                var response = await GetAllAsync();
+                if (!response.IsSucceeded)
+                {
+                    return new ResponseModel<List<CategoryViewModel>>
+                    {
+                        IsSucceeded = false,
+                        Error = response.Error ?? "Kategoriler yüklenemedi."
+                    };
+                }
+
+                // Döndürülen kategorileri model listesine dönüştür
+                return new ResponseModel<List<CategoryViewModel>>
+                {
+                    IsSucceeded = true,
+                    Data = response.Data
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ResponseModel<List<CategoryViewModel>>
+                {
+                    IsSucceeded = false,
+                    Error = $"Exception: {ex.Message}"
+                };
+            }
+        }
+
+        public static async Task<ResponseModel<List<CategoryViewModel>>> GetCategoriesWithProductsCountAsync()
+{
+    try
+    {
+        // Tüm kategorileri ürün sayılarıyla getir
+        var response = await GetAsync<List<CategoryViewModel>>($"{BaseUrl}/GetCategoriesWithProductsCount");
+        if (!response.IsSucceeded)
+        {
+            return new ResponseModel<List<CategoryViewModel>>
+            {
+                IsSucceeded = false,
+                Error = response.Error ?? "Kategoriler yüklenemedi."
             };
         }
 
+        return new ResponseModel<List<CategoryViewModel>>
+        {
+            IsSucceeded = true,
+            Data = response.Data
+        };
+    }
+    catch (Exception ex)
+    {
+        return new ResponseModel<List<CategoryViewModel>>
+        {
+            IsSucceeded = false,
+            Error = $"Exception: {ex.Message}"
+        };
+    }
+}
         public static async Task<ResponseModel<CategoryViewModel>> CreateAsync(CategoryCreateViewModel model)
         {
             return await PostAsync<CategoryCreateViewModel, CategoryViewModel>($"{BaseUrl}/Create", model);
@@ -60,18 +144,37 @@ namespace EgeApp.Frontend.Mvc.Services
             return await DeleteAsync<bool>($"{BaseUrl}/Delete/{id}");
         }
 
-        // Yardımcı Metotlar
         private static async Task<ResponseModel<T>> GetAsync<T>(string url)
         {
             try
             {
+                Console.WriteLine($"GetAsync çağrıldı. URL: {url}");
+
                 var response = await HttpClient.GetAsync(url);
+                Console.WriteLine($"HTTP Durum Kodu: {(int)response.StatusCode}");
+
                 var content = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<ResponseModel<T>>(content) ?? new ResponseModel<T> { IsSucceeded = false, Error = "Invalid response" };
+                Console.WriteLine("Gelen Yanıt: " + content);
+
+                var deserializedResponse = JsonConvert.DeserializeObject<ResponseModel<T>>(content);
+                if (deserializedResponse == null)
+                {
+                    Console.WriteLine("Deserialize işlemi başarısız oldu.");
+                }
+                return deserializedResponse ?? new ResponseModel<T>
+                {
+                    IsSucceeded = false,
+                    Error = "Yanıt deserializasyonunda hata oluştu."
+                };
             }
             catch (Exception ex)
             {
-                return new ResponseModel<T> { IsSucceeded = false, Error = $"Exception: {ex.Message}" };
+                Console.WriteLine($"İstisna Yakalandı: {ex.Message}");
+                return new ResponseModel<T>
+                {
+                    IsSucceeded = false,
+                    Error = $"Exception: {ex.Message}"
+                };
             }
         }
 
@@ -111,13 +214,33 @@ namespace EgeApp.Frontend.Mvc.Services
         {
             try
             {
+                Console.WriteLine($"DELETE Request URL: {url}");
                 var response = await HttpClient.DeleteAsync(url);
+                Console.WriteLine($"HTTP Status Code: {(int)response.StatusCode}");
+
                 var contentResponse = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<ResponseModel<TResult>>(contentResponse) ?? new ResponseModel<TResult> { IsSucceeded = false, Error = "Invalid response" };
+                Console.WriteLine($"Response Content: {contentResponse}");
+
+                var deserializedResponse = JsonConvert.DeserializeObject<ResponseModel<TResult>>(contentResponse);
+                if (deserializedResponse == null)
+                {
+                    Console.WriteLine("Deserialization failed: Response is null.");
+                }
+
+                return deserializedResponse ?? new ResponseModel<TResult>
+                {
+                    IsSucceeded = false,
+                    Error = "Invalid response"
+                };
             }
             catch (Exception ex)
             {
-                return new ResponseModel<TResult> { IsSucceeded = false, Error = $"Exception: {ex.Message}" };
+                Console.WriteLine($"Exception: {ex.Message}");
+                return new ResponseModel<TResult>
+                {
+                    IsSucceeded = false,
+                    Error = $"Exception: {ex.Message}"
+                };
             }
         }
     }

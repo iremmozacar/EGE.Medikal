@@ -20,9 +20,14 @@ namespace EgeApp.Frontend.Mvc.Controllers
 
         public async Task<IActionResult> Index()
         {
-            // Gelecekte asenkron işlemler için yer bırakılmıştır.
-            await Task.CompletedTask;
-            return View();
+            var result = await ProductService.GetAllAsync();
+            if (!result.IsSucceeded)
+            {
+                TempData["Error"] = result.Error ?? "Ürünler yüklenirken bir hata oluştu.";
+                return RedirectToAction("Error", "Home");
+            }
+
+            return View(result.Data);
         }
         public IActionResult Shop()
         {
@@ -69,5 +74,7 @@ namespace EgeApp.Frontend.Mvc.Controllers
             // Başarılı sonuç döndür
             return Ok(discountedProducts.Data);
         }
+
+        
     }
 }

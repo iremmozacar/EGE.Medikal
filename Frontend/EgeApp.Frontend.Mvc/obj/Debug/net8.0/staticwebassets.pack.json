@@ -8813,12 +8813,44 @@
       "PackagePath": "staticwebassets/ui/sass/style.scss"
     },
     {
+      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/uploads/categories/08b6f09c-e66f-4bbb-90bc-3c58591dd09a_category5.png",
+      "PackagePath": "staticwebassets/uploads/categories/08b6f09c-e66f-4bbb-90bc-3c58591dd09a_category5.png"
+    },
+    {
+      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/uploads/categories/1671f052-73a5-446c-9b77-45cf25dc8fa9_category2.png",
+      "PackagePath": "staticwebassets/uploads/categories/1671f052-73a5-446c-9b77-45cf25dc8fa9_category2.png"
+    },
+    {
+      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/uploads/categories/29103243-e139-4975-a4e5-12475cb97925_category1.png",
+      "PackagePath": "staticwebassets/uploads/categories/29103243-e139-4975-a4e5-12475cb97925_category1.png"
+    },
+    {
+      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/uploads/categories/36409489-65e9-45fa-b29e-3762897e332d_category2.png",
+      "PackagePath": "staticwebassets/uploads/categories/36409489-65e9-45fa-b29e-3762897e332d_category2.png"
+    },
+    {
       "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/uploads/categories/4e7733d4-285c-4e04-b5b8-359d72a7f5c9",
       "PackagePath": "staticwebassets/uploads/categories"
     },
     {
       "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/uploads/categories/547c2dfc-1787-4fee-8a2c-20964bb5aaf3",
       "PackagePath": "staticwebassets/uploads/categories"
+    },
+    {
+      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/uploads/categories/65b0ad33-114e-4f78-af61-302eab00c9f2_category6.png",
+      "PackagePath": "staticwebassets/uploads/categories/65b0ad33-114e-4f78-af61-302eab00c9f2_category6.png"
+    },
+    {
+      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/uploads/categories/6c972b1f-88f8-4f3b-ad1f-691425d3d7a3_category2.png",
+      "PackagePath": "staticwebassets/uploads/categories/6c972b1f-88f8-4f3b-ad1f-691425d3d7a3_category2.png"
+    },
+    {
+      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/uploads/categories/99e7c1b9-004f-4e70-ad24-75fe96e77619_category5.png",
+      "PackagePath": "staticwebassets/uploads/categories/99e7c1b9-004f-4e70-ad24-75fe96e77619_category5.png"
+    },
+    {
+      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/uploads/categories/9fc0a483-ff83-48dc-b787-153e7813a450_category1.png",
+      "PackagePath": "staticwebassets/uploads/categories/9fc0a483-ff83-48dc-b787-153e7813a450_category1.png"
     },
     {
       "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/uploads/categories/af238830-8f32-4c23-a206-b427d3852841",
@@ -8835,6 +8867,10 @@
     {
       "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/uploads/categories/e6507dc6-32d3-4d15-bc49-3676ac1b3e06",
       "PackagePath": "staticwebassets/uploads/categories"
+    },
+    {
+      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/wwwroot/uploads/products/6663f0a0-bc6c-4f5f-bd19-14728197e067_category1.png",
+      "PackagePath": "staticwebassets/uploads/products/6663f0a0-bc6c-4f5f-bd19-14728197e067_category1.png"
     },
     {
       "Id": "obj/Debug/net8.0/staticwebassets/msbuild.EgeApp.Frontend.Mvc.Microsoft.AspNetCore.StaticWebAssets.props",

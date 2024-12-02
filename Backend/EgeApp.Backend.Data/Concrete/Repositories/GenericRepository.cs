@@ -75,31 +75,102 @@ namespace EgeApp.Backend.Data.Concrete.Repositories
             }
             return await query.CountAsync();
         }
+        public async Task<List<TEntity>> GetHomeAsync()
+        {
+            var property = typeof(TEntity).GetProperty("IsHome");
+            if (property == null)
+            {
+                throw new InvalidOperationException($"{typeof(TEntity).Name} entity'sinde 'IsHome' özelliği bulunamadı.");
+            }
+
+            return await _dbSet.Where(e => EF.Property<bool>(e, "IsHome")).ToListAsync();
+        }
 
         public async Task UpdateAsync(TEntity entity)
         {
             _dbSet.Update(entity);
             await _dbContext.SaveChangesAsync();
         }
+        public async Task<(List<TEntity>, int)> GetPagedAsync(
+    int pageIndex, int pageSize,
+    Expression<Func<TEntity, bool>>? filter = null,
+    Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null)
+        {
+            IQueryable<TEntity> query = _dbSet;
+
+            if (include != null)
+            {
+                query = include(query);
+            }
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            var totalCount = await query.CountAsync();
+            var pagedData = await query.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
+
+            return (pagedData, totalCount);
+        }
+        public async Task<List<TEntity>> GetSortedAsync<TKey>(
+            Expression<Func<TEntity, TKey>> orderBy,
+            bool isDescending = false,
+            Expression<Func<TEntity, bool>>? filter = null,
+            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null)
+        {
+            IQueryable<TEntity> query = _dbSet;
+
+            if (include != null)
+            {
+                query = include(query);
+            }
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            query = isDescending ? query.OrderByDescending(orderBy) : query.OrderBy(orderBy);
+
+            return await query.ToListAsync();
+        }
+        public async Task<List<TEntity>> GetAllAsync(
+            Expression<Func<TEntity, bool>>? options = null,
+            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? predicate = null,
+            bool asNoTracking = false)
+        {
+            IQueryable<TEntity> query = _dbSet;
+
+            if (predicate != null)
+            {
+                query = predicate(query);
+            }
+
+            if (options != null)
+            {
+                query = query.Where(options);
+            }
+
+            if (asNoTracking)
+            {
+                query = query.AsNoTracking();
+            }
+
+            return await query.ToListAsync();
+        }
+        public async Task AddRangeAsync(IEnumerable<TEntity> entities)
+        {
+            await _dbSet.AddRangeAsync(entities);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task UpdateRangeAsync(IEnumerable<TEntity> entities)
+        {
+            _dbSet.UpdateRange(entities);
+            await _dbContext.SaveChangesAsync();
+        }
+
     }
 }
 
-
-
-// await _dbSet.ToListAsync();
-// await _dbContext.Set<TEntity>().ToListAsync();
-// await _dbContext.Products.ToListAsync();
-// await _dbContext
-//     .Products
-//     .Include(x => x.Category)
-//     .ToListAsync();
-// await _dbContext
-//     .Products
-//     .Where(x => x.IsHome == true)
-//     .Include(x => x.Category)
-//     .ToListAsync();
-// await _dbContext
-//     .Products
-//     .Include(x => x.Category)
-//     .Where(x => x.Category.Name == "Telefon")
-//     .ToListAsync();

@@ -1,94 +1,47 @@
-﻿@model EgeApp.Frontend.Mvc.Models.Identity.UpdateUserProfileViewModel
+﻿@model EgeApp.Frontend.Mvc.Models.Identity.RoleAssignViewModel
 @{
-    ViewData["PageHeader"] = "Kullanıcı Güncelleme";
-    ViewData["ShowButton"] = false;
-    ViewData["ButtonTitle"] = "";
-    ViewData["ButtonLink"] = "";
+    ViewData["PageHeader"] = "";
+   
 }
+<div class="container">
+    <h2 class="mb-4">@Model.Role.Name için Kullanıcı Yönetimi</h2>
 
-<div class="container py-5">
-    <div class="bg-white p-5 rounded shadow-sm">
-        <h2 class="text-center text-uppercase fw-bold mb-4" style="color: #002855;">Kullanıcı Güncelleme</h2>
-        <form asp-area="Admin" asp-controller="User" asp-action="Edit" method="post">
-            <input type="hidden" asp-for="UserId" />
-            <div class="row g-4">
-                <!-- Kullanıcı Bilgileri -->
-                <div class="col-md-8">
-                    <div class="card shadow-sm border-0">
-                        <div class="card-header text-white" style="background-color: #002855;">
-                            <h4 class="mb-0">Kullanıcı Bilgileri</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="row mb-3">
-                                <div class="col-md-2">
-                                    <label class="form-label text-dark">ID</label>
-                                    <input asp-for="UserId" class="form-control form-control-sm" readonly>
-                                </div>
-                                <div class="col-md-5">
-                                    <label asp-for="FirstName" class="form-label text-dark">Ad</label>
-                                    <input asp-for="FirstName" class="form-control">
-                                    <span class="text-danger" asp-validation-for="FirstName"></span>
-                                </div>
-                                <div class="col-md-5">
-                                    <label asp-for="LastName" class="form-label text-dark">Soyad</label>
-                                    <input asp-for="LastName" class="form-control">
-                                    <span class="text-danger" asp-validation-for="LastName"></span>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label asp-for="UserName" class="form-label text-dark">Kullanıcı Adı</label>
-                                <input asp-for="UserName" class="form-control">
-                                <span class="text-danger" asp-validation-for="UserName"></span>
-                            </div>
-                            <div class="mb-3">
-                                <label asp-for="Email" class="form-label text-dark">E-posta</label>
-                                <input asp-for="Email" class="form-control">
-                                <span class="text-danger" asp-validation-for="Email"></span>
-                            </div>
-                            <div class="mb-3">
-                                <label asp-for="PhoneNumber" class="form-label text-dark">Telefon Numarası</label>
-                                <input asp-for="PhoneNumber" class="form-control">
-                                <span class="text-danger" asp-validation-for="PhoneNumber"></span>
-                            </div>
-                            <button type="submit" class="btn w-100 mt-3" id="saveButton">Değişiklikleri Kaydet</button>
-                        </div>
-                    </div>
-                </div>
+    <form asp-action="Edit" method="post">
+        <input type="hidden" asp-for="RoleId" />
 
-                <!-- Roller -->
-                <div class="col-md-4">
-                    <div class="card shadow-sm border-0">
-                        <div class="card-header text-white" style="background-color: #e63946;">
-                            <h4 class="mb-0">Roller</h4>
-                        </div>
-                        <div class="card-body">
-                            @foreach (var role in Model.Roles)
-                            {
-                                <div class="form-check mb-2">
-                                    <input @(Model.UserRoles.Any(x => x == role.Name) ? "checked" : "") type="checkbox"
-                                        class="form-check-input" name="UserRoles" value="@role.Name">
-                                    <label class="form-check-label text-dark">@role.Name</label>
-                                </div>
-                            }
-                            <span class="text-danger">@ViewBag.ErrorRoleMessage</span>
-                        </div>
-                    </div>
-                </div>
+        <div class="row">
+            <!-- Üyeler -->
+            <div class="col-md-6">
+                <h4>Bu Role Ait Kullanıcılar</h4>
+                <ul class="list-group">
+                    @foreach (var member in Model.Members)
+                    {
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            @member.UserName
+                            <input type="checkbox" name="IdsRemove" value="@member.Id" />
+                        </li>
+                    }
+                </ul>
             </div>
-        </form>
-    </div>
+
+            <!-- Üye Olmayanlar -->
+            <div class="col-md-6">
+                <h4>Bu Role Ait Olmayan Kullanıcılar</h4>
+                <ul class="list-group">
+                    @foreach (var nonMember in Model.NonMembers)
+                    {
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            @nonMember.UserName
+                            <input type="checkbox" name="IdsAdd" value="@nonMember.Id" />
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+        <div class="mt-4 text-end">
+            <button type="submit" class="btn btn-primary">Değişiklikleri Kaydet</button>
+            <a asp-action="Index" class="btn btn-secondary">İptal</a>
+        </div>
+    </form>
 </div>
-
-@section Scripts {
-    <script>
-        // Buton rengini dinamik olarak değiştirme
-        document.addEventListener('DOMContentLoaded', () => {
-            const saveButton = document.getElementById('saveButton');
-            saveButton.style.backgroundColor = localStorage.getItem('saveButtonColor') || '#002855'; // Varsayılan Lacivert
-            saveButton.style.color = '#ffffff'; // Yazı rengi beyaz
-
-            // Eğer bir renk seçme özelliği eklenirse:
-            // Renk seçme event'inde localStorage.setItem('saveButtonColor', yeniRenk) kullanılabilir.
-        });
-    </script>
-}

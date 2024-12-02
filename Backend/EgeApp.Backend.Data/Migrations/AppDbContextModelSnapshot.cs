@@ -38,37 +38,37 @@ namespace EgeApp.Backend.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 12, 1, 21, 25, 20, 410, DateTimeKind.Local).AddTicks(2670),
+                            CreatedDate = new DateTime(2024, 12, 2, 14, 55, 15, 33, DateTimeKind.Local).AddTicks(8840),
                             UserId = "1"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 12, 1, 21, 25, 20, 410, DateTimeKind.Local).AddTicks(2680),
+                            CreatedDate = new DateTime(2024, 12, 2, 14, 55, 15, 33, DateTimeKind.Local).AddTicks(8840),
                             UserId = "2"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 12, 1, 21, 25, 20, 410, DateTimeKind.Local).AddTicks(2680),
+                            CreatedDate = new DateTime(2024, 12, 2, 14, 55, 15, 33, DateTimeKind.Local).AddTicks(8840),
                             UserId = "3"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2024, 12, 1, 21, 25, 20, 410, DateTimeKind.Local).AddTicks(2680),
+                            CreatedDate = new DateTime(2024, 12, 2, 14, 55, 15, 33, DateTimeKind.Local).AddTicks(8850),
                             UserId = "4"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedDate = new DateTime(2024, 12, 1, 21, 25, 20, 410, DateTimeKind.Local).AddTicks(2690),
+                            CreatedDate = new DateTime(2024, 12, 2, 14, 55, 15, 33, DateTimeKind.Local).AddTicks(8850),
                             UserId = "5"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedDate = new DateTime(2024, 12, 1, 21, 25, 20, 410, DateTimeKind.Local).AddTicks(2690),
+                            CreatedDate = new DateTime(2024, 12, 2, 14, 55, 15, 33, DateTimeKind.Local).AddTicks(8850),
                             UserId = "6"
                         });
                 });
@@ -195,6 +195,11 @@ namespace EgeApp.Backend.Data.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("IsHome")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasDefaultValue(false);
+
                     b.Property<DateTime>("ModifiedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT")
@@ -218,60 +223,66 @@ namespace EgeApp.Backend.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 12, 1, 21, 25, 20, 410, DateTimeKind.Local).AddTicks(4030),
+                            CreatedDate = new DateTime(2024, 12, 2, 14, 55, 15, 34, DateTimeKind.Local).AddTicks(650),
                             Description = "Ortopedik ürünler",
                             IsActive = true,
-                            ModifiedDate = new DateTime(2024, 12, 1, 21, 25, 20, 410, DateTimeKind.Local).AddTicks(4030),
+                            IsHome = true,
+                            ModifiedDate = new DateTime(2024, 12, 2, 14, 55, 15, 34, DateTimeKind.Local).AddTicks(650),
                             Name = "Ortopedik Ürünler",
                             Url = "ortopedik-urunler"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 12, 1, 21, 25, 20, 410, DateTimeKind.Local).AddTicks(4030),
+                            CreatedDate = new DateTime(2024, 12, 2, 14, 55, 15, 34, DateTimeKind.Local).AddTicks(650),
                             Description = "Solunum cihazları",
                             IsActive = true,
-                            ModifiedDate = new DateTime(2024, 12, 1, 21, 25, 20, 410, DateTimeKind.Local).AddTicks(4030),
+                            IsHome = true,
+                            ModifiedDate = new DateTime(2024, 12, 2, 14, 55, 15, 34, DateTimeKind.Local).AddTicks(660),
                             Name = "Solunum Cihazları",
                             Url = "solunum-cihazlari"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 12, 1, 21, 25, 20, 410, DateTimeKind.Local).AddTicks(4040),
+                            CreatedDate = new DateTime(2024, 12, 2, 14, 55, 15, 34, DateTimeKind.Local).AddTicks(660),
                             Description = "Solunum maskeleri",
                             IsActive = true,
-                            ModifiedDate = new DateTime(2024, 12, 1, 21, 25, 20, 410, DateTimeKind.Local).AddTicks(4040),
+                            IsHome = false,
+                            ModifiedDate = new DateTime(2024, 12, 2, 14, 55, 15, 34, DateTimeKind.Local).AddTicks(660),
                             Name = "Solunum Maskeleri",
                             Url = "solunum-maskeleri"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2024, 12, 1, 21, 25, 20, 410, DateTimeKind.Local).AddTicks(4040),
+                            CreatedDate = new DateTime(2024, 12, 2, 14, 55, 15, 34, DateTimeKind.Local).AddTicks(660),
                             Description = "Hasta bakım ürünleri",
                             IsActive = true,
-                            ModifiedDate = new DateTime(2024, 12, 1, 21, 25, 20, 410, DateTimeKind.Local).AddTicks(4040),
+                            IsHome = false,
+                            ModifiedDate = new DateTime(2024, 12, 2, 14, 55, 15, 34, DateTimeKind.Local).AddTicks(660),
                             Name = "Hasta Bakım Ürünleri",
                             Url = "hasta-bakim-urunleri"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedDate = new DateTime(2024, 12, 1, 21, 25, 20, 410, DateTimeKind.Local).AddTicks(4040),
+                            CreatedDate = new DateTime(2024, 12, 2, 14, 55, 15, 34, DateTimeKind.Local).AddTicks(660),
                             Description = "Tıbbi test ve sarf malzemeleri",
                             IsActive = true,
-                            ModifiedDate = new DateTime(2024, 12, 1, 21, 25, 20, 410, DateTimeKind.Local).AddTicks(4040),
+                            IsHome = true,
+                            ModifiedDate = new DateTime(2024, 12, 2, 14, 55, 15, 34, DateTimeKind.Local).AddTicks(660),
                             Name = "Tıbbi Test ve Sarf Malzemeleri",
                             Url = "tibbi-test-ve-sarf-malzemeleri"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedDate = new DateTime(2024, 12, 1, 21, 25, 20, 410, DateTimeKind.Local).AddTicks(4040),
+                            CreatedDate = new DateTime(2024, 12, 2, 14, 55, 15, 34, DateTimeKind.Local).AddTicks(670),
                             Description = "Tansiyon ve nabız ölçüm cihazları",
                             IsActive = true,
-                            ModifiedDate = new DateTime(2024, 12, 1, 21, 25, 20, 410, DateTimeKind.Local).AddTicks(4050),
+                            IsHome = false,
+                            ModifiedDate = new DateTime(2024, 12, 2, 14, 55, 15, 34, DateTimeKind.Local).AddTicks(670),
                             Name = "Tansiyon ve Nabız Ölçüm Cihazları",
                             Url = "tansiyon-ve-nabiz-olcum-cihazlari"
                         });
@@ -357,7 +368,7 @@ namespace EgeApp.Backend.Data.Migrations
                             Id = 1,
                             Brand = "KorseMarka",
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2024, 12, 1, 21, 25, 20, 410, DateTimeKind.Local).AddTicks(5950),
+                            CreatedDate = new DateTime(2024, 12, 2, 14, 55, 15, 34, DateTimeKind.Local).AddTicks(2530),
                             Description = "Diz ve sırt destekleyici",
                             ImageUrl = "http://localhost:5200/images/products/dorselumberkorse.webp",
                             IsActive = true,
@@ -366,7 +377,7 @@ namespace EgeApp.Backend.Data.Migrations
                             IsHome = true,
                             IsSameDayShipping = true,
                             IsSpecialProduct = false,
-                            ModifiedDate = new DateTime(2024, 12, 1, 21, 25, 20, 410, DateTimeKind.Local).AddTicks(5950),
+                            ModifiedDate = new DateTime(2024, 12, 2, 14, 55, 15, 34, DateTimeKind.Local).AddTicks(2530),
                             Name = "Dorselumber Korse",
                             Price = 1000m,
                             SalesCount = 0,
@@ -377,7 +388,7 @@ namespace EgeApp.Backend.Data.Migrations
                             Id = 2,
                             Brand = "SolunumMarka",
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2024, 12, 1, 21, 25, 20, 410, DateTimeKind.Local).AddTicks(5960),
+                            CreatedDate = new DateTime(2024, 12, 2, 14, 55, 15, 34, DateTimeKind.Local).AddTicks(2530),
                             Description = "Profesyonel solunum cihazı",
                             ImageUrl = "http://localhost:5200/images/products/devisbissoksijen.webp",
                             IsActive = true,
@@ -386,7 +397,7 @@ namespace EgeApp.Backend.Data.Migrations
                             IsHome = true,
                             IsSameDayShipping = true,
                             IsSpecialProduct = false,
-                            ModifiedDate = new DateTime(2024, 12, 1, 21, 25, 20, 410, DateTimeKind.Local).AddTicks(5960),
+                            ModifiedDate = new DateTime(2024, 12, 2, 14, 55, 15, 34, DateTimeKind.Local).AddTicks(2530),
                             Name = "Devisbiss Oksijen Konsantratörü",
                             Price = 8000m,
                             SalesCount = 0,
@@ -397,7 +408,7 @@ namespace EgeApp.Backend.Data.Migrations
                             Id = 3,
                             Brand = "MaskeMarka",
                             CategoryId = 3,
-                            CreatedDate = new DateTime(2024, 12, 1, 21, 25, 20, 410, DateTimeKind.Local).AddTicks(5970),
+                            CreatedDate = new DateTime(2024, 12, 2, 14, 55, 15, 34, DateTimeKind.Local).AddTicks(2540),
                             Description = "Solunum desteği için maske",
                             ImageUrl = "http://localhost:5200/images/products/tamyuzmaskesi.webp",
                             IsActive = true,
@@ -406,7 +417,7 @@ namespace EgeApp.Backend.Data.Migrations
                             IsHome = true,
                             IsSameDayShipping = true,
                             IsSpecialProduct = true,
-                            ModifiedDate = new DateTime(2024, 12, 1, 21, 25, 20, 410, DateTimeKind.Local).AddTicks(5970),
+                            ModifiedDate = new DateTime(2024, 12, 2, 14, 55, 15, 34, DateTimeKind.Local).AddTicks(2540),
                             Name = "Tam Yüz Maskesi",
                             Price = 500m,
                             SalesCount = 0,

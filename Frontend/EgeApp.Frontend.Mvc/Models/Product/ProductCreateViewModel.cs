@@ -34,15 +34,16 @@ public class ProductCreateViewModel
     public bool IsDiscounted { get; set; }
 
     [JsonPropertyName("isFreeShipping")]
-    public bool? IsFreeShipping { get; set; }
+    public bool IsFreeShipping { get; set; }
 
     [JsonPropertyName("isSpecialProduct")]
-    public bool? IsSpecialProduct { get; set; }
+    public bool IsSpecialProduct { get; set; }
 
     [JsonPropertyName("isSameDayShipping")]
-    public bool? IsSameDayShipping { get; set; }
+    public bool IsSameDayShipping { get; set; }
 
     [JsonPropertyName("CategoryId")]
+    [Required(ErrorMessage = "Kategori seçilmelidir.")]
     public int CategoryId { get; set; }
 
     [JsonPropertyName("url")]

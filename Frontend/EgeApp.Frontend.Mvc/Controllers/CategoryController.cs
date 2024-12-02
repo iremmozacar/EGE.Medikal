@@ -61,7 +61,21 @@ namespace EgeApp.Frontend.Mvc.Controllers
             return RedirectToAction("Index");
         }
 
+        // GET: Delete Confirmation Page
         public async Task<IActionResult> Delete(int id)
+        {
+            var response = await CategoryService.GetByIdAsync(id);
+            if (!response.IsSucceeded)
+            {
+                TempData["Error"] = response.Error;
+                return RedirectToAction("Error", "Home");
+            }
+            return View(response.Data); // Kategori bilgilerini silme onayı için görüntüle
+        }
+
+        // POST: Delete Action
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> ConfirmDelete(int id)
         {
             var response = await CategoryService.DeleteAsync(id);
             if (!response.IsSucceeded)
@@ -71,5 +85,6 @@ namespace EgeApp.Frontend.Mvc.Controllers
             }
             return RedirectToAction("Index");
         }
+
     }
 }
