@@ -1133,6 +1133,19 @@
         "build": {
           "buildTransitive/netcoreapp3.1/_._": {}
         }
+      },
+      "EgeApp.Backend.Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/EgeApp.Backend.Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EgeApp.Backend.Shared.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       }
     }
   },
@@ -2788,11 +2801,17 @@
         "system.threading.channels.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "EgeApp.Backend.Shared/1.0.0": {
+      "type": "project",
+      "path": "../../Backend/EgeApp.Backend.Shared/EgeApp.Backend.Shared.csproj",
+      "msbuildProject": "../../Backend/EgeApp.Backend.Shared/EgeApp.Backend.Shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "AspNetCoreHero.ToastNotification >= 1.1.0",
+      "EgeApp.Backend.Shared >= 1.0.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 8.0.8",
       "Microsoft.EntityFrameworkCore.Design >= 8.0.8",
       "Microsoft.EntityFrameworkCore.Sqlite >= 8.0.8",
@@ -2824,7 +2843,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.Shared/EgeApp.Backend.Shared.csproj": {
+              "projectPath": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.Shared/EgeApp.Backend.Shared.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

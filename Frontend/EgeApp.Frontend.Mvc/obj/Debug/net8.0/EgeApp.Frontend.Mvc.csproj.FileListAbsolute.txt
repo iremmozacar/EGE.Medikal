@@ -270,3 +270,5 @@
 /Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/obj/Debug/net8.0/EgeApp.Frontend.Mvc.pdb
 /Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/obj/Debug/net8.0/EgeApp.Frontend.Mvc.genruntimeconfig.cache
 /Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/obj/Debug/net8.0/ref/EgeApp.Frontend.Mvc.dll
+/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/bin/Debug/net8.0/EgeApp.Backend.Shared.dll
+/Users/iremozacar/Documents/GitHub/EGE.Medikal/Frontend/EgeApp.Frontend.Mvc/bin/Debug/net8.0/EgeApp.Backend.Shared.pdb

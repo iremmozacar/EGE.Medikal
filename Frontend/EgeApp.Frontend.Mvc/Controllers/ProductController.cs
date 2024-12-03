@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using EgeApp.Frontend.Mvc.Data.Entities;
 using EgeApp.Frontend.Mvc.Services;
+using EgeApp.Frontend.Mvc.Models.Product;
 
 namespace EgeApp.Frontend.Mvc.Controllers
 {
@@ -75,6 +76,32 @@ namespace EgeApp.Frontend.Mvc.Controllers
             return Ok(discountedProducts.Data);
         }
 
-        
+        public async Task<IActionResult> ProductList()
+        {
+            var response = await ProductService.GetAllAsync();
+
+            // Eğer response başarılıysa ve ürünler varsa işlemleri gerçekleştir
+            if (response != null && response.Data != null)
+            {
+                var products = response.Data
+                    .Select(p => new ProductListViewModel
+                    {
+                        Id = p.Id,
+                        Name = p.Name,
+                        ImageUrl = p.ImageUrl,
+                        Price = p.Price,
+                        DiscountedPrice = p.DiscountedPrice,
+                        IsActive = p.IsActive,
+                        IsFreeShipping = p.IsFreeShipping
+                    }).ToList();
+
+                return View(products);
+            }
+
+            // Eğer veri yoksa veya hata varsa, hata sayfasına yönlendirin veya uygun bir yanıt döndürün
+            return View(new List<ProductListViewModel>());
+        }
+
+
     }
 }

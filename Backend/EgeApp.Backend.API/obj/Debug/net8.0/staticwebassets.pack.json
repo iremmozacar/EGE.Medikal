@@ -1,8 +1,16 @@
 {
   "Files": [
     {
+      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/Product/672a2937-f0cc-4fa2-9a91-0f5f458c86b3.png",
+      "PackagePath": "staticwebassets/images/Product/672a2937-f0cc-4fa2-9a91-0f5f458c86b3.png"
+    },
+    {
       "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/33ba990b-b1ec-44aa-bbce-6c336fe06d47.jpg",
       "PackagePath": "staticwebassets/images/products/33ba990b-b1ec-44aa-bbce-6c336fe06d47.jpg"
+    },
+    {
+      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/40bf93c5-791c-424d-9040-0216857b8c48.png",
+      "PackagePath": "staticwebassets/images/products/40bf93c5-791c-424d-9040-0216857b8c48.png"
     },
     {
       "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/5ac53a29-c44d-4982-b4f5-15f98aaa7353.jpg",
@@ -17,8 +25,16 @@
       "PackagePath": "staticwebassets/images/products/6d2647fb-1897-45fd-85c4-b88de9a932af.png"
     },
     {
+      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/85dd225d-fcf4-474c-b8f5-d03615c4ba6f.png",
+      "PackagePath": "staticwebassets/images/products/85dd225d-fcf4-474c-b8f5-d03615c4ba6f.png"
+    },
+    {
       "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/89f43a46-8d89-4883-9d82-77b8194ec42d.png",
       "PackagePath": "staticwebassets/images/products/89f43a46-8d89-4883-9d82-77b8194ec42d.png"
+    },
+    {
+      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/9302e1c7-36c1-45ef-8009-8fbb541be7d1.png",
+      "PackagePath": "staticwebassets/images/products/9302e1c7-36c1-45ef-8009-8fbb541be7d1.png"
     },
     {
       "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/a4039a7a-0f8a-41dd-8c43-9ac890552041.jpg",
@@ -43,6 +59,10 @@
     {
       "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/bpapcihazı.webp",
       "PackagePath": "staticwebassets/images/products/bpapcihazı.webp"
+    },
+    {
+      "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/c5745830-2d65-4eee-a985-450074284252.png",
+      "PackagePath": "staticwebassets/images/products/c5745830-2d65-4eee-a985-450074284252.png"
     },
     {
       "Id": "/Users/iremozacar/Documents/GitHub/EGE.Medikal/Backend/EgeApp.Backend.API/wwwroot/images/products/cpap-bpapmaskeleri.webp",

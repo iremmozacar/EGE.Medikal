@@ -6,6 +6,10 @@ using EgeApp.Frontend.Mvc.Data;
 using EgeApp.Frontend.Mvc.Data.Entities;
 using EgeApp.Frontend.Mvc.Helpers.Abstract;
 using EgeApp.Frontend.Mvc.Models.Email;
+using EgeApp.Frontend.Mvc.Helpers.Concrete;
+using System.Net.Http.Headers;
+using Microsoft.Extensions.DependencyInjection;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,6 +47,13 @@ builder.Services.AddScoped<IEmailSenderHelper, EmailSenderSmtp>();
 // Razor Pages desteği (isteğe bağlı)
 builder.Services.AddRazorPages();
 
+builder.Services.AddHttpClient<IApiClient, ApiClient>(client =>
+{
+    client.BaseAddress = new Uri("http://localhost:5200/"); // API adresi
+    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+});
+
+
 var app = builder.Build();
 
 // Hata yönetimi
@@ -59,6 +70,8 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseSession();
+
+
 
 // Admin Area Rota
 app.MapAreaControllerRoute(

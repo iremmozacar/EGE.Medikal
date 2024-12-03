@@ -107,6 +107,8 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
                 ImageUrl = response.Data.ImageUrl
             };
 
+            // Başarı mesajını yalnızca güncelleme sonrası göstermek için kontrol et
+            ViewBag.SuccessMessage = TempData["SuccessMessage"];
             return View(model);
         }
 
@@ -124,7 +126,6 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
             {
                 try
                 {
-                    // Yeni fotoğraf kaydet
                     var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(model.Image.FileName)}";
                     var savePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads/categories", fileName);
 
@@ -133,7 +134,6 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
                         await model.Image.CopyToAsync(stream);
                     }
 
-                    // Eski fotoğrafı güncelle
                     model.ImageUrl = $"/uploads/categories/{fileName}";
                 }
                 catch (Exception ex)
@@ -150,11 +150,12 @@ namespace EgeApp.Frontend.Mvc.Areas.Admin.Controllers
                 return View(model);
             }
 
+            // Güncelleme başarılı olursa TempData'ya mesaj koy
             TempData["SuccessMessage"] = "Kategori başarıyla güncellendi!";
             return RedirectToAction("Update", new { id = model.Id });
         }
 
-        
+
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {

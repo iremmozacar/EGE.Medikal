@@ -22,4 +22,8 @@
     <Folder Include="ComplexTypes\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="../../Backend/EgeApp.Backend.Shared/EgeApp.Backend.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

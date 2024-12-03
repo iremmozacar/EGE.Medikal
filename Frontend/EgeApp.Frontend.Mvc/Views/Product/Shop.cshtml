@@ -1,69 +1,58 @@
-﻿<section class="shop spad">
+﻿@model List<EgeApp.Frontend.Mvc.Models.Product.ProductListViewModel>
+
+<section class="shop spad">
     <div class="container">
         <div class="row">
-            <!-- Ürünler Başlangıcı -->
-            <div class="col-lg-12 col-md-12">
-                <div class="row">
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="product__item">
-                            <!-- Ürün Fotoğrafı ve Link -->
-                            <a href="/Views/Product/Details.cshtml?id=1" class="product__item__pic set-bg"
-                                style="background-image: url('img/product-1.jpg'); height: 300px; background-size: cover; background-position: center;"></a>
-                            <div class="product__item__text text-center">
-                                <h6><a href="/Views/Product/Details.cshtml?id=1">Ürün 1</a></h6>
-                                <div class="product__price">$120 <span>$150</span></div>
-                                <!-- Sepete Ekle Butonu -->
-                                <form action="/Views/Cart/Index.cshtml" method="POST">
-                                    <input type="hidden" name="product_id" value="1">
-                                    <button type="submit" class="btn custom-btn btn-block mt-2">Sepete Ekle</button>
-                                </form>
+            <!-- Ürünleri Listele -->
+            @foreach (var product in Model)
+            {
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="product__item">
+                        <!-- Ürün Fotoğrafı -->
+                        <a href="@Url.Action("Details", "Shop", new { id = product.Id })" class="product__item__pic set-bg"
+                            style="background-image: url('@product.ImageUrl'); height: 300px; background-size: cover; background-position: center;"></a>
+                        <div class="product__item__text text-center">
+                            <h6>
+                                <a href="@Url.Action("Details", "Shop", new { id = product.Id })">@product.Name</a>
+                            </h6>
+                            <div class="product__price">
+                                @if (product.DiscountedPrice.HasValue)
+                                {
+                                    <span>@($"{product.DiscountedPrice:C}")</span>
+                                    <del>@($"{product.Price:C}")</del>
+                                }
+                                else
+                                {
+                                    @($"{product.Price:C}")
+                                }
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="product__item">
-                            <a href="/Views/Product/Details.cshtml?id=2" class="product__item__pic set-bg"
-                                style="background-image: url('img/product-2.jpg'); height: 300px; background-size: cover; background-position: center;"></a>
-                            <div class="product__item__text text-center">
-                                <h6><a href="/Views/Product/Details.cshtml?id=2">Ürün 2</a></h6>
-                                <div class="product__price">$80 <span>$100</span></div>
-                                <form action="/Views/Cart/Index.cshtml" method="POST">
-                                    <input type="hidden" name="product_id" value="2">
-                                    <button type="submit" class="btn custom-btn btn-block mt-2">Sepete Ekle</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="product__item">
-                            <a href="/Views/Product/Details.cshtml?id=3" class="product__item__pic set-bg"
-                                style="background-image: url('img/product-3.jpg'); height: 300px; background-size: cover; background-position: center;"></a>
-                            <div class="product__item__text text-center">
-                                <h6><a href="/Views/Product/Details.cshtml?id=3">Ürün 3</a></h6>
-                                <div class="product__price">$50</div>
-                                <form action="/Views/Cart/Index.cshtml" method="POST">
-                                    <input type="hidden" name="product_id" value="3">
-                                    <button type="submit" class="btn custom-btn btn-block mt-2">Sepete Ekle</button>
-                                </form>
-                            </div>
+                            @if (product.IsFreeShipping.HasValue && product.IsFreeShipping.Value)
+                            {
+                                <span class="badge badge-success">Ücretsiz Kargo</span>
+                            }
+                            <!-- Sepete Ekle Butonu -->
+                            <form asp-controller="Shop" asp-action="AddToCart" method="post">
+                                <input type="hidden" name="productId" value="@product.Id" />
+                                <input type="hidden" name="quantity" value="1" />
+                                <button type="submit" class="btn custom-btn btn-block mt-2">Sepete Ekle</button>
+                            </form>
                         </div>
                     </div>
                 </div>
-
-                <!-- Sayfalama -->
-                <div class="col-lg-12 text-center mt-4">
-                    <div class="pagination__option">
-                        <a href="#" class="active">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#"><i class="fa fa-angle-right"></i></a>
-                    </div>
-                </div>
+            }
+        </div>
+        <!-- Sayfalama -->
+        <div class="col-lg-12 text-center mt-4">
+            <div class="pagination__option">
+                <a href="#" class="active">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#"><i class="fa fa-angle-right"></i></a>
             </div>
-            <!-- Ürünler Bitişi -->
         </div>
     </div>
 </section>
+
 
 <!-- CSS -->
 <style>
