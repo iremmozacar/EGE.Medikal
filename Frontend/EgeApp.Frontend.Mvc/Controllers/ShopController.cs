@@ -14,11 +14,11 @@ namespace EgeApp.Frontend.Mvc.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly INotyfService _notyfService;
-        public ShopController(INotyfService notyfService, UserManager<AppUser> userManager )
+        public ShopController(INotyfService notyfService, UserManager<AppUser> userManager)
         {
             _notyfService = notyfService;
             _userManager = userManager;
-           
+
         }
 
         // Ürünleri listele
