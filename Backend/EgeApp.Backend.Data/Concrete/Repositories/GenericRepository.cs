@@ -62,6 +62,29 @@ namespace EgeApp.Backend.Data.Concrete.Repositories
 
         }
 
+
+        public async Task<TEntity> GetFirstAsync(
+            Expression<Func<TEntity, bool>>? options = null,
+            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null)
+        {
+            IQueryable<TEntity> query = _dbSet;
+
+            // Include işlemi
+            if (include != null)
+            {
+                query = include(query);
+            }
+
+            // Where şartı
+            if (options != null)
+            {
+                query = query.Where(options);
+            }
+
+            // İlk kayıt (veya varsayılan değer) döndürülür
+            return await query.AsNoTracking().FirstOrDefaultAsync();
+        }
+
         public async Task<int> GetCountAsync(Expression<Func<TEntity, bool>>? options = null, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? predicate = null)
         {
             IQueryable<TEntity> query = _dbSet;

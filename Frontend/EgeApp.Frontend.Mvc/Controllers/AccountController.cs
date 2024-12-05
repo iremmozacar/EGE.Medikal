@@ -82,11 +82,11 @@ namespace EgeApp.Frontend.Mvc.Controllers
             if (roles.Contains("Admin") || roles.Contains("Super Admin"))
             {
                 _notyfService.Success("Admin olarak giriş yaptınız!");
-                return RedirectToAction("Index", "Home", new { area = "Admin" });
+                return RedirectToAction("Index", "Home", new { area = "Admin" }); // Admin Home yönlendirme
             }
 
             _notyfService.Success("Başarıyla giriş yaptınız!");
-            return RedirectToAction("Index", "Account");
+            return RedirectToAction("Index", "Account"); // Normal kullanıcı yönlendirme
         }
 
         [HttpGet]

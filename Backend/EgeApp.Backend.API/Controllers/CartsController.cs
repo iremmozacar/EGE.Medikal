@@ -29,9 +29,19 @@ namespace EgeApp.Backend.API.Controllers
         [HttpGet("{userId}")]
         public async Task<IActionResult> GetCart(string userId)
         {
+            // Servis katmanından kullanıcı sepetini al
             var response = await _cartService.GetCartByUserIdAsync(userId);
-            return CreateActionResult(response);
+
+            // Eğer işlem başarısızsa uygun bir hata yanıtı döndür
+            if (!response.IsSucceeded)
+            {
+                return NotFound(new { Message = response.Error });
+            }
+
+            // Başarılı yanıt ve sepet verisini döndür
+            return Ok(response.Data);
         }
+
 
         [HttpPost]
         public async Task<IActionResult> AddToCart(AddToCartDto addToCartDto)

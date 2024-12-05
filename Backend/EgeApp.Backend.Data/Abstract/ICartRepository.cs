@@ -5,6 +5,6 @@ namespace EgeApp.Backend.Data.Abstract
 {
     public interface ICartRepository : IGenericRepository<Cart>
     {
-
+        Task<Cart> GetCartAsync(string userId);
     }
 }

@@ -43,21 +43,22 @@ namespace EgeApp.Backend.Business.Concrete
             await _cartRepository.UpdateAsync(cart);
             return ResponseDto<NoContent>.Success(StatusCodes.Status200OK);
         }
-
         public async Task<ResponseDto<Cart>> GetCartByUserIdAsync(string userId)
         {
-            var cart = await _cartRepository.GetAsync(
-                x => x.UserId == userId,
-                source => source
-                    .Include(x => x.CartItems)
-                    .ThenInclude(y => y.Product)
-            );
+            // Kullanıcının sepetini repository'den al
+            var cart = await _cartRepository.GetCartAsync(userId);
+
+            // Sepet bulunamadıysa hata yanıtı döndür
             if (cart == null)
             {
                 return ResponseDto<Cart>.Fail("Kullanıcıya ait bir sepet bulunamadı!", StatusCodes.Status404NotFound);
             }
+
+            // Sepeti başarıyla döndür
             return ResponseDto<Cart>.Success(cart, StatusCodes.Status200OK);
         }
+
+
 
         public async Task<ResponseDto<NoContent>> InitilaizeCartAsync(string userId)
         {

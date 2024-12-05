@@ -100,6 +100,7 @@ public class CartService
             return result;
         }
     }
+
     public static async Task<ResponseModel<NoContent>> DeleteCartItemAsync(int cartItemId)
     {
         using (HttpClient httpClient = new())

@@ -50,8 +50,9 @@
                     }
                     else
                     {
+                        <!-- Boş Sepet Mesajı -->
                         <tr>
-                            <td colspan="5" class="text-center">Sepetinizde ürün bulunmamaktadır.</td>
+                            <td colspan="5" class="text-center text-danger">Sepetinizde ürün bulunmamaktadır.</td>
                         </tr>
                     }
                 </tbody>
@@ -60,8 +61,18 @@
         
         <!-- Sepet Toplam ve Satın Al -->
         <div class="cart__total mt-4">
-            <h4>Toplam: $@Model.GetTotalPrice()</h4>
-            <a href="/Order/Checkout" class="btn btn-primary btn-lg mt-3">Satın Al</a>
+            <!-- Toplam Fiyat -->
+            <h4>Toplam: $@(Model.CartItems?.Sum(item => item.Product.Price * item.Quantity) ?? 0)</h4>
+            <!-- Eğer Sepet Boşsa Buton Devre Dışı -->
+                        @if (Model.CartItems != null && Model.CartItems.Any())
+            {
+                <a href="/Order/Checkout" class="btn btn-primary btn-lg mt-3">Satın Al</a>
+            }
+            else
+            {
+                <button class="btn btn-secondary btn-lg mt-3" disabled>Sepet Boş</button>
+            }
+            ```
         </div>
     </div>
 </section>
