@@ -1,14 +1,10 @@
-﻿
-
-<!-- Footer Section Begin -->
-<footer class="footer bg-dark text-light py-5">
+﻿<footer class="footer bg-dark text-light py-5">
     <div class="container">
         <div class="row">
             <!-- Footer Logo and Info -->
             <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                 <div class="footer__info">
                     <img src="~/ui/img/logo2.svg" alt="Logo" class="footer-logo mb-3">
-                  
                     <p>
                         Adres: Dumlupınar, Mektep Sk. No:1/B, 34025 Kadıköy / İstanbul
                     </p>
@@ -73,37 +69,31 @@
                 </div>
             </div>
         </div>
-
-        @* <div class="row mt-4">
-            <div class="col-lg-12 text-center">
-                <div class="footer__copyright__text"
-                    style="color: rgba(255, 255, 255, 0.6); background-color: transparent;">
-                    <p>Copyright &copy;
-                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template
-                        is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
-                            target="_blank" class="text-light">Colorlib</a>
-                    </p>
-                </div>
-            </div>
-        </div> *@
     </div>
 </footer>
-<!-- Footer Section End -->
+
 <style>
-    /* Koyu mavi renk tanımı */
-    .text-primary {
-        color: #004080 !important;
-        /* Koyu mavi renk */
+    html,
+    body {
+        height: 100%;
+        margin: 0;
     }
 
-    .footer__widget a {
-        color: #004080;
-        /* Footer bağlantıları için koyu mavi */
+    .page-wrapper {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
     }
 
-    .footer__widget a:hover {
-        color: #002040;
-        /* Hover durumda daha koyu mavi */
+    main.content {
+        flex: 1;
     }
-    
+
+    footer {
+        background: #333;
+        color: #fff;
+        text-align: center;
+        padding: 20px 0;
+        margin-top: auto;
+    }
 </style>

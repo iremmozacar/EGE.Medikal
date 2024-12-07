@@ -1,40 +1,25 @@
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+using EgeApp.Frontend.Mvc.Models.Product;
+using System.Linq;
+using System.Collections.Generic;
+using EgeApp.Frontend.Mvc.Services;
 
 namespace EgeApp.Frontend.Mvc.Controllers
 {
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Identity;
-    using AspNetCoreHero.ToastNotification.Abstractions;
-    using EgeApp.Frontend.Mvc.Models.Product;
-    using EgeApp.Frontend.Mvc.Services;
-    using EgeApp.Frontend.Mvc.Data.Entities;
-    using EgeApp.Frontend.Mvc.Models.Cart;
-
     public class ShopController : Controller
     {
-        private readonly UserManager<AppUser> _userManager;
-        private readonly INotyfService _notyfService;
-        public ShopController(INotyfService notyfService, UserManager<AppUser> userManager)
-        {
-            _notyfService = notyfService;
-            _userManager = userManager;
-
-        }
-
         // Ürünleri listele
         public async Task<IActionResult> Index()
         {
-            // ProductService'den ürünleri alıyoruz
             var productsResponse = await ProductService.GetAllAsync();
 
             if (!productsResponse.IsSucceeded || productsResponse.Data == null)
             {
-                // Eğer API çağrısı başarısızsa veya veri boşsa hata mesajı döndür
-                _notyfService.Error("Ürünler yüklenirken bir hata oluştu.");
-                return View(new List<ProductListViewModel>()); // Boş bir liste döndür
+                Console.WriteLine("Ürün verisi null geldi veya API çağrısı başarısız oldu.");
+                return View(new List<ProductListViewModel>()); // Boş liste döndür
             }
 
-            // Gelen veriyi ProductListViewModel'e dönüştür
             var productList = productsResponse.Data.Select(p => new ProductListViewModel
             {
                 Id = p.Id,
@@ -46,14 +31,12 @@ namespace EgeApp.Frontend.Mvc.Controllers
                 IsFreeShipping = p.IsFreeShipping
             }).ToList();
 
-            return View(productList);
+            return View(productList); // Varsayılan olarak 'Views/Shop/Index.cshtml' dosyasını yükler
         }
-
-
 
         // Sepete ekleme işlemi
         [HttpPost]
-        public async Task<IActionResult> AddToCart(int productId, int quantity)
+        public IActionResult AddToCart(int productId, int quantity)
         {
             if (!User.Identity.IsAuthenticated)
             {
@@ -63,30 +46,8 @@ namespace EgeApp.Frontend.Mvc.Controllers
                 return RedirectToAction("Login", "Account", new { returnUrl = "/Cart/AddToCartAfterLogin" });
             }
 
-            // Kullanıcı bilgilerini al
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            var userId = await _userManager.GetUserIdAsync(user);
-
-            // Sepete ekleme modeli
-            var addToCartModel = new AddToCartViewModel
-            {
-                ProductId = productId,
-                Quantity = quantity,
-                UserId = userId
-            };
-
-            // Sepete ekle
-            var result = await CartService.AddToCartAsync(addToCartModel);
-
-            if (result.IsSucceeded)
-            {
-                _notyfService.Success("Ürün başarıyla sepete eklendi!");
-            }
-            else
-            {
-                _notyfService.Error(result.Error ?? "Sepete ekleme sırasında bir hata oluştu.");
-            }
-
+            // Sepete ekleme işlemi başarılıysa yönlendir
+            TempData["SuccessMessage"] = "Ürün başarıyla sepete eklendi!";
             return RedirectToAction("Index");
         }
     }

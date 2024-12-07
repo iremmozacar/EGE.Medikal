@@ -31,13 +31,44 @@
 /* Template default CSS
 /*----------------------------------------*/
 
+/*----------------------------------------*/
+
+
+
+
+
 html,
 body {
 	height: 100%;
+	margin: 0;
 	font-family: "Montserrat", sans-serif;
 	-webkit-font-smoothing: antialiased;
 }
+.page-wrapper {
+	display: flex;
+	flex-direction: column;
+	/* İçeriği dikey olarak düzenler */
+	min-height: 100vh;
+	/* Sayfa yüksekliği tarayıcı yüksekliğine eşit olur */
+}
 
+main.content {
+	flex: 1;
+	/* İçeriği esneterek footer'ı en alta iter */
+}
+
+footer {
+	background: #333;
+	/* Footer arka plan rengi */
+	color: #fff;
+	/* Footer yazı rengi */
+	text-align: center;
+	/* Metni ortala */
+	padding: 20px 0;
+	/* Üst ve alt boşluk */
+	margin-top: auto;
+	/* Footer’ı en alta yerleştirir */
+}
 h1,
 h2,
 h3,
@@ -195,6 +226,21 @@ ol {
 	padding-top: 100px;
 	padding-bottom: 100px;
 }
+
+
+
+main.content {
+	flex: 1;
+	min-height: 200px;
+	/* Boş sayfalarda bile alan bırakır */
+}
+
+
+
+
+
+
+
 
 .text-white h1,
 .text-white h2,

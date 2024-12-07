@@ -11,22 +11,30 @@
 </head>
 
 <body>
-    @await Html.PartialAsync("_PreloderPartial")
-    @await Html.PartialAsync("_SearchPartial")
-    @await Html.PartialAsync("_OffCanvarsMenuBeginPartial")
-    @await Html.PartialAsync("_HeaderSectionPartial")
-    
-    
- 
-    
+    <div class="page-wrapper">
+        <!-- Preloader -->
+        @await Html.PartialAsync("_PreloderPartial")
 
+        <!-- Search -->
+        @await Html.PartialAsync("_SearchPartial")
 
-    @RenderBody()
+        <!-- Offcanvas Menu -->
+        @await Html.PartialAsync("_OffCanvarsMenuBeginPartial")
 
-    @await Html.PartialAsync("_FooterPartial")
+        <!-- Header Section -->
+        @await Html.PartialAsync("_HeaderSectionPartial")
 
+        <!-- Main Content (Sayfa içeriği buraya gelir) -->
+        <main class="content">
+            @RenderBody()
+        </main>
+
+        <!-- Footer -->
+        @await Html.PartialAsync("_FooterPartial")
+    </div>
+
+    <!-- Scripts -->
     @await Html.PartialAsync("_ScriptsPartial")
-
 </body>
 
 </html>
