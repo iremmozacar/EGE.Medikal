@@ -21,6 +21,6 @@ public class CartViewModel
 
     public decimal GetTotalPrice()
     {
-        return CartItems?.Sum(x => x.Product.Price * x.Quantity) ?? 0;
+        return CartItems?.Sum(x => x.Price * x.Quantity) ?? 0;
     }
 }

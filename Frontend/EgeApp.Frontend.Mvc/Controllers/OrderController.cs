@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using EgeApp.Frontend.Mvc.Data.Entities;
 using EgeApp.Frontend.Mvc.Models.Order;
 using EgeApp.Frontend.Mvc.Services;
+using EgeApp.Frontend.Mvc.Models.Cart;
+using EgeApp.Backend.Shared.Dtos.CartDtos;
 
 namespace EgeApp.Frontend.Mvc.Controllers
 {
@@ -29,13 +31,17 @@ namespace EgeApp.Frontend.Mvc.Controllers
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             var userId = await _userManager.GetUserIdAsync(user);
             var cartResult = await CartService.GetCartAsync(userId);
+
             if (!cartResult.IsSucceeded)
             {
                 return RedirectToAction("Error", "Home");
             }
+
+            var cartViewModel = MapToViewModel(cartResult.Data);
+
             OrderCreateViewModel model = new()
             {
-                Cart = cartResult.Data,
+                Cart = cartViewModel,
                 FirstName = "Sezen",
                 LastName = "Aksu",
                 Address = "Düpedüz Sk. Yamuk yumuk ap. D:12 Beşiktaş",
@@ -45,6 +51,7 @@ namespace EgeApp.Frontend.Mvc.Controllers
                 PaymentType = 0,
                 UserId = userId
             };
+
             return View(model);
         }
 
@@ -54,20 +61,26 @@ namespace EgeApp.Frontend.Mvc.Controllers
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             var userId = await _userManager.GetUserIdAsync(user);
             var cartResult = await CartService.GetCartAsync(userId);
+
             if (!cartResult.IsSucceeded)
             {
                 return RedirectToAction("Error", "Home");
             }
-            List<OrderItemViewModel> orderItems = [];
+
+            // DTO'dan ViewModel'e dönüşüm
+            var cartViewModel = MapToViewModel(cartResult.Data);
+
+            List<OrderItemViewModel> orderItems = new();
             foreach (var cartItem in cartResult.Data.CartItems)
             {
                 orderItems.Add(new OrderItemViewModel
                 {
                     ProductId = cartItem.ProductId,
-                    Price = cartItem.Product.Price,
+                    Price = cartItem.Price,
                     Quantity = cartItem.Quantity
                 });
             }
+
             model.OrderItems = orderItems;
             model.UserId = userId;
 
@@ -77,11 +90,33 @@ namespace EgeApp.Frontend.Mvc.Controllers
                 _notyfService.Error(result.Error);
                 return View(model);
             }
+
             await CartService.ClearCartAsync(cartResult.Data.Id);
             _notyfService.Success("Ödeme işlemi başarıyla tamamlandı!");
             _notyfService.Information("Siparişiniz alındı!");
             return RedirectToAction("Index", "Home");
         }
 
+        private CartViewModel MapToViewModel(CartDto cartDto)
+        {
+            if (cartDto == null) return new CartViewModel();
+
+            return new CartViewModel
+            {
+                Id = cartDto.Id,
+                CreatedDate = cartDto.CreatedDate,
+                UserId = cartDto.UserId,
+                CartItems = cartDto.CartItems.Select(item => new CartItemViewModel
+                {
+                    Id = item.ProductId,
+                    ProductId = item.ProductId,
+                    ProductName = item.ProductName,
+                    ImageUrl = item.ImageUrl,
+                    Price = item.Price,
+                    Quantity = item.Quantity,
+                    CartId = cartDto.Id
+                }).ToList()
+            };
+        }
     }
 }

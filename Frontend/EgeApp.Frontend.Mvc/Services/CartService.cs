@@ -1,10 +1,9 @@
 using System;
 using System.Text;
 using Newtonsoft.Json;
-using EgeApp.Frontend.Mvc.Controllers;
 using EgeApp.Frontend.Mvc.Models.Cart;
-using EgeApp.Frontend.Mvc.Models.Product;
 using EgeApp.Frontend.Mvc.Models.Response;
+using EgeApp.Backend.Shared.Dtos.CartDtos;
 
 namespace EgeApp.Frontend.Mvc.Services;
 
@@ -22,7 +21,8 @@ public class CartService
             return response;
         }
     }
-    public static async Task<ResponseModel<CartViewModel>> GetCartAsync(string userId)
+
+    public static async Task<ResponseModel<CartDto>> GetCartAsync(string userId)
     {
         using (HttpClient httpClient = new())
         {
@@ -31,8 +31,7 @@ public class CartService
 
             if (!httpResponseMessage.IsSuccessStatusCode)
             {
-                Console.WriteLine($"HTTP Hatası: {httpResponseMessage.StatusCode}");
-                return new ResponseModel<CartViewModel>
+                return new ResponseModel<CartDto>
                 {
                     IsSucceeded = false,
                     Error = $"HTTP Hatası: {httpResponseMessage.StatusCode}"
@@ -41,14 +40,12 @@ public class CartService
 
             try
             {
-                var response = JsonConvert.DeserializeObject<ResponseModel<CartViewModel>>(contentResponse);
+                var response = JsonConvert.DeserializeObject<ResponseModel<CartDto>>(contentResponse);
                 return response;
             }
             catch (JsonReaderException ex)
             {
-                Console.WriteLine($"JSON Çözümleme Hatası: {ex.Message}");
-                Console.WriteLine($"Yanıt İçeriği: {contentResponse}");
-                return new ResponseModel<CartViewModel>
+                return new ResponseModel<CartDto>
                 {
                     IsSucceeded = false,
                     Error = "JSON formatı hatalı veya modelle uyuşmuyor."
@@ -57,16 +54,17 @@ public class CartService
         }
     }
 
-    public static async Task<ResponseModel<CartItemViewModel>> GetCartItemAsync(int cartItemId)
+    public static async Task<ResponseModel<CartItemDto>> GetCartItemAsync(int cartItemId)
     {
         using (HttpClient httpClient = new())
         {
             HttpResponseMessage httpResponseMessage = await httpClient.GetAsync($"http://localhost:5200/api/Carts/GetCartItem/{cartItemId}");
             string contentResponse = await httpResponseMessage.Content.ReadAsStringAsync();
-            var response = JsonConvert.DeserializeObject<ResponseModel<CartItemViewModel>>(contentResponse);
+            var response = JsonConvert.DeserializeObject<ResponseModel<CartItemDto>>(contentResponse);
             return response;
         }
     }
+
     public static async Task<ResponseModel<ReturnChangeQuantityModel>> ChangeQuantityAsync(int cartItemId, int quantity, string userId)
     {
         using (HttpClient httpClient = new())
@@ -77,15 +75,17 @@ public class CartService
             var httpResponseMessageString = await httpResponseMessage.Content.ReadAsStringAsync();
             var response = JsonConvert.DeserializeObject<ResponseModel<ReturnChangeQuantityModel>>(httpResponseMessageString);
             ResponseModel<ReturnChangeQuantityModel> result = new();
+
             if (response.IsSucceeded)
             {
                 var cartItem = await GetCartItemAsync(cartItemId);
-                if (cartItem != null)
+                if (cartItem?.Data != null)
                 {
-                    result.Data.CartItemTotal = cartItem.Data.Quantity * cartItem.Data.Product.Price;
+                    result.Data.CartItemTotal = cartItem.Data.Quantity * cartItem.Data.Price;
                 }
+
                 var cart = await GetCartAsync(userId);
-                if (cart != null)
+                if (cart?.Data != null)
                 {
                     result.Data.SubTotal = cart.Data.GetTotalPrice();
                     result.Data.CartTotal = result.Data.SubTotal > 20000 ? result.Data.SubTotal : result.Data.SubTotal + 1000;
@@ -97,6 +97,7 @@ public class CartService
                 result.Error = response.Error;
                 result.IsSucceeded = response.IsSucceeded;
             }
+
             return result;
         }
     }
@@ -111,6 +112,7 @@ public class CartService
             return response;
         }
     }
+
     public static async Task<ResponseModel<NoContent>> ClearCartAsync(int cartId)
     {
         using (HttpClient httpClient = new())
@@ -121,6 +123,7 @@ public class CartService
             return response;
         }
     }
+
     public static async Task<ResponseModel<NoContent>> InitiliazeCartAsync(string userId)
     {
         using (HttpClient httpClient = new())
@@ -133,9 +136,5 @@ public class CartService
             return response;
         }
     }
-
-    }
-
-
-
-
+    
+}

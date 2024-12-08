@@ -84,5 +84,13 @@ namespace EgeApp.Backend.API.Controllers
             var response = await _cartItemService.GetCartItemAsync(cartItemId);
             return CreateActionResult(response);
         }
+
+        [HttpPost("assign")]
+        public async Task<IActionResult> AssignAnonymousCartToUser(string userId)
+        {
+            await _cartService.AssignAnonymousCartToUser(HttpContext, userId);
+            return Ok();
+        }
     }
+
 }

@@ -16,9 +16,9 @@ namespace EgeApp.Backend.Data.Concrete.Repositories
         public async Task<Cart> GetCartAsync(string userId)
         {
             return await _dbContext.Carts
-                .Include(c => c.CartItems)
-                .ThenInclude(ci => ci.Product)
-                .FirstOrDefaultAsync(c => c.UserId == userId); // SingleOrDefault yerine FirstOrDefault kullanıyoruz
+         .Include(cart => cart.CartItems)
+         .ThenInclude(item => item.Product) // Ürün bilgilerini yükle
+         .FirstOrDefaultAsync(cart => cart.UserId == userId);
         }
     }
 }

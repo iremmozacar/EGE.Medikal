@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EgeApp.Backend.Data")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+48fc7819ca8ed1efb4c3c6f6869d645992abfb0d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ef71b1609919c3dd78ee881f314b1deaddd54f23")]
 [assembly: System.Reflection.AssemblyProductAttribute("EgeApp.Backend.Data")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EgeApp.Backend.Data")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
