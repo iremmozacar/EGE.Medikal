@@ -9,6 +9,8 @@ using EgeApp.Frontend.Mvc.Models.Email;
 using EgeApp.Frontend.Mvc.Helpers.Concrete;
 using System.Net.Http.Headers;
 using Microsoft.Extensions.DependencyInjection;
+using System.Net.Mail;
+using System.Net;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -107,15 +109,24 @@ public class EmailSenderSmtp : IEmailSenderHelper
         _password = configuration["EmailSender:Password"];
     }
 
-    public Task SendEmailAsync(SendEmailModel model)
+    public async Task SendEmailAsync(SendEmailModel model)
     {
-        // Burada model üzerinden e-posta gönderimi için gereken kod yazılır.
-        throw new NotImplementedException();
+        await SendEmailAsync(model.EmailTo, model.Subject, model.Body);
     }
 
-    public Task SendEmailAsync(string emailTo, string subject, string body)
+    public async Task SendEmailAsync(string emailTo, string subject, string body)
     {
-        // Burada doğrudan e-posta parametreleri üzerinden gönderim kodu yazılır.
-        throw new NotImplementedException();
+        var client = new SmtpClient(_host, _port)
+        {
+            Credentials = new NetworkCredential(_userName, _password),
+            EnableSsl = _enableSsl
+        };
+
+        var mailMessage = new MailMessage(_userName, emailTo, subject, body)
+        {
+            IsBodyHtml = true
+        };
+
+        await client.SendMailAsync(mailMessage);
     }
 }

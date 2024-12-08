@@ -77,6 +77,11 @@ namespace EgeApp.Frontend.Mvc.Controllers
                 return View(model);
             }
 
+            await _signInManager.RefreshSignInAsync(user);
+
+            // Kullanıcıya ait sepeti yükle veya oluştur
+            TempData["CartId"] = user.Id; // Sepet işlemlerinde kullanılmak üzere oturumda tut
+
             var roles = await _userManager.GetRolesAsync(user);
 
             if (roles.Contains("Admin") || roles.Contains("Super Admin"))
@@ -89,20 +94,26 @@ namespace EgeApp.Frontend.Mvc.Controllers
             return RedirectToAction("Index", "Account"); // Normal kullanıcı yönlendirme
         }
 
-        [HttpGet]
-        public IActionResult Index()
-        {
-            var model = new UserProfileViewModel
-            {
-                FirstName = User.Identity.Name
-            };
-            return View(model);
-        }
 
         [HttpGet]
-        public IActionResult Register()
+        public async Task<IActionResult> IndexAsync()
         {
-            var model = new RegisterViewModel();
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            if (user == null)
+            {
+                _notyfService.Error("Kullanıcı bilgileri yüklenemedi.");
+                return RedirectToAction("Login");
+            }
+
+            var model = new UserProfileViewModel
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                UserName = user.UserName
+            };
+
             return View(model);
         }
 
@@ -206,9 +217,10 @@ namespace EgeApp.Frontend.Mvc.Controllers
 
         public async Task<IActionResult> Logout()
         {
-            await _signInManager.SignOutAsync();
-            _notyfService.Success("Başarıyla çıkış yaptınız.");
-            return Redirect("~/");
+            await _signInManager.SignOutAsync(); // Oturum ve çerezleri temizle
+            TempData.Clear(); // TempData'yı temizle
+            _notyfService.Success("Başarıyla çıkış yaptınız."); // Kullanıcıya mesaj göster
+            return Redirect("~/"); // Anasayfaya yönlendir
         }
 
         [HttpGet]
