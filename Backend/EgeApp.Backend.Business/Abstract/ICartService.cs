@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using EgeApp.Backend.Entity.Concrete;
 using EgeApp.Backend.Shared.Dtos.ResponseDtos;
 using EgeApp.Backend.Shared.Dtos.CartDtos;
+using Microsoft.AspNetCore.Http;
 
 namespace EgeApp.Backend.Business.Abstract
 {
